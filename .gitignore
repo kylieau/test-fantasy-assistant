@@ -34,3 +34,6 @@ coverage/
 
 # OS files
 Thumbs.db
+
+# Personal local Claude Code settings (permissions, etc.)
+.claude/settings.local.json

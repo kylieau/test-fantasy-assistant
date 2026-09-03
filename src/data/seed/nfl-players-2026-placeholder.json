@@ -1,0 +1,3590 @@
+[
+  {
+    "id": "p001",
+    "name": "Malik Halloran",
+    "position": [
+      "RB"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 4,
+    "rank": 1,
+    "projected_points": 310.3
+  },
+  {
+    "id": "p002",
+    "name": "Dominic Barrera",
+    "position": [
+      "RB"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 1,
+    "rank": 2,
+    "projected_points": 294.3
+  },
+  {
+    "id": "p003",
+    "name": "Logan Winslow",
+    "position": [
+      "RB"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 10,
+    "rank": 3,
+    "projected_points": 293.9
+  },
+  {
+    "id": "p004",
+    "name": "Karim Okafor",
+    "position": [
+      "WR"
+    ],
+    "team": "CIN",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 4,
+    "rank": 4,
+    "projected_points": 294.3
+  },
+  {
+    "id": "p005",
+    "name": "Austin Quintana",
+    "position": [
+      "WR"
+    ],
+    "team": "ATL",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 1,
+    "rank": 5,
+    "projected_points": 292.4
+  },
+  {
+    "id": "p006",
+    "name": "Logan Nakamura",
+    "position": [
+      "RB"
+    ],
+    "team": "NYG",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 18,
+    "rank": 6,
+    "projected_points": 275
+  },
+  {
+    "id": "p007",
+    "name": "Julian Carter",
+    "position": [
+      "RB"
+    ],
+    "team": "NYJ",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 20,
+    "rank": 7,
+    "projected_points": 272.1
+  },
+  {
+    "id": "p008",
+    "name": "Marcus Reyes",
+    "position": [
+      "WR"
+    ],
+    "team": "IND",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 1,
+    "rank": 8,
+    "projected_points": 284.3
+  },
+  {
+    "id": "p009",
+    "name": "Rashad Quintana",
+    "position": [
+      "RB"
+    ],
+    "team": "PIT",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 1,
+    "rank": 9,
+    "projected_points": 269.1
+  },
+  {
+    "id": "p010",
+    "name": "Isaiah Winslow",
+    "position": [
+      "WR"
+    ],
+    "team": "CIN",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 11,
+    "rank": 10,
+    "projected_points": 279.1
+  },
+  {
+    "id": "p011",
+    "name": "Vincent Marsh",
+    "position": [
+      "RB"
+    ],
+    "team": "PIT",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 24,
+    "rank": 11,
+    "projected_points": 263.2
+  },
+  {
+    "id": "p012",
+    "name": "Cameron Higgins",
+    "position": [
+      "WR"
+    ],
+    "team": "ARI",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 23,
+    "rank": 12,
+    "projected_points": 271
+  },
+  {
+    "id": "p013",
+    "name": "Tyler Sanborn",
+    "position": [
+      "WR"
+    ],
+    "team": "CLE",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 17,
+    "rank": 13,
+    "projected_points": 264.4
+  },
+  {
+    "id": "p014",
+    "name": "Jordan Okafor",
+    "position": [
+      "WR"
+    ],
+    "team": "CIN",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 5,
+    "rank": 14,
+    "projected_points": 262.9
+  },
+  {
+    "id": "p015",
+    "name": "Austin Reyes",
+    "position": [
+      "QB"
+    ],
+    "team": "LAR",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 28,
+    "rank": 15,
+    "projected_points": 337.3
+  },
+  {
+    "id": "p016",
+    "name": "Devon Ellsworth",
+    "position": [
+      "QB"
+    ],
+    "team": "KC",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 13,
+    "rank": 16,
+    "projected_points": 331
+  },
+  {
+    "id": "p017",
+    "name": "Grant Okafor",
+    "position": [
+      "WR"
+    ],
+    "team": "WAS",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 27,
+    "rank": 17,
+    "projected_points": 254.5
+  },
+  {
+    "id": "p018",
+    "name": "Vincent Pruitt",
+    "position": [
+      "RB"
+    ],
+    "team": "TB",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 8,
+    "rank": 18,
+    "projected_points": 242.4
+  },
+  {
+    "id": "p019",
+    "name": "DeShawn Adeyemi",
+    "position": [
+      "RB"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 8,
+    "rank": 19,
+    "projected_points": 239.3
+  },
+  {
+    "id": "p020",
+    "name": "Preston Iverson",
+    "position": [
+      "WR"
+    ],
+    "team": "CLE",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 18,
+    "rank": 20,
+    "projected_points": 249.1
+  },
+  {
+    "id": "p021",
+    "name": "Nathaniel Carter",
+    "position": [
+      "QB"
+    ],
+    "team": "BAL",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 18,
+    "rank": 21,
+    "projected_points": 321.6
+  },
+  {
+    "id": "p022",
+    "name": "Devon Delgado",
+    "position": [
+      "QB"
+    ],
+    "team": "DEN",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 7,
+    "rank": 22,
+    "projected_points": 316.9
+  },
+  {
+    "id": "p023",
+    "name": "Austin Osei",
+    "position": [
+      "RB"
+    ],
+    "team": "CIN",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 29,
+    "rank": 23,
+    "projected_points": 232.9
+  },
+  {
+    "id": "p024",
+    "name": "Terrence Whitmore",
+    "position": [
+      "WR"
+    ],
+    "team": "CLE",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 22,
+    "rank": 24,
+    "projected_points": 242.5
+  },
+  {
+    "id": "p025",
+    "name": "Terrence Nakamura",
+    "position": [
+      "RB"
+    ],
+    "team": "MIN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 20,
+    "rank": 25,
+    "projected_points": 226.1
+  },
+  {
+    "id": "p026",
+    "name": "Rashad Odom",
+    "position": [
+      "QB"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 38,
+    "rank": 26,
+    "projected_points": 305.3
+  },
+  {
+    "id": "p027",
+    "name": "Tyler Halloran",
+    "position": [
+      "RB"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 34,
+    "rank": 27,
+    "projected_points": 218.6
+  },
+  {
+    "id": "p028",
+    "name": "Jalen Winslow",
+    "position": [
+      "RB"
+    ],
+    "team": "IND",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 20,
+    "rank": 28,
+    "projected_points": 216.6
+  },
+  {
+    "id": "p029",
+    "name": "Jalen Okafor",
+    "position": [
+      "QB"
+    ],
+    "team": "ATL",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 19,
+    "rank": 29,
+    "projected_points": 292.7
+  },
+  {
+    "id": "p030",
+    "name": "Kendall Callahan",
+    "position": [
+      "WR"
+    ],
+    "team": "LAR",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 20,
+    "rank": 30,
+    "projected_points": 226
+  },
+  {
+    "id": "p031",
+    "name": "Julian Mercer",
+    "position": [
+      "QB"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 32,
+    "rank": 31,
+    "projected_points": 291.3
+  },
+  {
+    "id": "p032",
+    "name": "Nathaniel Whitmore",
+    "position": [
+      "WR"
+    ],
+    "team": "NYJ",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 20,
+    "rank": 32,
+    "projected_points": 221.4
+  },
+  {
+    "id": "p033",
+    "name": "Logan Pruitt",
+    "position": [
+      "QB"
+    ],
+    "team": "LAR",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 44,
+    "rank": 33,
+    "projected_points": 284.9
+  },
+  {
+    "id": "p034",
+    "name": "Isaiah Delgado",
+    "position": [
+      "WR"
+    ],
+    "team": "LAC",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 32,
+    "rank": 34,
+    "projected_points": 212.2
+  },
+  {
+    "id": "p035",
+    "name": "Blake Thibodeaux",
+    "position": [
+      "QB"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 36,
+    "rank": 35,
+    "projected_points": 271
+  },
+  {
+    "id": "p036",
+    "name": "Micah Thibodeaux",
+    "position": [
+      "RB"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 23,
+    "rank": 36,
+    "projected_points": 198.9
+  },
+  {
+    "id": "p037",
+    "name": "Marcus Higgins",
+    "position": [
+      "WR"
+    ],
+    "team": "CHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 38,
+    "rank": 37,
+    "projected_points": 206.7
+  },
+  {
+    "id": "p038",
+    "name": "Cameron Okafor",
+    "position": [
+      "RB"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 33,
+    "rank": 38,
+    "projected_points": 196.9
+  },
+  {
+    "id": "p039",
+    "name": "Bryce Vance",
+    "position": [
+      "WR"
+    ],
+    "team": "DEN",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 34,
+    "rank": 39,
+    "projected_points": 202.3
+  },
+  {
+    "id": "p040",
+    "name": "Terrence Higgins",
+    "position": [
+      "WR"
+    ],
+    "team": "JAX",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 30,
+    "rank": 40,
+    "projected_points": 200.6
+  },
+  {
+    "id": "p041",
+    "name": "Terrence Callahan",
+    "position": [
+      "RB"
+    ],
+    "team": "IND",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 39,
+    "rank": 41,
+    "projected_points": 191.3
+  },
+  {
+    "id": "p042",
+    "name": "Dominic Whitmore",
+    "position": [
+      "QB"
+    ],
+    "team": "TEN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 53,
+    "rank": 42,
+    "projected_points": 258.6
+  },
+  {
+    "id": "p043",
+    "name": "Preston Kowalski",
+    "position": [
+      "QB"
+    ],
+    "team": "IND",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 55,
+    "rank": 43,
+    "projected_points": 254.1
+  },
+  {
+    "id": "p044",
+    "name": "Elijah Winslow",
+    "position": [
+      "WR"
+    ],
+    "team": "DAL",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 47,
+    "rank": 44,
+    "projected_points": 195.3
+  },
+  {
+    "id": "p045",
+    "name": "Isaiah Okafor",
+    "position": [
+      "QB"
+    ],
+    "team": "PHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 47,
+    "rank": 45,
+    "projected_points": 252
+  },
+  {
+    "id": "p046",
+    "name": "Nathaniel Okafor",
+    "position": [
+      "WR"
+    ],
+    "team": "TB",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 40,
+    "rank": 46,
+    "projected_points": 194.6
+  },
+  {
+    "id": "p047",
+    "name": "Cameron Duarte",
+    "position": [
+      "WR"
+    ],
+    "team": "KC",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 58,
+    "rank": 47,
+    "projected_points": 194.5
+  },
+  {
+    "id": "p048",
+    "name": "Isaiah Iverson",
+    "position": [
+      "RB"
+    ],
+    "team": "IND",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 57,
+    "rank": 48,
+    "projected_points": 185.7
+  },
+  {
+    "id": "p049",
+    "name": "Elijah Kowalski",
+    "position": [
+      "RB"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 61,
+    "rank": 49,
+    "projected_points": 182.7
+  },
+  {
+    "id": "p050",
+    "name": "Blake Whitmore",
+    "position": [
+      "WR"
+    ],
+    "team": "BAL",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 50,
+    "rank": 50,
+    "projected_points": 186.6
+  },
+  {
+    "id": "p051",
+    "name": "Marcus Duarte",
+    "position": [
+      "QB"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 44,
+    "rank": 51,
+    "projected_points": 241.4
+  },
+  {
+    "id": "p052",
+    "name": "Jordan Odom",
+    "position": [
+      "RB"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 45,
+    "rank": 52,
+    "projected_points": 178.4
+  },
+  {
+    "id": "p053",
+    "name": "Dominic Broussard",
+    "position": [
+      "QB"
+    ],
+    "team": "LV",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 65,
+    "rank": 53,
+    "projected_points": 231.1
+  },
+  {
+    "id": "p054",
+    "name": "Elijah Barrera",
+    "position": [
+      "TE"
+    ],
+    "team": "PIT",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 67,
+    "rank": 54,
+    "projected_points": 215
+  },
+  {
+    "id": "p055",
+    "name": "Elijah Iverson",
+    "position": [
+      "WR"
+    ],
+    "team": "NYG",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 60,
+    "rank": 55,
+    "projected_points": 173.8
+  },
+  {
+    "id": "p056",
+    "name": "Malik Marsh",
+    "position": [
+      "QB"
+    ],
+    "team": "LV",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 44,
+    "rank": 56,
+    "projected_points": 224.7
+  },
+  {
+    "id": "p057",
+    "name": "Marcus Castellano",
+    "position": [
+      "RB"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 46,
+    "rank": 57,
+    "projected_points": 165.8
+  },
+  {
+    "id": "p058",
+    "name": "Julian Osei",
+    "position": [
+      "WR"
+    ],
+    "team": "DET",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 47,
+    "rank": 58,
+    "projected_points": 172.7
+  },
+  {
+    "id": "p059",
+    "name": "Xavier Pruitt",
+    "position": [
+      "QB"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 70,
+    "rank": 59,
+    "projected_points": 223.2
+  },
+  {
+    "id": "p060",
+    "name": "Logan Higgins",
+    "position": [
+      "TE"
+    ],
+    "team": "NYJ",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 65,
+    "rank": 60,
+    "projected_points": 210.3
+  },
+  {
+    "id": "p061",
+    "name": "Dominic Higgins",
+    "position": [
+      "WR"
+    ],
+    "team": "PHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 47,
+    "rank": 61,
+    "projected_points": 171.9
+  },
+  {
+    "id": "p062",
+    "name": "Jalen Barrera",
+    "position": [
+      "WR"
+    ],
+    "team": "CLE",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 70,
+    "rank": 62,
+    "projected_points": 170.4
+  },
+  {
+    "id": "p063",
+    "name": "Preston Osei",
+    "position": [
+      "RB"
+    ],
+    "team": "NE",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 70,
+    "rank": 63,
+    "projected_points": 159.4
+  },
+  {
+    "id": "p064",
+    "name": "Grant Odom",
+    "position": [
+      "TE"
+    ],
+    "team": "NO",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 50,
+    "rank": 64,
+    "projected_points": 202.5
+  },
+  {
+    "id": "p065",
+    "name": "Julian Odom",
+    "position": [
+      "QB"
+    ],
+    "team": "CLE",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 67,
+    "rank": 65,
+    "projected_points": 213.7
+  },
+  {
+    "id": "p066",
+    "name": "Micah Quintana",
+    "position": [
+      "WR"
+    ],
+    "team": "NYJ",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 60,
+    "rank": 66,
+    "projected_points": 164.7
+  },
+  {
+    "id": "p067",
+    "name": "Preston Whitmore",
+    "position": [
+      "RB"
+    ],
+    "team": "PIT",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 77,
+    "rank": 67,
+    "projected_points": 156.1
+  },
+  {
+    "id": "p068",
+    "name": "Cooper Nakamura",
+    "position": [
+      "QB"
+    ],
+    "team": "LV",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 73,
+    "rank": 68,
+    "projected_points": 210.2
+  },
+  {
+    "id": "p069",
+    "name": "Marcus Quintana",
+    "position": [
+      "RB"
+    ],
+    "team": "SEA",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 65,
+    "rank": 69,
+    "projected_points": 154.3
+  },
+  {
+    "id": "p070",
+    "name": "Reggie Osei",
+    "position": [
+      "QB"
+    ],
+    "team": "GB",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 74,
+    "rank": 70,
+    "projected_points": 206.5
+  },
+  {
+    "id": "p071",
+    "name": "Malik Winslow",
+    "position": [
+      "QB"
+    ],
+    "team": "GB",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 57,
+    "rank": 71,
+    "projected_points": 204.5
+  },
+  {
+    "id": "p072",
+    "name": "Karim Whitmore",
+    "position": [
+      "RB"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 85,
+    "rank": 72,
+    "projected_points": 148.5
+  },
+  {
+    "id": "p073",
+    "name": "Jordan Reyes",
+    "position": [
+      "TE"
+    ],
+    "team": "DEN",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 60,
+    "rank": 73,
+    "projected_points": 188.2
+  },
+  {
+    "id": "p074",
+    "name": "Preston Thibodeaux",
+    "position": [
+      "RB"
+    ],
+    "team": "ATL",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 62,
+    "rank": 74,
+    "projected_points": 145.3
+  },
+  {
+    "id": "p075",
+    "name": "Xavier Whitfield",
+    "position": [
+      "WR"
+    ],
+    "team": "MIN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 90,
+    "rank": 75,
+    "projected_points": 151.2
+  },
+  {
+    "id": "p076",
+    "name": "Kendall Vance",
+    "position": [
+      "QB"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 73,
+    "rank": 76,
+    "projected_points": 195.3
+  },
+  {
+    "id": "p077",
+    "name": "Cooper Whitfield",
+    "position": [
+      "TE"
+    ],
+    "team": "TB",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 80,
+    "rank": 77,
+    "projected_points": 182.6
+  },
+  {
+    "id": "p078",
+    "name": "Julian Kowalski",
+    "position": [
+      "WR"
+    ],
+    "team": "MIA",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 73,
+    "rank": 78,
+    "projected_points": 148.7
+  },
+  {
+    "id": "p079",
+    "name": "Reggie Halloran",
+    "position": [
+      "RB"
+    ],
+    "team": "CIN",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 77,
+    "rank": 79,
+    "projected_points": 141
+  },
+  {
+    "id": "p080",
+    "name": "Jordan Ellsworth",
+    "position": [
+      "QB"
+    ],
+    "team": "WAS",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 82,
+    "rank": 80,
+    "projected_points": 187.3
+  },
+  {
+    "id": "p081",
+    "name": "Logan Falcone",
+    "position": [
+      "WR"
+    ],
+    "team": "KC",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 72,
+    "rank": 81,
+    "projected_points": 143.3
+  },
+  {
+    "id": "p082",
+    "name": "Nathaniel Nakamura",
+    "position": [
+      "RB"
+    ],
+    "team": "NE",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 93,
+    "rank": 82,
+    "projected_points": 137
+  },
+  {
+    "id": "p083",
+    "name": "Jalen Sanborn",
+    "position": [
+      "WR"
+    ],
+    "team": "PIT",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 93,
+    "rank": 83,
+    "projected_points": 142.5
+  },
+  {
+    "id": "p084",
+    "name": "Karim Vance",
+    "position": [
+      "QB"
+    ],
+    "team": "TB",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 71,
+    "rank": 84,
+    "projected_points": 184.3
+  },
+  {
+    "id": "p085",
+    "name": "Malik Barrera",
+    "position": [
+      "TE"
+    ],
+    "team": "ATL",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 92,
+    "rank": 85,
+    "projected_points": 173.2
+  },
+  {
+    "id": "p086",
+    "name": "Terrence Sanborn",
+    "position": [
+      "WR"
+    ],
+    "team": "MIN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 87,
+    "rank": 86,
+    "projected_points": 141.6
+  },
+  {
+    "id": "p087",
+    "name": "Preston Reyes",
+    "position": [
+      "TE"
+    ],
+    "team": "ARI",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 98,
+    "rank": 87,
+    "projected_points": 173
+  },
+  {
+    "id": "p088",
+    "name": "Blake Sanborn",
+    "position": [
+      "WR"
+    ],
+    "team": "DET",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 74,
+    "rank": 88,
+    "projected_points": 140.5
+  },
+  {
+    "id": "p089",
+    "name": "Grant Brennan",
+    "position": [
+      "WR"
+    ],
+    "team": "NO",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 100,
+    "rank": 89,
+    "projected_points": 140.1
+  },
+  {
+    "id": "p090",
+    "name": "Elijah Vance",
+    "position": [
+      "RB"
+    ],
+    "team": "TB",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 103,
+    "rank": 90,
+    "projected_points": 133.4
+  },
+  {
+    "id": "p091",
+    "name": "Preston Brennan",
+    "position": [
+      "QB"
+    ],
+    "team": "NYJ",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 77,
+    "rank": 91,
+    "projected_points": 179.7
+  },
+  {
+    "id": "p092",
+    "name": "Austin Castellano",
+    "position": [
+      "WR"
+    ],
+    "team": "DET",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 81,
+    "rank": 92,
+    "projected_points": 136.8
+  },
+  {
+    "id": "p093",
+    "name": "Andre Pruitt",
+    "position": [
+      "QB"
+    ],
+    "team": "DAL",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 85,
+    "rank": 93,
+    "projected_points": 174.5
+  },
+  {
+    "id": "p094",
+    "name": "Isaiah Odom",
+    "position": [
+      "QB"
+    ],
+    "team": "ARI",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 82,
+    "rank": 94,
+    "projected_points": 171.2
+  },
+  {
+    "id": "p095",
+    "name": "Terrence Falcone",
+    "position": [
+      "RB"
+    ],
+    "team": "DEN",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 108,
+    "rank": 95,
+    "projected_points": 126.1
+  },
+  {
+    "id": "p096",
+    "name": "Jalen Vance",
+    "position": [
+      "TE"
+    ],
+    "team": "PIT",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 93,
+    "rank": 96,
+    "projected_points": 158.6
+  },
+  {
+    "id": "p097",
+    "name": "Bryce Halloran",
+    "position": [
+      "TE"
+    ],
+    "team": "LV",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 108,
+    "rank": 97,
+    "projected_points": 157.9
+  },
+  {
+    "id": "p098",
+    "name": "Dominic Pruitt",
+    "position": [
+      "WR"
+    ],
+    "team": "WAS",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 93,
+    "rank": 98,
+    "projected_points": 128.2
+  },
+  {
+    "id": "p099",
+    "name": "Micah Barrera",
+    "position": [
+      "WR"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 100,
+    "rank": 99,
+    "projected_points": 128.1
+  },
+  {
+    "id": "p100",
+    "name": "Jalen Duarte",
+    "position": [
+      "RB"
+    ],
+    "team": "ATL",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 87,
+    "rank": 100,
+    "projected_points": 120.3
+  },
+  {
+    "id": "p101",
+    "name": "Blake Kowalski",
+    "position": [
+      "QB"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 92,
+    "rank": 101,
+    "projected_points": 161.9
+  },
+  {
+    "id": "p102",
+    "name": "Julian Duarte",
+    "position": [
+      "RB"
+    ],
+    "team": "CIN",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 101,
+    "rank": 102,
+    "projected_points": 118.3
+  },
+  {
+    "id": "p103",
+    "name": "Preston Marsh",
+    "position": [
+      "RB"
+    ],
+    "team": "TB",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 111,
+    "rank": 103,
+    "projected_points": 117.4
+  },
+  {
+    "id": "p104",
+    "name": "Malik Okafor",
+    "position": [
+      "WR"
+    ],
+    "team": "NYJ",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 101,
+    "rank": 104,
+    "projected_points": 121.8
+  },
+  {
+    "id": "p105",
+    "name": "Devon Adeyemi",
+    "position": [
+      "QB"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 119,
+    "rank": 105,
+    "projected_points": 157.3
+  },
+  {
+    "id": "p106",
+    "name": "Kendall Osei",
+    "position": [
+      "QB"
+    ],
+    "team": "DAL",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 113,
+    "rank": 106,
+    "projected_points": 156.5
+  },
+  {
+    "id": "p107",
+    "name": "Reggie Okafor",
+    "position": [
+      "QB"
+    ],
+    "team": "LAC",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 117,
+    "rank": 107,
+    "projected_points": 153.5
+  },
+  {
+    "id": "p108",
+    "name": "Karim Thibodeaux",
+    "position": [
+      "TE"
+    ],
+    "team": "ARI",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 111,
+    "rank": 108,
+    "projected_points": 143.8
+  },
+  {
+    "id": "p109",
+    "name": "Jordan Whitmore",
+    "position": [
+      "QB"
+    ],
+    "team": "ATL",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 114,
+    "rank": 109,
+    "projected_points": 151.1
+  },
+  {
+    "id": "p110",
+    "name": "Grant Sanborn",
+    "position": [
+      "WR"
+    ],
+    "team": "LAC",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 110,
+    "rank": 110,
+    "projected_points": 116.1
+  },
+  {
+    "id": "p111",
+    "name": "DeShawn Halloran",
+    "position": [
+      "RB"
+    ],
+    "team": "TEN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 124,
+    "rank": 111,
+    "projected_points": 110.3
+  },
+  {
+    "id": "p112",
+    "name": "Dominic Quintana",
+    "position": [
+      "WR"
+    ],
+    "team": "BAL",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 102,
+    "rank": 112,
+    "projected_points": 113.5
+  },
+  {
+    "id": "p113",
+    "name": "Xavier Whitmore",
+    "position": [
+      "WR"
+    ],
+    "team": "BAL",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 116,
+    "rank": 113,
+    "projected_points": 113.5
+  },
+  {
+    "id": "p114",
+    "name": "Xavier Brennan",
+    "position": [
+      "RB"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 106,
+    "rank": 114,
+    "projected_points": 107.8
+  },
+  {
+    "id": "p115",
+    "name": "Logan Okafor",
+    "position": [
+      "WR"
+    ],
+    "team": "IND",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 122,
+    "rank": 115,
+    "projected_points": 112.5
+  },
+  {
+    "id": "p116",
+    "name": "Tyler Higgins",
+    "position": [
+      "QB"
+    ],
+    "team": "PHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 115,
+    "rank": 116,
+    "projected_points": 143.9
+  },
+  {
+    "id": "p117",
+    "name": "Austin Carter",
+    "position": [
+      "TE"
+    ],
+    "team": "ATL",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 130,
+    "rank": 117,
+    "projected_points": 134.8
+  },
+  {
+    "id": "p118",
+    "name": "Tyler Mercer",
+    "position": [
+      "TE"
+    ],
+    "team": "TEN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 130,
+    "rank": 118,
+    "projected_points": 133.2
+  },
+  {
+    "id": "p119",
+    "name": "Dominic Kowalski",
+    "position": [
+      "QB"
+    ],
+    "team": "SEA",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 133,
+    "rank": 119,
+    "projected_points": 139.6
+  },
+  {
+    "id": "p120",
+    "name": "Rashad Vance",
+    "position": [
+      "RB"
+    ],
+    "team": "LAC",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 128,
+    "rank": 120,
+    "projected_points": 102.7
+  },
+  {
+    "id": "p121",
+    "name": "Preston Vance",
+    "position": [
+      "RB"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 128,
+    "rank": 121,
+    "projected_points": 102.5
+  },
+  {
+    "id": "p122",
+    "name": "Xavier Ellsworth",
+    "position": [
+      "WR"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 115,
+    "rank": 122,
+    "projected_points": 106.4
+  },
+  {
+    "id": "p123",
+    "name": "Cooper Falcone",
+    "position": [
+      "WR"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 138,
+    "rank": 123,
+    "projected_points": 104.9
+  },
+  {
+    "id": "p124",
+    "name": "Trevon Nakamura",
+    "position": [
+      "QB"
+    ],
+    "team": "DET",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 119,
+    "rank": 124,
+    "projected_points": 133.9
+  },
+  {
+    "id": "p125",
+    "name": "Bryce Iverson",
+    "position": [
+      "WR"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 112,
+    "rank": 125,
+    "projected_points": 103.4
+  },
+  {
+    "id": "p126",
+    "name": "Karim Whitfield",
+    "position": [
+      "QB"
+    ],
+    "team": "NE",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 118,
+    "rank": 126,
+    "projected_points": 132.1
+  },
+  {
+    "id": "p127",
+    "name": "Grant Higgins",
+    "position": [
+      "TE"
+    ],
+    "team": "CIN",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 139,
+    "rank": 127,
+    "projected_points": 123
+  },
+  {
+    "id": "p128",
+    "name": "Cameron Ellsworth",
+    "position": [
+      "WR"
+    ],
+    "team": "TEN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 125,
+    "rank": 128,
+    "projected_points": 100.3
+  },
+  {
+    "id": "p129",
+    "name": "Jordan Marsh",
+    "position": [
+      "RB"
+    ],
+    "team": "LAC",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 116,
+    "rank": 129,
+    "projected_points": 95.8
+  },
+  {
+    "id": "p130",
+    "name": "Isaiah Castellano",
+    "position": [
+      "QB"
+    ],
+    "team": "LAR",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 134,
+    "rank": 130,
+    "projected_points": 127.5
+  },
+  {
+    "id": "p131",
+    "name": "Jordan Kowalski",
+    "position": [
+      "RB"
+    ],
+    "team": "NYG",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 137,
+    "rank": 131,
+    "projected_points": 93.9
+  },
+  {
+    "id": "p132",
+    "name": "Kendall Broussard",
+    "position": [
+      "RB"
+    ],
+    "team": "CHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 120,
+    "rank": 132,
+    "projected_points": 92.8
+  },
+  {
+    "id": "p133",
+    "name": "Julian Higgins",
+    "position": [
+      "TE"
+    ],
+    "team": "CHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 148,
+    "rank": 133,
+    "projected_points": 118.4
+  },
+  {
+    "id": "p134",
+    "name": "Reggie Odom",
+    "position": [
+      "WR"
+    ],
+    "team": "SEA",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 126,
+    "rank": 134,
+    "projected_points": 94.6
+  },
+  {
+    "id": "p135",
+    "name": "Andre Quintana",
+    "position": [
+      "TE"
+    ],
+    "team": "IND",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 137,
+    "rank": 135,
+    "projected_points": 115.5
+  },
+  {
+    "id": "p136",
+    "name": "Logan Broussard",
+    "position": [
+      "WR"
+    ],
+    "team": "NYG",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 140,
+    "rank": 136,
+    "projected_points": 93.8
+  },
+  {
+    "id": "p137",
+    "name": "Rashad Mercer",
+    "position": [
+      "RB"
+    ],
+    "team": "MIA",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 128,
+    "rank": 137,
+    "projected_points": 88.8
+  },
+  {
+    "id": "p138",
+    "name": "Austin Whitmore",
+    "position": [
+      "WR"
+    ],
+    "team": "MIN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 149,
+    "rank": 138,
+    "projected_points": 91.5
+  },
+  {
+    "id": "p139",
+    "name": "DeShawn Higgins",
+    "position": [
+      "RB"
+    ],
+    "team": "TB",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 130,
+    "rank": 139,
+    "projected_points": 87.2
+  },
+  {
+    "id": "p140",
+    "name": "Marcus Barrera",
+    "position": [
+      "RB"
+    ],
+    "team": "BAL",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 132,
+    "rank": 140,
+    "projected_points": 85.8
+  },
+  {
+    "id": "p141",
+    "name": "Cameron Delgado",
+    "position": [
+      "WR"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 146,
+    "rank": 141,
+    "projected_points": 88.4
+  },
+  {
+    "id": "p142",
+    "name": "Preston Sanborn",
+    "position": [
+      "TE"
+    ],
+    "team": "WAS",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 141,
+    "rank": 142,
+    "projected_points": 106.8
+  },
+  {
+    "id": "p143",
+    "name": "Tyler Falcone",
+    "position": [
+      "TE"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 155,
+    "rank": 143,
+    "projected_points": 105
+  },
+  {
+    "id": "p144",
+    "name": "Nathaniel Barrera",
+    "position": [
+      "WR"
+    ],
+    "team": "LAR",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 156,
+    "rank": 144,
+    "projected_points": 85
+  },
+  {
+    "id": "p145",
+    "name": "Malik Odom",
+    "position": [
+      "RB"
+    ],
+    "team": "PHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 139,
+    "rank": 145,
+    "projected_points": 81.3
+  },
+  {
+    "id": "p146",
+    "name": "Rashad Whitmore",
+    "position": [
+      "WR"
+    ],
+    "team": "LAR",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 142,
+    "rank": 146,
+    "projected_points": 84.6
+  },
+  {
+    "id": "p147",
+    "name": "Elijah Carter",
+    "position": [
+      "WR"
+    ],
+    "team": "NO",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 142,
+    "rank": 147,
+    "projected_points": 84.1
+  },
+  {
+    "id": "p148",
+    "name": "Logan Duarte",
+    "position": [
+      "TE"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 149,
+    "rank": 148,
+    "projected_points": 102.3
+  },
+  {
+    "id": "p149",
+    "name": "Bryce Quintana",
+    "position": [
+      "WR"
+    ],
+    "team": "LAR",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 158,
+    "rank": 149,
+    "projected_points": 83.6
+  },
+  {
+    "id": "p150",
+    "name": "Preston Barrera",
+    "position": [
+      "RB"
+    ],
+    "team": "GB",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 160,
+    "rank": 150,
+    "projected_points": 79.9
+  },
+  {
+    "id": "p151",
+    "name": "Austin Marsh",
+    "position": [
+      "TE"
+    ],
+    "team": "CHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 136,
+    "rank": 151,
+    "projected_points": 101.4
+  },
+  {
+    "id": "p152",
+    "name": "Vincent Adeyemi",
+    "position": [
+      "WR"
+    ],
+    "team": "NYJ",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 161,
+    "rank": 152,
+    "projected_points": 82
+  },
+  {
+    "id": "p153",
+    "name": "Terrence Pruitt",
+    "position": [
+      "RB"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 162,
+    "rank": 153,
+    "projected_points": 77.4
+  },
+  {
+    "id": "p154",
+    "name": "Micah Whitfield",
+    "position": [
+      "TE"
+    ],
+    "team": "SEA",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 157,
+    "rank": 154,
+    "projected_points": 96.6
+  },
+  {
+    "id": "p155",
+    "name": "DeShawn Barrera",
+    "position": [
+      "WR"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 151,
+    "rank": 155,
+    "projected_points": 77.5
+  },
+  {
+    "id": "p156",
+    "name": "Elijah Whitmore",
+    "position": [
+      "WR"
+    ],
+    "team": "NE",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 165,
+    "rank": 156,
+    "projected_points": 76.6
+  },
+  {
+    "id": "p157",
+    "name": "Karim Nakamura",
+    "position": [
+      "RB"
+    ],
+    "team": "JAX",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 166,
+    "rank": 157,
+    "projected_points": 70.9
+  },
+  {
+    "id": "p158",
+    "name": "Bryce Barrera",
+    "position": [
+      "WR"
+    ],
+    "team": "ATL",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 152,
+    "rank": 158,
+    "projected_points": 71.5
+  },
+  {
+    "id": "p159",
+    "name": "Julian Iverson",
+    "position": [
+      "RB"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 156,
+    "rank": 159,
+    "projected_points": 67.2
+  },
+  {
+    "id": "p160",
+    "name": "Andre Marsh",
+    "position": [
+      "RB"
+    ],
+    "team": "NO",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 154,
+    "rank": 160,
+    "projected_points": 66.2
+  },
+  {
+    "id": "p161",
+    "name": "Blake Barrera",
+    "position": [
+      "WR"
+    ],
+    "team": "ARI",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 173,
+    "rank": 161,
+    "projected_points": 69.2
+  },
+  {
+    "id": "p162",
+    "name": "Trevon Odom",
+    "position": [
+      "WR"
+    ],
+    "team": "WAS",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 172,
+    "rank": 162,
+    "projected_points": 68.7
+  },
+  {
+    "id": "p163",
+    "name": "Dominic Winslow",
+    "position": [
+      "TE"
+    ],
+    "team": "SEA",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 176,
+    "rank": 163,
+    "projected_points": 83.9
+  },
+  {
+    "id": "p164",
+    "name": "Marcus Sanborn",
+    "position": [
+      "TE"
+    ],
+    "team": "PIT",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 157,
+    "rank": 164,
+    "projected_points": 83.4
+  },
+  {
+    "id": "p165",
+    "name": "Marcus Ellsworth",
+    "position": [
+      "RB"
+    ],
+    "team": "MIN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 172,
+    "rank": 165,
+    "projected_points": 65
+  },
+  {
+    "id": "p166",
+    "name": "Rashad Duarte",
+    "position": [
+      "WR"
+    ],
+    "team": "CHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 179,
+    "rank": 166,
+    "projected_points": 67.8
+  },
+  {
+    "id": "p167",
+    "name": "Logan Halloran",
+    "position": [
+      "RB"
+    ],
+    "team": "SEA",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 176,
+    "rank": 167,
+    "projected_points": 63.8
+  },
+  {
+    "id": "p168",
+    "name": "Cameron Whitfield",
+    "position": [
+      "TE"
+    ],
+    "team": "NYG",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 165,
+    "rank": 168,
+    "projected_points": 80.6
+  },
+  {
+    "id": "p169",
+    "name": "Devon Marsh",
+    "position": [
+      "TE"
+    ],
+    "team": "LV",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 169,
+    "rank": 169,
+    "projected_points": 80
+  },
+  {
+    "id": "p170",
+    "name": "Bryce Delgado",
+    "position": [
+      "RB"
+    ],
+    "team": "LAC",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 159,
+    "rank": 170,
+    "projected_points": 62.2
+  },
+  {
+    "id": "p171",
+    "name": "Malik Whitmore",
+    "position": [
+      "RB"
+    ],
+    "team": "LAR",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 162,
+    "rank": 171,
+    "projected_points": 62.2
+  },
+  {
+    "id": "p172",
+    "name": "Jordan Osei",
+    "position": [
+      "TE"
+    ],
+    "team": "MIA",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 174,
+    "rank": 172,
+    "projected_points": 77.8
+  },
+  {
+    "id": "p173",
+    "name": "Jalen Quintana",
+    "position": [
+      "TE"
+    ],
+    "team": "ATL",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 179,
+    "rank": 173,
+    "projected_points": 77
+  },
+  {
+    "id": "p174",
+    "name": "Terrence Carter",
+    "position": [
+      "RB"
+    ],
+    "team": "DET",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 166,
+    "rank": 174,
+    "projected_points": 58.7
+  },
+  {
+    "id": "p175",
+    "name": "Jordan Whitfield",
+    "position": [
+      "WR"
+    ],
+    "team": "WAS",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 181,
+    "rank": 175,
+    "projected_points": 60.7
+  },
+  {
+    "id": "p176",
+    "name": "Jalen Odom",
+    "position": [
+      "TE"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 177,
+    "rank": 176,
+    "projected_points": 73.8
+  },
+  {
+    "id": "p177",
+    "name": "Cooper Winslow",
+    "position": [
+      "RB"
+    ],
+    "team": "CIN",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 166,
+    "rank": 177,
+    "projected_points": 57.5
+  },
+  {
+    "id": "p178",
+    "name": "Vincent Brennan",
+    "position": [
+      "WR"
+    ],
+    "team": "NE",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 170,
+    "rank": 178,
+    "projected_points": 59.9
+  },
+  {
+    "id": "p179",
+    "name": "Dominic Okafor",
+    "position": [
+      "WR"
+    ],
+    "team": "TEN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 182,
+    "rank": 179,
+    "projected_points": 59.4
+  },
+  {
+    "id": "p180",
+    "name": "Trevon Falcone",
+    "position": [
+      "RB"
+    ],
+    "team": "NYG",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 175,
+    "rank": 180,
+    "projected_points": 56.7
+  },
+  {
+    "id": "p181",
+    "name": "Jalen Delgado",
+    "position": [
+      "WR"
+    ],
+    "team": "DEN",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 189,
+    "rank": 181,
+    "projected_points": 58.8
+  },
+  {
+    "id": "p182",
+    "name": "Vincent Odom",
+    "position": [
+      "WR"
+    ],
+    "team": "GB",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 197,
+    "rank": 182,
+    "projected_points": 58.8
+  },
+  {
+    "id": "p183",
+    "name": "Blake Osei",
+    "position": [
+      "WR"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 196,
+    "rank": 183,
+    "projected_points": 58.2
+  },
+  {
+    "id": "p184",
+    "name": "Kendall Brennan",
+    "position": [
+      "TE"
+    ],
+    "team": "TEN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 187,
+    "rank": 184,
+    "projected_points": 69.8
+  },
+  {
+    "id": "p185",
+    "name": "Julian Quintana",
+    "position": [
+      "WR"
+    ],
+    "team": "IND",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 191,
+    "rank": 185,
+    "projected_points": 56.9
+  },
+  {
+    "id": "p186",
+    "name": "Cooper Carter",
+    "position": [
+      "RB"
+    ],
+    "team": "NE",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 188,
+    "rank": 186,
+    "projected_points": 53.9
+  },
+  {
+    "id": "p187",
+    "name": "Rashad Marsh",
+    "position": [
+      "WR"
+    ],
+    "team": "CLE",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 197,
+    "rank": 187,
+    "projected_points": 56.2
+  },
+  {
+    "id": "p188",
+    "name": "Bryce Thibodeaux",
+    "position": [
+      "K"
+    ],
+    "team": "TB",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 184,
+    "rank": 188,
+    "projected_points": 151.3
+  },
+  {
+    "id": "p189",
+    "name": "Preston Delgado",
+    "position": [
+      "WR"
+    ],
+    "team": "BAL",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 175,
+    "rank": 189,
+    "projected_points": 54.9
+  },
+  {
+    "id": "p190",
+    "name": "Cooper Pruitt",
+    "position": [
+      "K"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 199,
+    "rank": 190,
+    "projected_points": 147.2
+  },
+  {
+    "id": "p191",
+    "name": "Marcus Pruitt",
+    "position": [
+      "K"
+    ],
+    "team": "JAX",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 195,
+    "rank": 191,
+    "projected_points": 147.1
+  },
+  {
+    "id": "p192",
+    "name": "Bryce Whitmore",
+    "position": [
+      "RB"
+    ],
+    "team": "TEN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 207,
+    "rank": 192,
+    "projected_points": 50.9
+  },
+  {
+    "id": "p193",
+    "name": "Andre Ellsworth",
+    "position": [
+      "WR"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 186,
+    "rank": 193,
+    "projected_points": 53.2
+  },
+  {
+    "id": "p194",
+    "name": "Bryce Adeyemi",
+    "position": [
+      "RB"
+    ],
+    "team": "KC",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 203,
+    "rank": 194,
+    "projected_points": 50.6
+  },
+  {
+    "id": "p195",
+    "name": "Andre Whitmore",
+    "position": [
+      "WR"
+    ],
+    "team": "CHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 196,
+    "rank": 195,
+    "projected_points": 52.1
+  },
+  {
+    "id": "p196",
+    "name": "Kendall Nakamura",
+    "position": [
+      "DST"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 197,
+    "rank": 196,
+    "projected_points": 140.6
+  },
+  {
+    "id": "p197",
+    "name": "Cameron Carter",
+    "position": [
+      "TE"
+    ],
+    "team": "DEN",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 205,
+    "rank": 197,
+    "projected_points": 62
+  },
+  {
+    "id": "p198",
+    "name": "Trevon Callahan",
+    "position": [
+      "K"
+    ],
+    "team": "DET",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 197,
+    "rank": 198,
+    "projected_points": 138.8
+  },
+  {
+    "id": "p199",
+    "name": "Andre Kowalski",
+    "position": [
+      "K"
+    ],
+    "team": "MIN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 196,
+    "rank": 199,
+    "projected_points": 137.6
+  },
+  {
+    "id": "p200",
+    "name": "DeShawn Falcone",
+    "position": [
+      "DST"
+    ],
+    "team": "NYJ",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 214,
+    "rank": 200,
+    "projected_points": 136.1
+  },
+  {
+    "id": "p201",
+    "name": "Austin Okafor",
+    "position": [
+      "K"
+    ],
+    "team": "NO",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 203,
+    "rank": 201,
+    "projected_points": 134.9
+  },
+  {
+    "id": "p202",
+    "name": "Austin Halloran",
+    "position": [
+      "WR"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 214,
+    "rank": 202,
+    "projected_points": 48.9
+  },
+  {
+    "id": "p203",
+    "name": "Marcus Mercer",
+    "position": [
+      "RB"
+    ],
+    "team": "KC",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 215,
+    "rank": 203,
+    "projected_points": 46.6
+  },
+  {
+    "id": "p204",
+    "name": "Logan Barrera",
+    "position": [
+      "TE"
+    ],
+    "team": "SEA",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 203,
+    "rank": 204,
+    "projected_points": 59.5
+  },
+  {
+    "id": "p205",
+    "name": "Cooper Odom",
+    "position": [
+      "RB"
+    ],
+    "team": "IND",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 209,
+    "rank": 205,
+    "projected_points": 46.5
+  },
+  {
+    "id": "p206",
+    "name": "Grant Kowalski",
+    "position": [
+      "DST"
+    ],
+    "team": "LV",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 200,
+    "rank": 206,
+    "projected_points": 133.3
+  },
+  {
+    "id": "p207",
+    "name": "Trevon Vance",
+    "position": [
+      "WR"
+    ],
+    "team": "CLE",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 207,
+    "rank": 207,
+    "projected_points": 48.4
+  },
+  {
+    "id": "p208",
+    "name": "Xavier Higgins",
+    "position": [
+      "WR"
+    ],
+    "team": "NE",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 211,
+    "rank": 208,
+    "projected_points": 48.3
+  },
+  {
+    "id": "p209",
+    "name": "Logan Whitmore",
+    "position": [
+      "K"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 221,
+    "rank": 209,
+    "projected_points": 132.8
+  },
+  {
+    "id": "p210",
+    "name": "Isaiah Halloran",
+    "position": [
+      "DST"
+    ],
+    "team": "SEA",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 202,
+    "rank": 210,
+    "projected_points": 131.4
+  },
+  {
+    "id": "p211",
+    "name": "Devon Whitfield",
+    "position": [
+      "WR"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 204,
+    "rank": 211,
+    "projected_points": 47.6
+  },
+  {
+    "id": "p212",
+    "name": "Andre Mercer",
+    "position": [
+      "DST"
+    ],
+    "team": "SEA",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 213,
+    "rank": 212,
+    "projected_points": 130.4
+  },
+  {
+    "id": "p213",
+    "name": "Vincent Quintana",
+    "position": [
+      "K"
+    ],
+    "team": "BAL",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 200,
+    "rank": 213,
+    "projected_points": 129.5
+  },
+  {
+    "id": "p214",
+    "name": "Kendall Quintana",
+    "position": [
+      "TE"
+    ],
+    "team": "DET",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 213,
+    "rank": 214,
+    "projected_points": 57.5
+  },
+  {
+    "id": "p215",
+    "name": "Karim Winslow",
+    "position": [
+      "K"
+    ],
+    "team": "BAL",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 229,
+    "rank": 215,
+    "projected_points": 127.1
+  },
+  {
+    "id": "p216",
+    "name": "Julian Broussard",
+    "position": [
+      "RB"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 219,
+    "rank": 216,
+    "projected_points": 44.1
+  },
+  {
+    "id": "p217",
+    "name": "Trevon Quintana",
+    "position": [
+      "DST"
+    ],
+    "team": "IND",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 216,
+    "rank": 217,
+    "projected_points": 125.7
+  },
+  {
+    "id": "p218",
+    "name": "Grant Osei",
+    "position": [
+      "DST"
+    ],
+    "team": "NE",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 216,
+    "rank": 218,
+    "projected_points": 125.5
+  },
+  {
+    "id": "p219",
+    "name": "Jalen Mercer",
+    "position": [
+      "DST"
+    ],
+    "team": "CLE",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 231,
+    "rank": 219,
+    "projected_points": 124.9
+  },
+  {
+    "id": "p220",
+    "name": "Terrence Odom",
+    "position": [
+      "K"
+    ],
+    "team": "DAL",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 206,
+    "rank": 220,
+    "projected_points": 124.6
+  },
+  {
+    "id": "p221",
+    "name": "Andre Nakamura",
+    "position": [
+      "TE"
+    ],
+    "team": "KC",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 223,
+    "rank": 221,
+    "projected_points": 54.7
+  },
+  {
+    "id": "p222",
+    "name": "Jordan Iverson",
+    "position": [
+      "K"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 221,
+    "rank": 222,
+    "projected_points": 122.8
+  },
+  {
+    "id": "p223",
+    "name": "Tyler Broussard",
+    "position": [
+      "TE"
+    ],
+    "team": "PIT",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 214,
+    "rank": 223,
+    "projected_points": 54
+  },
+  {
+    "id": "p224",
+    "name": "Micah Iverson",
+    "position": [
+      "DST"
+    ],
+    "team": "LV",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 219,
+    "rank": 224,
+    "projected_points": 121
+  },
+  {
+    "id": "p225",
+    "name": "Micah Castellano",
+    "position": [
+      "RB"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 210,
+    "rank": 225,
+    "projected_points": 41.9
+  },
+  {
+    "id": "p226",
+    "name": "Jalen Halloran",
+    "position": [
+      "K"
+    ],
+    "team": "ARI",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 231,
+    "rank": 226,
+    "projected_points": 120.3
+  },
+  {
+    "id": "p227",
+    "name": "Tyler Whitfield",
+    "position": [
+      "RB"
+    ],
+    "team": "NYG",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 216,
+    "rank": 227,
+    "projected_points": 41.5
+  },
+  {
+    "id": "p228",
+    "name": "Reggie Kowalski",
+    "position": [
+      "DST"
+    ],
+    "team": "ATL",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 228,
+    "rank": 228,
+    "projected_points": 114.8
+  },
+  {
+    "id": "p229",
+    "name": "Andre Broussard",
+    "position": [
+      "K"
+    ],
+    "team": "CIN",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 229,
+    "rank": 229,
+    "projected_points": 114.7
+  },
+  {
+    "id": "p230",
+    "name": "Terrence Marsh",
+    "position": [
+      "RB"
+    ],
+    "team": "LAC",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 224,
+    "rank": 230,
+    "projected_points": 39.8
+  },
+  {
+    "id": "p231",
+    "name": "Grant Carter",
+    "position": [
+      "WR"
+    ],
+    "team": "ARI",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 228,
+    "rank": 231,
+    "projected_points": 41.5
+  },
+  {
+    "id": "p232",
+    "name": "Andre Delgado",
+    "position": [
+      "DST"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 246,
+    "rank": 232,
+    "projected_points": 113.3
+  },
+  {
+    "id": "p233",
+    "name": "Reggie Carter",
+    "position": [
+      "WR"
+    ],
+    "team": "TEN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 221,
+    "rank": 233,
+    "projected_points": 41.1
+  },
+  {
+    "id": "p234",
+    "name": "Rashad Falcone",
+    "position": [
+      "DST"
+    ],
+    "team": "CHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 238,
+    "rank": 234,
+    "projected_points": 113
+  },
+  {
+    "id": "p235",
+    "name": "Jalen Reyes",
+    "position": [
+      "K"
+    ],
+    "team": "MIA",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 221,
+    "rank": 235,
+    "projected_points": 112.5
+  },
+  {
+    "id": "p236",
+    "name": "Jalen Carter",
+    "position": [
+      "K"
+    ],
+    "team": "WAS",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 249,
+    "rank": 236,
+    "projected_points": 112.3
+  },
+  {
+    "id": "p237",
+    "name": "Elijah Castellano",
+    "position": [
+      "K"
+    ],
+    "team": "LAR",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 225,
+    "rank": 237,
+    "projected_points": 111.4
+  },
+  {
+    "id": "p238",
+    "name": "Elijah Nakamura",
+    "position": [
+      "K"
+    ],
+    "team": "TEN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 244,
+    "rank": 238,
+    "projected_points": 111.3
+  },
+  {
+    "id": "p239",
+    "name": "Dominic Duarte",
+    "position": [
+      "WR"
+    ],
+    "team": "LV",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 241,
+    "rank": 239,
+    "projected_points": 40.4
+  },
+  {
+    "id": "p240",
+    "name": "Trevon Barrera",
+    "position": [
+      "DST"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 244,
+    "rank": 240,
+    "projected_points": 110
+  },
+  {
+    "id": "p241",
+    "name": "Andre Reyes",
+    "position": [
+      "RB"
+    ],
+    "team": "GB",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 247,
+    "rank": 241,
+    "projected_points": 38.1
+  },
+  {
+    "id": "p242",
+    "name": "Logan Sanborn",
+    "position": [
+      "RB"
+    ],
+    "team": "WAS",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 241,
+    "rank": 242,
+    "projected_points": 37.9
+  },
+  {
+    "id": "p243",
+    "name": "Grant Thibodeaux",
+    "position": [
+      "K"
+    ],
+    "team": "TEN",
+    "sport": "NFL",
+    "bye_week": 5,
+    "adp": 252,
+    "rank": 243,
+    "projected_points": 108.4
+  },
+  {
+    "id": "p244",
+    "name": "DeShawn Winslow",
+    "position": [
+      "RB"
+    ],
+    "team": "DAL",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 247,
+    "rank": 244,
+    "projected_points": 37.7
+  },
+  {
+    "id": "p245",
+    "name": "Xavier Quintana",
+    "position": [
+      "WR"
+    ],
+    "team": "DEN",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 251,
+    "rank": 245,
+    "projected_points": 39.4
+  },
+  {
+    "id": "p246",
+    "name": "Grant Nakamura",
+    "position": [
+      "WR"
+    ],
+    "team": "JAX",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 234,
+    "rank": 246,
+    "projected_points": 39.3
+  },
+  {
+    "id": "p247",
+    "name": "Julian Barrera",
+    "position": [
+      "TE"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 243,
+    "rank": 247,
+    "projected_points": 47.8
+  },
+  {
+    "id": "p248",
+    "name": "DeShawn Sanborn",
+    "position": [
+      "DST"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 236,
+    "rank": 248,
+    "projected_points": 107.5
+  },
+  {
+    "id": "p249",
+    "name": "Logan Adeyemi",
+    "position": [
+      "DST"
+    ],
+    "team": "SEA",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 258,
+    "rank": 249,
+    "projected_points": 107
+  },
+  {
+    "id": "p250",
+    "name": "Xavier Castellano",
+    "position": [
+      "WR"
+    ],
+    "team": "TB",
+    "sport": "NFL",
+    "bye_week": 14,
+    "adp": 235,
+    "rank": 250,
+    "projected_points": 38.8
+  },
+  {
+    "id": "p251",
+    "name": "Andre Thibodeaux",
+    "position": [
+      "RB"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 239,
+    "rank": 251,
+    "projected_points": 37
+  },
+  {
+    "id": "p252",
+    "name": "Jordan Thibodeaux",
+    "position": [
+      "RB"
+    ],
+    "team": "GB",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 246,
+    "rank": 252,
+    "projected_points": 36.9
+  },
+  {
+    "id": "p253",
+    "name": "Elijah Ellsworth",
+    "position": [
+      "DST"
+    ],
+    "team": "WAS",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 253,
+    "rank": 253,
+    "projected_points": 106
+  },
+  {
+    "id": "p254",
+    "name": "Tyler Barrera",
+    "position": [
+      "WR"
+    ],
+    "team": "NO",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 255,
+    "rank": 254,
+    "projected_points": 38.5
+  },
+  {
+    "id": "p255",
+    "name": "Trevon Broussard",
+    "position": [
+      "K"
+    ],
+    "team": "HOU",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 267,
+    "rank": 255,
+    "projected_points": 105.8
+  },
+  {
+    "id": "p256",
+    "name": "Bryce Callahan",
+    "position": [
+      "WR"
+    ],
+    "team": "BAL",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 250,
+    "rank": 256,
+    "projected_points": 38.3
+  },
+  {
+    "id": "p257",
+    "name": "Dominic Odom",
+    "position": [
+      "RB"
+    ],
+    "team": "CLE",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 243,
+    "rank": 257,
+    "projected_points": 36.6
+  },
+  {
+    "id": "p258",
+    "name": "Dominic Reyes",
+    "position": [
+      "RB"
+    ],
+    "team": "GB",
+    "sport": "NFL",
+    "bye_week": 6,
+    "adp": 269,
+    "rank": 258,
+    "projected_points": 36
+  },
+  {
+    "id": "p259",
+    "name": "Grant Whitmore",
+    "position": [
+      "DST"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 267,
+    "rank": 259,
+    "projected_points": 103.3
+  },
+  {
+    "id": "p260",
+    "name": "Julian Okafor",
+    "position": [
+      "RB"
+    ],
+    "team": "JAX",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 254,
+    "rank": 260,
+    "projected_points": 35.6
+  },
+  {
+    "id": "p261",
+    "name": "Dominic Iverson",
+    "position": [
+      "K"
+    ],
+    "team": "CLE",
+    "sport": "NFL",
+    "bye_week": 12,
+    "adp": 272,
+    "rank": 261,
+    "projected_points": 101.3
+  },
+  {
+    "id": "p262",
+    "name": "Kendall Iverson",
+    "position": [
+      "RB"
+    ],
+    "team": "SF",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 251,
+    "rank": 262,
+    "projected_points": 35.2
+  },
+  {
+    "id": "p263",
+    "name": "Julian Pruitt",
+    "position": [
+      "DST"
+    ],
+    "team": "NYJ",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 270,
+    "rank": 263,
+    "projected_points": 100.6
+  },
+  {
+    "id": "p264",
+    "name": "Kendall Barrera",
+    "position": [
+      "RB"
+    ],
+    "team": "LV",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 253,
+    "rank": 264,
+    "projected_points": 34.6
+  },
+  {
+    "id": "p265",
+    "name": "Marcus Thibodeaux",
+    "position": [
+      "DST"
+    ],
+    "team": "BAL",
+    "sport": "NFL",
+    "bye_week": 7,
+    "adp": 276,
+    "rank": 265,
+    "projected_points": 98.5
+  },
+  {
+    "id": "p266",
+    "name": "Elijah Mercer",
+    "position": [
+      "DST"
+    ],
+    "team": "CAR",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 254,
+    "rank": 266,
+    "projected_points": 96.3
+  },
+  {
+    "id": "p267",
+    "name": "Micah Sanborn",
+    "position": [
+      "WR"
+    ],
+    "team": "DAL",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 275,
+    "rank": 267,
+    "projected_points": 35
+  },
+  {
+    "id": "p268",
+    "name": "Terrence Brennan",
+    "position": [
+      "RB"
+    ],
+    "team": "BUF",
+    "sport": "NFL",
+    "bye_week": 8,
+    "adp": 276,
+    "rank": 268,
+    "projected_points": 32.7
+  },
+  {
+    "id": "p269",
+    "name": "Austin Vance",
+    "position": [
+      "WR"
+    ],
+    "team": "KC",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 276,
+    "rank": 269,
+    "projected_points": 33.5
+  },
+  {
+    "id": "p270",
+    "name": "Nathaniel Duarte",
+    "position": [
+      "WR"
+    ],
+    "team": "NYJ",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 271,
+    "rank": 270,
+    "projected_points": 33.4
+  },
+  {
+    "id": "p271",
+    "name": "Andre Adeyemi",
+    "position": [
+      "WR"
+    ],
+    "team": "KC",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 276,
+    "rank": 271,
+    "projected_points": 33.4
+  },
+  {
+    "id": "p272",
+    "name": "Malik Duarte",
+    "position": [
+      "WR"
+    ],
+    "team": "PHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 276,
+    "rank": 272,
+    "projected_points": 33
+  },
+  {
+    "id": "p273",
+    "name": "Terrence Okafor",
+    "position": [
+      "RB"
+    ],
+    "team": "CHI",
+    "sport": "NFL",
+    "bye_week": 10,
+    "adp": 267,
+    "rank": 273,
+    "projected_points": 29.7
+  },
+  {
+    "id": "p274",
+    "name": "Cooper Duarte",
+    "position": [
+      "WR"
+    ],
+    "team": "PIT",
+    "sport": "NFL",
+    "bye_week": 11,
+    "adp": 264,
+    "rank": 274,
+    "projected_points": 31
+  },
+  {
+    "id": "p275",
+    "name": "Xavier Vance",
+    "position": [
+      "RB"
+    ],
+    "team": "JAX",
+    "sport": "NFL",
+    "bye_week": 9,
+    "adp": 264,
+    "rank": 275,
+    "projected_points": 20.3
+  },
+  {
+    "id": "p276",
+    "name": "Rashad Iverson",
+    "position": [
+      "RB"
+    ],
+    "team": "DAL",
+    "sport": "NFL",
+    "bye_week": 13,
+    "adp": 276,
+    "rank": 276,
+    "projected_points": 18.8
+  }
+]
