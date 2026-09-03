@@ -1,5 +1,6 @@
 import { draftReducer, type DraftAction } from '../../state/draftReducer';
 import type { DraftState } from '../../domain/draft';
+import type { DraftStrategy } from '../../domain/strategy';
 import type { DraftAdapter } from '../types';
 
 /**
@@ -35,8 +36,12 @@ export class ManualAdapter implements DraftAdapter {
     this.dispatch({ type: 'UNDO' });
   }
 
-  setBpaVsNeedWeight(weight: number): void {
-    this.dispatch({ type: 'SET_WEIGHT', weight });
+  setStrategy(strategy: DraftStrategy): void {
+    this.dispatch({ type: 'SET_STRATEGY', strategy });
+  }
+
+  toggleFavorite(playerId: string): void {
+    this.dispatch({ type: 'TOGGLE_FAVORITE', playerId });
   }
 
   subscribe(onChange: (state: DraftState) => void): () => void {

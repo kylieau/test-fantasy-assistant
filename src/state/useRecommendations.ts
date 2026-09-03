@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import type { DraftState } from '../domain/draft';
 import { computeFilledRosterSlots } from '../domain/roster';
+import { resolveStrategyWeight } from '../domain/strategy';
 import { rankRecommendations } from '../engine/recommend';
 import type { Recommendation } from '../engine/types';
 
@@ -9,11 +10,12 @@ export function useRecommendations(state: DraftState | null): Recommendation[] {
   return useMemo(() => {
     if (!state) return [];
     const rosterSlots = computeFilledRosterSlots(state.leagueSettings.rosterSlots, state.userRoster);
+    const weight = resolveStrategyWeight(state.strategy, rosterSlots);
     return rankRecommendations(
       state.availablePlayers,
       state.leagueSettings,
       rosterSlots,
-      state.bpaVsNeedWeight,
+      weight,
       state.availablePlayers.length,
     );
   }, [state]);

@@ -1,58 +1,63 @@
 import type { Recommendation } from '../../engine/types';
-import { BpaNeedSlider } from './BpaNeedSlider';
+import type { FuturePickProjection } from '../../engine/projection';
+import { STRATEGY_LABELS, type DraftStrategy } from '../../domain/strategy';
 
 export function RecommendationPanel({
-  recommendations,
-  weight,
-  onWeightChange,
+  strategy,
+  recommendation,
+  futurePicks,
   onDraft,
 }: {
-  recommendations: Recommendation[];
-  weight: number;
-  onWeightChange: (weight: number) => void;
+  strategy: DraftStrategy;
+  recommendation: Recommendation | undefined;
+  futurePicks: FuturePickProjection[];
   onDraft: (playerId: string) => void;
 }) {
-  const [top, ...alternates] = recommendations;
-
   return (
     <section className="recommendation-panel">
-      <h2>Who should I take?</h2>
-      <BpaNeedSlider weight={weight} onChange={onWeightChange} />
+      <h2>Your Next Pick</h2>
+      <p className="recommendation-panel__strategy">Strategy: {STRATEGY_LABELS[strategy]}</p>
 
-      {top ? (
+      {recommendation ? (
         <div className="recommendation-panel__top">
           <div className="recommendation-panel__top-player">
-            <strong>{top.player.name}</strong>
+            <strong>{recommendation.player.name}</strong>
             <span>
-              {top.player.position[0]} · {top.player.team}
+              {recommendation.player.position[0]} · {recommendation.player.team}
             </span>
           </div>
           <ul className="recommendation-panel__reasons">
-            {top.reasonParts.map((reason) => (
+            {recommendation.reasonParts.map((reason) => (
               <li key={reason}>{reason}</li>
             ))}
           </ul>
-          <button type="button" className="primary-button" onClick={() => onDraft(top.player.id)}>
-            Draft {top.player.name}
+          <button
+            type="button"
+            className="primary-button"
+            onClick={() => onDraft(recommendation.player.id)}
+          >
+            Draft {recommendation.player.name}
           </button>
         </div>
       ) : (
         <p>No players left to recommend.</p>
       )}
 
-      {alternates.length > 0 && (
-        <ol className="recommendation-panel__alternates">
-          {alternates.slice(0, 4).map((rec) => (
-            <li key={rec.player.id}>
-              <span>
-                {rec.player.name} ({rec.player.position[0]})
-              </span>
-              <button type="button" onClick={() => onDraft(rec.player.id)}>
-                Draft
-              </button>
-            </li>
-          ))}
-        </ol>
+      {futurePicks.length > 0 && (
+        <div className="recommendation-panel__future">
+          <h3>Anticipated Next Rounds</h3>
+          <p className="recommendation-panel__future-caveat">
+            Projected assuming other teams draft by ADP — not a guarantee.
+          </p>
+          <ol>
+            {futurePicks.map((fp) => (
+              <li key={fp.pickNumber}>
+                Pick {fp.pickNumber} (Rd {fp.round}): <strong>{fp.player.name}</strong> (
+                {fp.player.position[0]})
+              </li>
+            ))}
+          </ol>
+        </div>
       )}
     </section>
   );

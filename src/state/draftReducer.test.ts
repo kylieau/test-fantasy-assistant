@@ -19,6 +19,7 @@ function initialState(): DraftState {
       leagueSettings: createDefaultLeagueSettings(4),
       availablePlayers: samplePlayers(),
       userTeamId: USER_TEAM_ID,
+      strategy: 'balanced',
     },
   );
 }
@@ -70,10 +71,19 @@ describe('draftReducer', () => {
     expect(draftReducer(state, { type: 'DRAFT_PLAYER', playerId: 'nope', teamId: USER_TEAM_ID })).toEqual(state);
   });
 
-  it('SET_WEIGHT updates only the weight', () => {
+  it('SET_STRATEGY updates only the strategy', () => {
     const state = initialState();
-    const next = draftReducer(state, { type: 'SET_WEIGHT', weight: 0.8 });
-    expect(next.bpaVsNeedWeight).toBe(0.8);
+    const next = draftReducer(state, { type: 'SET_STRATEGY', strategy: 'need' });
+    expect(next.strategy).toBe('need');
     expect(next.availablePlayers).toBe(state.availablePlayers);
+  });
+
+  it('TOGGLE_FAVORITE adds then removes a player id', () => {
+    const state = initialState();
+    const favorited = draftReducer(state, { type: 'TOGGLE_FAVORITE', playerId: 'RB1' });
+    expect(favorited.favoritedPlayerIds).toEqual(['RB1']);
+
+    const unfavorited = draftReducer(favorited, { type: 'TOGGLE_FAVORITE', playerId: 'RB1' });
+    expect(unfavorited.favoritedPlayerIds).toEqual([]);
   });
 });

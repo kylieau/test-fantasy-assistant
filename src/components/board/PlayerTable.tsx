@@ -2,22 +2,45 @@ import { useMemo, useState } from 'react';
 import type { Recommendation } from '../../engine/types';
 import type { Position } from '../../domain/player';
 import { labelAdpDelta } from '../../engine/value';
+import { availabilityMargin } from '../../engine/projection';
+import { POSITION_COLORS } from '../positionColors';
 
-type SortKey = 'rank' | 'adp' | 'projected_points' | 'value';
+type SortKey = 'rank' | 'adp' | 'projected_points' | 'value' | 'positionRank' | 'tier' | 'availability';
 
 const ALL_POSITIONS: Position[] = ['QB', 'RB', 'WR', 'TE', 'K', 'DST'];
 
+interface TeamOption {
+  id: string;
+  name: string;
+}
+
 export function PlayerTable({
   recommendations,
-  onDraft,
+  positionRanks,
+  tiers,
+  favoritedPlayerIds,
+  nextUserPickNumber,
+  teams,
+  onDraftToMyTeam,
+  onMarkDraftedByTeam,
+  onToggleFavorite,
 }: {
   recommendations: Recommendation[];
-  onDraft: (playerId: string) => void;
+  positionRanks: Record<string, number>;
+  tiers: Record<string, number>;
+  favoritedPlayerIds: string[];
+  nextUserPickNumber: number | null;
+  teams: TeamOption[];
+  onDraftToMyTeam: (playerId: string) => void;
+  onMarkDraftedByTeam: (playerId: string, teamId: string) => void;
+  onToggleFavorite: (playerId: string) => void;
 }) {
   const [sortKey, setSortKey] = useState<SortKey>('rank');
   const [sortAsc, setSortAsc] = useState(true);
   const [positionFilter, setPositionFilter] = useState<Position | 'ALL'>('ALL');
   const [search, setSearch] = useState('');
+
+  const favoritedSet = useMemo(() => new Set(favoritedPlayerIds), [favoritedPlayerIds]);
 
   const rows = useMemo(() => {
     let filtered = recommendations;
@@ -28,13 +51,24 @@ export function PlayerTable({
       const q = search.trim().toLowerCase();
       filtered = filtered.filter((r) => r.player.name.toLowerCase().includes(q));
     }
-    const sorted = [...filtered].sort((a, b) => {
-      const aVal = sortKey === 'value' ? a.value : a.player[sortKey];
-      const bVal = sortKey === 'value' ? b.value : b.player[sortKey];
-      return sortAsc ? aVal - bVal : bVal - aVal;
-    });
-    return sorted;
-  }, [recommendations, positionFilter, search, sortKey, sortAsc]);
+
+    function sortValue(r: Recommendation): number {
+      switch (sortKey) {
+        case 'value':
+          return r.value;
+        case 'positionRank':
+          return positionRanks[r.player.id] ?? Number.MAX_SAFE_INTEGER;
+        case 'tier':
+          return tiers[r.player.id] ?? Number.MAX_SAFE_INTEGER;
+        case 'availability':
+          return nextUserPickNumber !== null ? availabilityMargin(r.player, nextUserPickNumber) : 0;
+        default:
+          return r.player[sortKey];
+      }
+    }
+
+    return [...filtered].sort((a, b) => (sortAsc ? sortValue(a) - sortValue(b) : sortValue(b) - sortValue(a)));
+  }, [recommendations, positionFilter, search, sortKey, sortAsc, positionRanks, tiers, nextUserPickNumber]);
 
   function toggleSort(key: SortKey) {
     if (key === sortKey) {
@@ -47,6 +81,7 @@ export function PlayerTable({
 
   return (
     <section className="player-table">
+      <h2>Available Players</h2>
       <div className="player-table__controls">
         <input
           type="search"
@@ -64,43 +99,94 @@ export function PlayerTable({
         </select>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Pos</th>
-            <th>Team</th>
-            <th>Bye</th>
-            <th onClick={() => toggleSort('adp')}>ADP</th>
-            <th onClick={() => toggleSort('rank')}>Rank</th>
-            <th onClick={() => toggleSort('projected_points')}>Proj Pts</th>
-            <th onClick={() => toggleSort('value')}>Value</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((rec) => {
-            const label = labelAdpDelta(rec.adpDelta);
-            return (
-              <tr key={rec.player.id}>
-                <td>{rec.player.name}</td>
-                <td>{rec.player.position.join('/')}</td>
-                <td>{rec.player.team}</td>
-                <td>{rec.player.bye_week ?? '—'}</td>
-                <td className={label !== 'neutral' ? `adp-label--${label}` : undefined}>{rec.player.adp}</td>
-                <td>{rec.player.rank}</td>
-                <td>{rec.player.projected_points.toFixed(1)}</td>
-                <td>{rec.value.toFixed(1)}</td>
-                <td>
-                  <button type="button" onClick={() => onDraft(rec.player.id)}>
-                    Draft
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="player-table__scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>★</th>
+              <th>Name</th>
+              <th>Pos</th>
+              <th>Team</th>
+              <th>Bye</th>
+              <th onClick={() => toggleSort('rank')}>Overall</th>
+              <th onClick={() => toggleSort('positionRank')}>Pos Rank</th>
+              <th onClick={() => toggleSort('tier')}>Tier</th>
+              <th onClick={() => toggleSort('adp')}>ADP</th>
+              <th onClick={() => toggleSort('projected_points')}>Proj Pts</th>
+              <th onClick={() => toggleSort('value')}>Value</th>
+              <th onClick={() => toggleSort('availability')}>Availability</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((rec) => {
+              const { player } = rec;
+              const label = labelAdpDelta(rec.adpDelta);
+              const margin = nextUserPickNumber !== null ? availabilityMargin(player, nextUserPickNumber) : null;
+              const isFavorited = favoritedSet.has(player.id);
+
+              return (
+                <tr key={player.id}>
+                  <td>
+                    <button
+                      type="button"
+                      className={`favorite-star ${isFavorited ? 'favorite-star--active' : ''}`}
+                      onClick={() => onToggleFavorite(player.id)}
+                      aria-label={isFavorited ? 'Remove favorite' : 'Favorite this player'}
+                      title={isFavorited ? 'Remove favorite' : 'Favorite this player'}
+                    >
+                      {isFavorited ? '★' : '☆'}
+                    </button>
+                  </td>
+                  <td>{player.name}</td>
+                  <td>
+                    <span
+                      className="position-badge"
+                      style={{ backgroundColor: POSITION_COLORS[player.position[0]] }}
+                    >
+                      {player.position[0]}
+                      {positionRanks[player.id] ?? ''}
+                    </span>
+                  </td>
+                  <td>{player.team}</td>
+                  <td>{player.bye_week ?? '—'}</td>
+                  <td>{player.rank}</td>
+                  <td>{positionRanks[player.id] ?? '—'}</td>
+                  <td>{tiers[player.id] ?? '—'}</td>
+                  <td className={label !== 'neutral' ? `adp-label--${label}` : undefined}>{player.adp}</td>
+                  <td>{player.projected_points.toFixed(1)}</td>
+                  <td>{rec.value.toFixed(1)}</td>
+                  <td
+                    className={
+                      margin !== null ? (margin >= 0 ? 'availability--likely' : 'availability--risky') : undefined
+                    }
+                  >
+                    {margin !== null ? (margin >= 0 ? 'Likely there' : 'At risk') : '—'}
+                  </td>
+                  <td className="player-table__actions">
+                    <button type="button" onClick={() => onDraftToMyTeam(player.id)}>
+                      Mine
+                    </button>
+                    <select
+                      value=""
+                      onChange={(e) => {
+                        if (e.target.value) onMarkDraftedByTeam(player.id, e.target.value);
+                      }}
+                    >
+                      <option value="">Drafted by…</option>
+                      {teams.map((team) => (
+                        <option key={team.id} value={team.id}>
+                          {team.name}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }

@@ -13,7 +13,8 @@ function emptyDraftState(): DraftState {
     userTeamId: USER_TEAM_ID,
     userRoster: [],
     opponentRosters: {},
-    bpaVsNeedWeight: 0.3,
+    strategy: 'balanced',
+    favoritedPlayerIds: [],
   };
 }
 

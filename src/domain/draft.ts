@@ -1,5 +1,6 @@
 import type { Player } from './player';
 import type { LeagueSettings } from './roster';
+import type { DraftStrategy } from './strategy';
 
 export interface Pick {
   pickNumber: number;
@@ -17,11 +18,8 @@ export interface DraftState {
   userTeamId: string;
   userRoster: Player[];
   opponentRosters: Record<string, Player[]>;
-  bpaVsNeedWeight: number;
+  strategy: DraftStrategy;
+  favoritedPlayerIds: string[];
   // Deliberately omitted for Phase 1, added later without breaking this shape:
   //   remaining_seconds, opponent_profiles, is_connected, category_z_scores
-}
-
-export function opponentTeamIds(leagueSettings: LeagueSettings): string[] {
-  return Array.from({ length: leagueSettings.teamCount - 1 }, (_, i) => `opp-${i + 1}`);
 }

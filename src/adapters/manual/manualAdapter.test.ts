@@ -13,7 +13,8 @@ function initialState(): DraftState {
     userTeamId: USER_TEAM_ID,
     userRoster: [],
     opponentRosters: {},
-    bpaVsNeedWeight: 0.3,
+    strategy: 'balanced',
+    favoritedPlayerIds: [],
   };
 }
 
@@ -46,6 +47,27 @@ describe('ManualAdapter', () => {
 
     expect(listener).toHaveBeenCalledTimes(1);
     expect(adapter.getState().userRoster).toHaveLength(0);
+  });
+
+  it('setStrategy updates the strategy and notifies subscribers', () => {
+    const adapter = new ManualAdapter(initialState());
+    const listener = vi.fn();
+    adapter.subscribe(listener);
+
+    adapter.setStrategy('need');
+
+    expect(listener).toHaveBeenCalledTimes(1);
+    expect(adapter.getState().strategy).toBe('need');
+  });
+
+  it('toggleFavorite adds and removes a player id', () => {
+    const adapter = new ManualAdapter(initialState());
+
+    adapter.toggleFavorite('RB1');
+    expect(adapter.getState().favoritedPlayerIds).toEqual(['RB1']);
+
+    adapter.toggleFavorite('RB1');
+    expect(adapter.getState().favoritedPlayerIds).toEqual([]);
   });
 
   it('unsubscribe stops further notifications', () => {

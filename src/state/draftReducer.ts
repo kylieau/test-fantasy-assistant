@@ -1,13 +1,20 @@
 import type { DraftState, Pick } from '../domain/draft';
 import type { LeagueSettings } from '../domain/roster';
 import type { Player } from '../domain/player';
-import { DEFAULT_BPA_VS_NEED_WEIGHT } from '../engine/recommend';
+import type { DraftStrategy } from '../domain/strategy';
 
 export type DraftAction =
-  | { type: 'INIT_LEAGUE'; leagueSettings: LeagueSettings; availablePlayers: Player[]; userTeamId: string }
+  | {
+      type: 'INIT_LEAGUE';
+      leagueSettings: LeagueSettings;
+      availablePlayers: Player[];
+      userTeamId: string;
+      strategy: DraftStrategy;
+    }
   | { type: 'DRAFT_PLAYER'; playerId: string; teamId: string }
   | { type: 'UNDO' }
-  | { type: 'SET_WEIGHT'; weight: number };
+  | { type: 'SET_STRATEGY'; strategy: DraftStrategy }
+  | { type: 'TOGGLE_FAVORITE'; playerId: string };
 
 export function draftReducer(state: DraftState, action: DraftAction): DraftState {
   switch (action.type) {
@@ -20,7 +27,8 @@ export function draftReducer(state: DraftState, action: DraftAction): DraftState
         userTeamId: action.userTeamId,
         userRoster: [],
         opponentRosters: {},
-        bpaVsNeedWeight: state.bpaVsNeedWeight ?? DEFAULT_BPA_VS_NEED_WEIGHT,
+        strategy: action.strategy,
+        favoritedPlayerIds: [],
       };
     }
 
@@ -76,8 +84,18 @@ export function draftReducer(state: DraftState, action: DraftAction): DraftState
       };
     }
 
-    case 'SET_WEIGHT': {
-      return { ...state, bpaVsNeedWeight: action.weight };
+    case 'SET_STRATEGY': {
+      return { ...state, strategy: action.strategy };
+    }
+
+    case 'TOGGLE_FAVORITE': {
+      const isFavorited = state.favoritedPlayerIds.includes(action.playerId);
+      return {
+        ...state,
+        favoritedPlayerIds: isFavorited
+          ? state.favoritedPlayerIds.filter((id) => id !== action.playerId)
+          : [...state.favoritedPlayerIds, action.playerId],
+      };
     }
 
     default:

@@ -1,34 +1,26 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { DraftState } from '../domain/draft';
 import { USER_TEAM_ID } from '../domain/draft';
 import type { LeagueSettings } from '../domain/roster';
-import type { Player } from '../domain/player';
-import { DEFAULT_BPA_VS_NEED_WEIGHT } from '../engine/recommend';
+import type { DraftStrategy } from '../domain/strategy';
 import { ManualAdapter } from '../adapters/manual/manualAdapter';
 import { clearDraftState, loadDraftState, saveDraftState } from '../persistence/draftRepository';
-import seedPlayersRaw from '../data/seed/nfl-players-2026-placeholder.json';
-
-const seedPlayers = seedPlayersRaw as Player[];
+import { SEED_PLAYERS } from '../data/seed/derived';
 
 interface DraftContextValue {
   state: DraftState | null;
   isLoading: boolean;
   draftPlayer: (playerId: string, teamId: string) => void;
   undo: () => void;
-  setWeight: (weight: number) => void;
-  startNewDraft: (leagueSettings: LeagueSettings) => void;
+  setStrategy: (strategy: DraftStrategy) => void;
+  toggleFavorite: (playerId: string) => void;
+  startNewDraft: (leagueSettings: LeagueSettings, strategy: DraftStrategy) => void;
+  resetDraft: () => void;
   goToSetup: () => void;
+  saveNow: () => Promise<void>;
 }
 
 const DraftContext = createContext<DraftContextValue | null>(null);
-
-function debounce<Args extends unknown[]>(fn: (...args: Args) => void, delayMs: number) {
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  return (...args: Args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => fn(...args), delayMs);
-  };
-}
 
 export function DraftProvider({ children }: { children: ReactNode }) {
   const [adapter, setAdapter] = useState<ManualAdapter | null>(null);
@@ -55,22 +47,26 @@ export function DraftProvider({ children }: { children: ReactNode }) {
     return adapter.subscribe(setState);
   }, [adapter]);
 
-  const debouncedSave = useMemo(() => debounce((s: DraftState) => void saveDraftState(s), 150), []);
-
-  function startNewDraft(leagueSettings: LeagueSettings) {
+  function startNewDraft(leagueSettings: LeagueSettings, strategy: DraftStrategy) {
     const initialState: DraftState = {
       leagueSettings,
       picksMade: [],
-      availablePlayers: seedPlayers,
+      availablePlayers: SEED_PLAYERS,
       currentPick: 1,
       userTeamId: USER_TEAM_ID,
       userRoster: [],
       opponentRosters: {},
-      bpaVsNeedWeight: DEFAULT_BPA_VS_NEED_WEIGHT,
+      strategy,
+      favoritedPlayerIds: [],
     };
     setAdapter(new ManualAdapter(initialState));
     setState(initialState);
     void saveDraftState(initialState);
+  }
+
+  function resetDraft() {
+    if (!state) return;
+    startNewDraft(state.leagueSettings, state.strategy);
   }
 
   function draftPlayer(playerId: string, teamId: string) {
@@ -85,10 +81,16 @@ export function DraftProvider({ children }: { children: ReactNode }) {
     void saveDraftState(adapter.getState());
   }
 
-  function setWeight(weight: number) {
+  function setStrategy(strategy: DraftStrategy) {
     if (!adapter) return;
-    adapter.setBpaVsNeedWeight(weight);
-    debouncedSave(adapter.getState());
+    adapter.setStrategy(strategy);
+    void saveDraftState(adapter.getState());
+  }
+
+  function toggleFavorite(playerId: string) {
+    if (!adapter) return;
+    adapter.toggleFavorite(playerId);
+    void saveDraftState(adapter.getState());
   }
 
   function goToSetup() {
@@ -97,14 +99,22 @@ export function DraftProvider({ children }: { children: ReactNode }) {
     void clearDraftState();
   }
 
+  async function saveNow() {
+    if (!adapter) return;
+    await saveDraftState(adapter.getState());
+  }
+
   const value: DraftContextValue = {
     state,
     isLoading,
     draftPlayer,
     undo,
-    setWeight,
+    setStrategy,
+    toggleFavorite,
     startNewDraft,
+    resetDraft,
     goToSetup,
+    saveNow,
   };
 
   return <DraftContext.Provider value={value}>{children}</DraftContext.Provider>;
