@@ -73,13 +73,13 @@ Client-side web applications making direct fetch calls to undocumented or offici
 - **Points Formats (NFL/NHL):** Value = ADP − rank (positive = "steal", negative = "reach"). Dynamic replacement values update as players leave the board.
 - **Category & Roto Formats (MLB/NBA):** Calculates category Z-scores (`Z = (x - μ) / σ`) normalized against replacement level. Tracks cumulative team totals to maintain roster category balance.
 - **Punt Strategy Support:** Supports `punt_categories[]` in config to zero out specific weights (e.g., ignoring FT% in NBA or Saves in MLB).
-- **BPA vs. Need Control:** Final recommendation uses a weighted blend of value and need, controlled by a user-adjustable live slider between "Best Player Available" and "Fill a Need".
+- **BPA vs. Need Control:** Final recommendation uses a weighted blend of value and need. In Phase 1 this weight is not a live slider — it's derived from a named strategy chosen once at League Setup (see Customization Model below), so each recommendation's reasoning stays tied to a strategy the user explicitly picked rather than an in-the-moment drag.
 
 **Differentiating Intelligence Modules**
 
 - **Live Draft Intelligence:**
   - Draft Capital Efficiency: Measures how effectively each manager converts draft picks into value relative to ADP, projections, and expected draft position.
-  - Player Survival Probability: Estimates the probability that a target player will still be available at the user's next pick — and subsequent picks.
+  - Player Survival Probability: Estimates the probability that a target player will still be available at the user's next pick — and subsequent picks. *(A first, lightweight version of this shipped in Phase 1 as "Anticipated Next Rounds" — see Core Drafting Workspace — using an ADP-based opponent simulation rather than full Manager DNA modeling.)*
   - Cost of Waiting: Quantifies the opportunity cost of passing on a player now versus waiting one or more rounds.
   - Tier Cliff Radar: Identifies upcoming drop-offs in player value and warns when the current pick may be the last opportunity to acquire a player from a particular tier.
   - Draft Momentum: Detects when the current draft deviates from historical ADP patterns, such as unusually aggressive RB, WR, QB, or TE drafting.
@@ -102,17 +102,26 @@ Client-side web applications making direct fetch calls to undocumented or offici
 
 **Customization Model**
 
-- Simple Mode: Weighted combination of built-in factors (value, scarcity, tier breaks, ADP, custom composite rankings).
-- Advanced Mode: Full custom rules/scripting (if-this-then-that logic, e.g., "if a QB run happens, boost remaining elite QBs by X").
-- Import a Template: Users can import/paste published expert rankings or strategy sheets (ECR) as a starting point.
+Implemented in Phase 1 as a named strategy, chosen once during League Setup:
+
+- **Best Player Available:** Always take the highest-value player left on the board.
+- **Fill a Need:** Always prioritize filling the emptiest roster slots.
+- **Balanced:** Equal weight between Best Player Available and Fill a Need.
+- **Best Player Available, then Fill a Need after 80% rostered:** Best player available until 80% of the roster is filled, then draft for need among the best players remaining.
+
+"Also Consider" on the draft board shows what each of the other three strategies would suggest right now, as a built-in cross-check — a lower-effort alternative to a live slider.
+
+Deferred: Advanced Mode (full custom rules/scripting, e.g., "if a QB run happens, boost remaining elite QBs by X") and Import a Template (pasting in published expert rankings/ECR) remain future extensions of this model.
 
 ## 4. League Setup / Onboarding
 
-- League Rules Input: Scoring format (points vs. categories/roto), roster slots, bench size, keeper rules, league-specific scoring multipliers (Superflex, TE Premium, PPR, Points Per Boot).
-- Category Config (MLB/NBA): Category toggles (5x5, 6x6, points-based), and optional Punt Category selection.
-- Draft Settings: Snake vs. auction, pick order, time per pick.
-- Platform Selection: Adapter connection choice (Sleeper, Yahoo, ESPN, or Manual).
-- Strategy & Risk Setup: Default weights, imported rankings template, custom rule overrides, and risk tolerance setting ("Maximize Expected Value" vs. "Minimize Regret").
+Phase 1 ships this as a single "League Rules & Personal Strategy" page:
+
+- League Rules Input: Number of teams and roster slot counts (QB/RB/WR/TE/FLEX/K/DST/BENCH). Scoring is points-based only in Phase 1 — category/roto toggles, bench-size-as-a-separate-setting, keeper rules, and scoring multipliers (Superflex, TE Premium, PPR, etc.) remain future work.
+- Category Config (MLB/NBA): Deferred until category/roto scoring and non-NFL sports are built.
+- Draft Settings: **Type of draft — Snake or Linear** (Auction is deferred; see Scope Constraints). Draft order is captured directly as an ordered list of team names, plus which position in that order is the user's own — this doubles as "pick order" and "the user's order in the draft."
+- Platform Selection: Manual entry only in Phase 1 (`ManualAdapter`) — the "option to input names of the other teams/managers" is what a live Sleeper/Yahoo/ESPN adapter would eventually populate automatically instead of by hand.
+- Strategy Setup: Select one of the four named strategies from the Customization Model above as the league's default. Risk-tolerance framing ("Maximize Expected Value" vs. "Minimize Regret") and per-pick time limits remain future work.
 
 ## 5. Live Draft Real-Time Experience & UI
 
@@ -132,58 +141,98 @@ The draft screen is designed for high-stress, low-latency decision-making — cr
 **Predictive & Strategic Overlay**
 
 - Draft Story Narrative: Concise narrative explaining what is happening in the draft and why it matters (e.g., "The league started WR-heavy, so RB value is falling. Three teams are now approaching RB scarcity, making a run likely. You have an opportunity to take advantage before that happens.").
-- "Likely Still There" & Survival Radar: Projects player availability at future picks based on ADP, positional runs, and opponent Manager DNA.
+- "Likely Still There" & Survival Radar: Projects player availability at future picks based on ADP, positional runs, and opponent Manager DNA. *(Phase 1 ships the ADP-only slice of this as "Anticipated Next Rounds"; positional-run and Manager DNA awareness are future work.)*
 - Snag / Steal Risk Radar: Evaluates teams drafting between your turns and highlights targets with a red "High Snag Risk" flag if an upcoming opponent has an obvious roster hole.
 - Run & Tier Alerts: Priority alerts for positional runs, tier endings, and bait/false run warnings.
 
-**Core Drafting Workspace**
+**Core Drafting Workspace** *(as implemented in Phase 1)*
 
-- Roster Needs & Archetype Matrix: Live pill row showing filled/total roster slots, archetype coverage (e.g., high-floor WR, pass-catching RB), and category contribution meters.
-- Pick Recommendation Panel:
-  - Single top suggestion (slot, ADP, computed value, survival odds).
-  - Side-by-side "Best Value" vs. "Fill a Need" options with live slider control.
-  - Stacking flags, Bye-Week warnings, and Opponent Blocking opportunities.
-  - Plain-language reasoning and "Trap Value" warnings.
-- Full Player Table & Manual Board: Sortable/filterable table with visual Tier Break Lines, Watchlist toggles, and 1-tap Manual Quick-Board fallback.
+- **My Team:** Live pill row showing filled/total roster slots. Each pill expands on tap (not hover, since this is a mobile-first app) to list the players currently occupying that slot. Archetype coverage and category contribution meters remain future work, tracked under Roster Construction Intelligence above.
+- **Your Next Pick:** Names the active strategy, shows the single top suggestion with plain-language reasoning, and an "Anticipated Next Rounds" forecast for the next few turns (see the Survival Radar note above).
+- **Also Consider:** Shows what each of the other three named strategies would suggest right now, as a quick cross-check — replaces the originally-envisioned live BPA/Need slider.
+- **Available Players:** Sortable/filterable table. Each player shows a colored position badge with a static position rank (e.g. "WR2"), a computed tier, overall rank, ADP, projected points, VBD value, and an Availability column (ADP relative to the user's next pick). Sorting is available by any of these. A favorite/target star is cosmetic only and does not influence recommendations. Each row has two actions — draft to the user's own team, or mark drafted by a specific opponent team by name — this manual attribution is exactly what a live platform adapter (Sleeper, etc.) would take over once built. Visual Tier Break Lines and a distinct Watchlist (vs. favorites) remain future refinements.
+- **All Rosters view:** A separate tab showing every team's roster in the same expandable-pill format as My Team, using the draft order and team names captured at League Setup.
+
+Not yet built: "The One Thing" banner, Clock Intelligence Adaptation, Panic Mode Toggle, Draft Story Narrative, Snag/Steal Risk Radar, and Run & Tier Alerts — these remain part of the fuller vision described earlier in this section.
 
 **Auction-Specific Controls (If Auction Format)**
+
+Deferred — Auction is not yet a selectable draft type in Phase 1 (see League Setup / Onboarding).
 
 - Max Bid Calculator: Real-time formula display (`Remaining Budget - Open Slots + 1`) ensuring hard cap awareness.
 - Inflation/Deflation Tracker: Displays whether top tiers are selling above or below baseline projections.
 
 ## 6. Data Model Sketch
 
+### Implemented (Phase 1)
+
 ```typescript
+type Position = 'QB' | 'RB' | 'WR' | 'TE' | 'K' | 'DST'; // NFL only so far
+
 interface Player {
   id: string;
   name: string;
-  position: string[]; // Supports multi-position eligibility (MLB/NBA)
+  position: Position[]; // shape supports multi-position eligibility; NFL players use one today
   team: string;
-  sport: 'NFL' | 'MLB' | 'NBA' | 'NHL';
+  sport: 'NFL'; // widens to 'MLB' | 'NBA' | 'NHL' once other sports are added
   bye_week?: number;
   adp: number;
-  rank: number;
-  tiers: number[];
-  archetypes: string[]; // e.g., ['high_floor_wr', 'pass_catching_rb']
+  rank: number; // static overall rank
+  projected_points: number;
+}
+// Position rank (the "2" in "WR2") and tier are NOT stored on Player — they're computed
+// once from the full player pool (computePositionRanks / computeTiers) and looked up by id,
+// the same way adp/rank are treated as static, preseason-style values.
 
-  // Scoring Data
-  projected_points?: number; // Used for Points formats (NFL/NHL)
-  category_projections?: Record<string, number>; // e.g., { HR: 35, SB: 12, AVG: 0.275 }
-  category_z_scores?: Record<string, number>; // Calculated standard deviations
+type DraftType = 'snake' | 'linear'; // auction deferred
+
+interface RosterSlot {
+  position: Position | 'FLEX' | 'BENCH';
+  count: number;
+  filled: number;
 }
 
+interface LeagueSettings {
+  teamCount: number;
+  rosterSlots: RosterSlot[];
+  scoring: { type: 'points' }; // categories/roto deferred
+  draftType: DraftType;
+  draftOrder: string[]; // team ids in round-1 pick order
+  teamNames: Record<string, string>;
+}
+
+// Supersedes the FormulaConfig.bpa_vs_need_weight slider sketched below — chosen once at
+// League Setup rather than dragged live during the draft.
+type DraftStrategy = 'bpa' | 'need' | 'balanced' | 'bpa_then_need_80';
+
+interface Pick {
+  pickNumber: number;
+  player: Player;
+  teamId: string;
+}
+
+interface DraftState {
+  leagueSettings: LeagueSettings;
+  picksMade: Pick[];
+  availablePlayers: Player[];
+  currentPick: number;
+  userTeamId: string;
+  userRoster: Player[];
+  opponentRosters: Record<string, Player[]>;
+  strategy: DraftStrategy;
+  favoritedPlayerIds: string[]; // cosmetic "target" flag — not fed into recommendations
+}
+```
+
+### Future (not yet implemented)
+
+```typescript
 interface ManagerProfile {
   manager_id: string;
   positional_bias: Record<string, number>; // Tendency to reach for specific positions
   risk_tolerance: 'safe' | 'balanced' | 'chasing_upside';
   stacking_behavior: boolean;
   reach_frequency: number;
-}
-
-interface RosterSlot {
-  position: string;
-  count: number;
-  filled: number;
 }
 
 interface ScoringRule {
@@ -194,21 +243,13 @@ interface ScoringRule {
 
 interface FormulaConfig {
   mode: 'weights' | 'rules';
-  bpa_vs_need_weight: number; // 0.0 (BPA) to 1.0 (Need) live slider
   risk_mode: 'maximize_ev' | 'minimize_regret';
   punt_categories?: string[];
   tier_scarcity_multiplier: number;
   rules?: RuleScript[];
 }
 
-interface DraftState {
-  picks_made: Pick[];
-  available_players: Player[];
-  current_pick: number;
-  remaining_seconds: number;
-  user_roster: Player[];
-  opponent_rosters: Record<string, Player[]>;
-  opponent_profiles: Record<string, ManagerProfile>;
-  is_connected: boolean; // Tracks adapter connection state for auto-fallback
-}
+// Fields DraftState will grow into without breaking its current shape:
+//   remaining_seconds, opponent_profiles: Record<string, ManagerProfile>, is_connected,
+//   category_z_scores, archetypes on Player
 ```

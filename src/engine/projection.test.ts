@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { availabilityMargin, projectFuturePicks, upcomingUserPickNumbers } from './projection';
+import { availabilityMargin, availabilityProbability, projectFuturePicks, upcomingUserPickNumbers } from './projection';
 import { createDefaultLeagueSettings } from '../domain/roster';
 import { makePlayer } from '../test/fixtures';
 import type { LeagueSettings } from '../domain/roster';
@@ -42,6 +42,36 @@ describe('availabilityMargin', () => {
   it('is negative when ADP is earlier than the target pick (likely gone)', () => {
     const player = makePlayer({ id: 'p1', adp: 5 });
     expect(availabilityMargin(player, 10)).toBe(-5);
+  });
+});
+
+describe('availabilityProbability', () => {
+  it('is exactly 50% when the margin is zero', () => {
+    const player = makePlayer({ id: 'p1', adp: 10 });
+    expect(availabilityProbability(player, 10)).toBeCloseTo(0.5);
+  });
+
+  it('is above 50% when ADP is comfortably later than the target pick', () => {
+    const player = makePlayer({ id: 'p1', adp: 30 });
+    expect(availabilityProbability(player, 10)).toBeGreaterThan(0.5);
+  });
+
+  it('is below 50% when ADP is comfortably earlier than the target pick', () => {
+    const player = makePlayer({ id: 'p1', adp: 1 });
+    expect(availabilityProbability(player, 10)).toBeLessThan(0.5);
+  });
+
+  it('is monotonically increasing in the margin', () => {
+    const nearGone = makePlayer({ id: 'p1', adp: 2 });
+    const safe = makePlayer({ id: 'p2', adp: 40 });
+    expect(availabilityProbability(nearGone, 10)).toBeLessThan(availabilityProbability(safe, 10));
+  });
+
+  it('approaches but does not exceed 1 for a large positive margin', () => {
+    const player = makePlayer({ id: 'p1', adp: 40 });
+    const prob = availabilityProbability(player, 10);
+    expect(prob).toBeGreaterThan(0.95);
+    expect(prob).toBeLessThanOrEqual(1);
   });
 });
 

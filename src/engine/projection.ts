@@ -30,6 +30,19 @@ export function availabilityMargin(player: Player, nextUserPickNumber: number): 
   return player.adp - nextUserPickNumber;
 }
 
+/**
+ * How many picks of ADP margin correspond to one "swing" in availability odds. Real ADP has
+ * variance rather than a hard cutoff, so this converts the linear margin into a smooth
+ * probability via a logistic curve instead of a deterministic yes/no.
+ */
+const AVAILABILITY_SCALE = 6;
+
+/** Rough probability (0–1) the player is still available at nextUserPickNumber, based on ADP. */
+export function availabilityProbability(player: Player, nextUserPickNumber: number): number {
+  const margin = availabilityMargin(player, nextUserPickNumber);
+  return 1 / (1 + Math.exp(-margin / AVAILABILITY_SCALE));
+}
+
 export interface FuturePickProjection {
   pickNumber: number;
   round: number;

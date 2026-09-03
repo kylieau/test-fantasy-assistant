@@ -7,16 +7,18 @@ export function RosterNeedsView({
   title = 'My Team',
   rosterSlots,
   roster,
+  compact = false,
 }: {
   title?: string;
   rosterSlots: RosterSlot[];
   roster: Player[];
+  compact?: boolean;
 }) {
   const [expandedSlot, setExpandedSlot] = useState<string | null>(null);
   const grouped = groupRosterBySlot(rosterSlots, roster);
 
   return (
-    <section className="roster-needs">
+    <section className={`roster-needs ${compact ? 'roster-needs--compact' : ''}`}>
       <h2>{title}</h2>
       <div className="roster-needs__pills">
         {grouped.map((slot) => {

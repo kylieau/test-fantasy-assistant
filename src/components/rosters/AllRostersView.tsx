@@ -1,5 +1,5 @@
 import { useDraft } from '../../state/DraftContext';
-import { RosterNeedsView } from '../roster/RosterNeedsView';
+import { TeamRosterCard } from './TeamRosterCard';
 
 export function AllRostersView() {
   const { state } = useDraft();
@@ -13,7 +13,7 @@ export function AllRostersView() {
         const roster = teamId === state.userTeamId ? state.userRoster : state.opponentRosters[teamId] ?? [];
         const name = leagueSettings.teamNames[teamId] ?? teamId;
         return (
-          <RosterNeedsView key={teamId} title={name} rosterSlots={leagueSettings.rosterSlots} roster={roster} />
+          <TeamRosterCard key={teamId} title={name} rosterSlots={leagueSettings.rosterSlots} roster={roster} />
         );
       })}
     </div>

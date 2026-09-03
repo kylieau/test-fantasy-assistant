@@ -2,17 +2,13 @@ import { useMemo, useState } from 'react';
 import type { Recommendation } from '../../engine/types';
 import type { Position } from '../../domain/player';
 import { labelAdpDelta } from '../../engine/value';
-import { availabilityMargin } from '../../engine/projection';
+import { availabilityMargin, availabilityProbability } from '../../engine/projection';
 import { POSITION_COLORS } from '../positionColors';
+import { PlayerActions, type TeamOption } from '../PlayerActions';
 
 type SortKey = 'rank' | 'adp' | 'projected_points' | 'value' | 'positionRank' | 'tier' | 'availability';
 
 const ALL_POSITIONS: Position[] = ['QB', 'RB', 'WR', 'TE', 'K', 'DST'];
-
-interface TeamOption {
-  id: string;
-  name: string;
-}
 
 export function PlayerTable({
   recommendations,
@@ -122,7 +118,8 @@ export function PlayerTable({
             {rows.map((rec) => {
               const { player } = rec;
               const label = labelAdpDelta(rec.adpDelta);
-              const margin = nextUserPickNumber !== null ? availabilityMargin(player, nextUserPickNumber) : null;
+              const probability =
+                nextUserPickNumber !== null ? availabilityProbability(player, nextUserPickNumber) : null;
               const isFavorited = favoritedSet.has(player.id);
 
               return (
@@ -158,28 +155,21 @@ export function PlayerTable({
                   <td>{rec.value.toFixed(1)}</td>
                   <td
                     className={
-                      margin !== null ? (margin >= 0 ? 'availability--likely' : 'availability--risky') : undefined
+                      probability !== null
+                        ? probability >= 0.5
+                          ? 'availability--likely'
+                          : 'availability--risky'
+                        : undefined
                     }
                   >
-                    {margin !== null ? (margin >= 0 ? 'Likely there' : 'At risk') : '—'}
+                    {probability !== null ? `${Math.round(probability * 100)}%` : '—'}
                   </td>
                   <td className="player-table__actions">
-                    <button type="button" onClick={() => onDraftToMyTeam(player.id)}>
-                      Mine
-                    </button>
-                    <select
-                      value=""
-                      onChange={(e) => {
-                        if (e.target.value) onMarkDraftedByTeam(player.id, e.target.value);
-                      }}
-                    >
-                      <option value="">Drafted by…</option>
-                      {teams.map((team) => (
-                        <option key={team.id} value={team.id}>
-                          {team.name}
-                        </option>
-                      ))}
-                    </select>
+                    <PlayerActions
+                      teams={teams}
+                      onDraftToMyTeam={() => onDraftToMyTeam(player.id)}
+                      onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(player.id, teamId)}
+                    />
                   </td>
                 </tr>
               );

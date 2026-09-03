@@ -41,18 +41,23 @@ export function DraftBoard() {
 
   return (
     <div className="draft-board">
-      <div className="draft-board__top">
-        <div className="draft-board__top-main">
-          <RecommendationPanel
-            strategy={state.strategy}
-            recommendation={recommendations[0]}
-            futurePicks={futurePicks}
-            onDraft={draftToMyTeam}
-          />
-          <AlsoConsiderPanel state={state} onDraft={draftToMyTeam} />
-        </div>
-        <RosterNeedsView rosterSlots={leagueSettings.rosterSlots} roster={state.userRoster} />
-      </div>
+      <RosterNeedsView rosterSlots={leagueSettings.rosterSlots} roster={state.userRoster} compact />
+
+      <RecommendationPanel
+        strategy={state.strategy}
+        recommendation={recommendations[0]}
+        futurePicks={futurePicks}
+        teams={otherTeams}
+        onDraft={draftToMyTeam}
+        onMarkDraftedByTeam={(playerId, teamId) => draftPlayer(playerId, teamId)}
+      />
+      <AlsoConsiderPanel
+        state={state}
+        excludePlayerId={recommendations[0]?.player.id}
+        teams={otherTeams}
+        onDraftToMyTeam={draftToMyTeam}
+        onMarkDraftedByTeam={(playerId, teamId) => draftPlayer(playerId, teamId)}
+      />
 
       <PlayerTable
         recommendations={recommendations}

@@ -4,6 +4,7 @@ import { AppShell, type AppView } from './components/layout/AppShell';
 import { LeagueSetupForm } from './components/setup/LeagueSetupForm';
 import { DraftBoard } from './components/board/DraftBoard';
 import { AllRostersView } from './components/rosters/AllRostersView';
+import { MyRosterView } from './components/rosters/MyRosterView';
 
 function AppContent() {
   const { state, isLoading } = useDraft();
@@ -14,6 +15,8 @@ function AppContent() {
     content = <p>Loading…</p>;
   } else if (!state) {
     content = <LeagueSetupForm />;
+  } else if (view === 'myRoster') {
+    content = <MyRosterView />;
   } else if (view === 'rosters') {
     content = <AllRostersView />;
   } else {

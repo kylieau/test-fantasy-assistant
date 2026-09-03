@@ -1,17 +1,22 @@
 import type { Recommendation } from '../../engine/types';
 import type { FuturePickProjection } from '../../engine/projection';
 import { STRATEGY_LABELS, type DraftStrategy } from '../../domain/strategy';
+import { OppDraftedControl, type TeamOption } from '../OppDraftedControl';
 
 export function RecommendationPanel({
   strategy,
   recommendation,
   futurePicks,
+  teams,
   onDraft,
+  onMarkDraftedByTeam,
 }: {
   strategy: DraftStrategy;
   recommendation: Recommendation | undefined;
   futurePicks: FuturePickProjection[];
+  teams: TeamOption[];
   onDraft: (playerId: string) => void;
+  onMarkDraftedByTeam: (playerId: string, teamId: string) => void;
 }) {
   return (
     <section className="recommendation-panel">
@@ -31,13 +36,20 @@ export function RecommendationPanel({
               <li key={reason}>{reason}</li>
             ))}
           </ul>
-          <button
-            type="button"
-            className="primary-button"
-            onClick={() => onDraft(recommendation.player.id)}
-          >
-            Draft {recommendation.player.name}
-          </button>
+          <div className="recommendation-panel__actions">
+            <button
+              type="button"
+              className="primary-button"
+              onClick={() => onDraft(recommendation.player.id)}
+            >
+              Draft {recommendation.player.name}
+            </button>
+            <OppDraftedControl
+              teams={teams}
+              onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(recommendation.player.id, teamId)}
+              compact
+            />
+          </div>
         </div>
       ) : (
         <p>No players left to recommend.</p>
