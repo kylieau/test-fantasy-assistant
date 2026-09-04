@@ -69,6 +69,7 @@ export function LeagueSetupForm() {
         draftOrder,
         teamNames: teamNamesById,
         platform: 'manual',
+        hasProjections: true,
       },
       strategy,
     );

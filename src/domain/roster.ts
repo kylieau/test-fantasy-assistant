@@ -20,12 +20,17 @@ export interface LeagueSettings {
   draftOrder: string[];
   /** Display name per team id. */
   teamNames: Record<string, string>;
-  /**
-   * 'manual' has real projections/ADP (seed data) and drives recommendations. 'sleeper' has
-   * real players and real live picks but no projections — the UI gates recommendation-engine
-   * features off when this is 'sleeper' rather than feeding it meaningless sentinel values.
-   */
+  /** Which draft adapter is live. Sleeper stays authoritative for actual picks regardless
+   * of hasProjections — the UI hides draft actions (not recommendations) when this isn't
+   * 'manual', matching a "decide here, execute there" workflow. */
   platform: DraftPlatform;
+  /**
+   * Whether availablePlayers carry real, usable adp/rank/projected_points. True for manual
+   * (seed data). For Sleeper, true only once real projections have been merged in from
+   * elsewhere (see src/data/espnProjections) — false means the recommendation engine would
+   * only see sentinel zeros, so the UI shows a tracker-only view instead of fake rankings.
+   */
+  hasProjections: boolean;
 }
 
 export const DEFAULT_ROSTER_SLOTS: RosterSlot[] = [
@@ -53,6 +58,7 @@ export function createDefaultLeagueSettings(teamCount = 10): LeagueSettings {
     draftOrder,
     teamNames,
     platform: 'manual',
+    hasProjections: true,
   };
 }
 

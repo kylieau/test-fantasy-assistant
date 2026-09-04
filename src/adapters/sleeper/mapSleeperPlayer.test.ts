@@ -20,8 +20,8 @@ describe('mapSleeperPlayer', () => {
       position: ['QB'],
       team: 'BUF',
       sport: 'NFL',
-      adp: 0,
-      rank: 0,
+      adp: 9999,
+      rank: 9999,
       projected_points: 0,
     });
   });
@@ -91,8 +91,8 @@ describe('mapSleeperPickMetadata', () => {
       position: ['QB'],
       team: 'BUF',
       sport: 'NFL',
-      adp: 0,
-      rank: 0,
+      adp: 9999,
+      rank: 9999,
       projected_points: 0,
     });
   });

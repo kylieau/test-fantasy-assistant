@@ -20,7 +20,8 @@ export function PlayerTable({
   onDraftToMyTeam,
   onMarkDraftedByTeam,
   onToggleFavorite,
-  readOnly = false,
+  showValueColumns,
+  showActions,
 }: {
   recommendations: Recommendation[];
   positionRanks: Record<string, number>;
@@ -31,8 +32,11 @@ export function PlayerTable({
   onDraftToMyTeam: (playerId: string) => void;
   onMarkDraftedByTeam: (playerId: string, teamId: string) => void;
   onToggleFavorite: (playerId: string) => void;
-  /** No projections/ADP to show or act on (e.g. a live Sleeper draft) — just name/pos/team/bye. */
-  readOnly?: boolean;
+  /** No usable projections/ADP (e.g. a live Sleeper draft with no ESPN match) — just name/pos/team/bye. */
+  showValueColumns: boolean;
+  /** Whether this app is authoritative for drafting (Manual) vs. just advising (Sleeper stays
+   * the system of record — the user executes the pick over there, not here). */
+  showActions: boolean;
 }) {
   const [sortKey, setSortKey] = useState<SortKey>('rank');
   const [sortAsc, setSortAsc] = useState(true);
@@ -107,7 +111,7 @@ export function PlayerTable({
               <th>Pos</th>
               <th>Team</th>
               <th>Bye</th>
-              {!readOnly && (
+              {showValueColumns && (
                 <>
                   <th onClick={() => toggleSort('rank')}>Overall</th>
                   <th onClick={() => toggleSort('positionRank')}>Pos Rank</th>
@@ -116,9 +120,9 @@ export function PlayerTable({
                   <th onClick={() => toggleSort('projected_points')}>Proj Pts</th>
                   <th onClick={() => toggleSort('value')}>Value</th>
                   <th onClick={() => toggleSort('availability')}>Availability</th>
-                  <th>Action</th>
                 </>
               )}
+              {showActions && <th>Action</th>}
             </tr>
           </thead>
           <tbody>
@@ -154,7 +158,7 @@ export function PlayerTable({
                   </td>
                   <td>{player.team}</td>
                   <td>{player.bye_week ?? '—'}</td>
-                  {!readOnly && (
+                  {showValueColumns && (
                     <>
                       <td>{player.rank}</td>
                       <td>{positionRanks[player.id] ?? '—'}</td>
@@ -173,14 +177,16 @@ export function PlayerTable({
                       >
                         {probability !== null ? `${Math.round(probability * 100)}%` : '—'}
                       </td>
-                      <td className="player-table__actions">
-                        <PlayerActions
-                          teams={teams}
-                          onDraftToMyTeam={() => onDraftToMyTeam(player.id)}
-                          onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(player.id, teamId)}
-                        />
-                      </td>
                     </>
+                  )}
+                  {showActions && (
+                    <td className="player-table__actions">
+                      <PlayerActions
+                        teams={teams}
+                        onDraftToMyTeam={() => onDraftToMyTeam(player.id)}
+                        onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(player.id, teamId)}
+                      />
+                    </td>
                   )}
                 </tr>
               );

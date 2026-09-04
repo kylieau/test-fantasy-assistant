@@ -2,6 +2,9 @@ import { draftReducer, type DraftAction } from '../../state/draftReducer';
 import type { DraftState } from '../../domain/draft';
 import type { Player } from '../../domain/player';
 import type { DraftStrategy } from '../../domain/strategy';
+import { currentFantasySeason, getEspnProjections } from '../../data/espnProjections/espnProjectionsClient';
+import { buildEspnProjectionIndex } from '../../data/espnProjections/mapEspnProjections';
+import { mergeEspnProjections } from '../../data/espnProjections/mergeEspnProjections';
 import type { DraftAdapter } from '../types';
 import type { SleeperPick, SleeperPlayer } from './sleeperTypes';
 import { mapSleeperPickMetadata, mapSleeperPlayer } from './mapSleeperPlayer';
@@ -10,6 +13,9 @@ import * as sleeperClient from './sleeperClient';
 
 const POLL_INTERVAL_MS = 5000;
 const MAX_CONSECUTIVE_FAILURES = 3;
+/** Below this fraction of matched players, showing "recommendations" would be more noise
+ * than signal — fall back to tracker-only mode instead. */
+const MIN_MATCHED_FRACTION = 0.3;
 
 export type SleeperSyncStatus =
   | { state: 'connecting' }
@@ -164,12 +170,34 @@ export async function connectToSleeperDraft(
     user.user_id,
   );
 
-  const availablePlayers = Object.values(playersById)
+  let availablePlayers = Object.values(playersById)
     .map(mapSleeperPlayer)
     .filter((p): p is Player => p !== null && p.team !== 'FA');
 
+  // Sleeper has no projections/ADP of its own — merge in real ones from ESPN's public API so
+  // "Your Next Pick"/"Also Consider" can work the same way they do in Manual mode. Failure
+  // here (ESPN down, low match rate) degrades to tracker-only mode rather than breaking the
+  // connection or showing fabricated rankings.
+  let hasProjections = false;
+  try {
+    const season = currentFantasySeason();
+    const espnRawPlayers = await getEspnProjections(season);
+    const index = buildEspnProjectionIndex(espnRawPlayers, season);
+    const merged = mergeEspnProjections(availablePlayers, index);
+    if (merged.matchedFraction >= MIN_MATCHED_FRACTION) {
+      availablePlayers = merged.players;
+      hasProjections = true;
+    } else {
+      console.warn(
+        `ESPN projections only matched ${(merged.matchedFraction * 100).toFixed(0)}% of players — showing tracker-only mode.`,
+      );
+    }
+  } catch (error) {
+    console.warn('Could not load ESPN projections; continuing in tracker-only mode.', error);
+  }
+
   const initialState: DraftState = {
-    leagueSettings,
+    leagueSettings: { ...leagueSettings, hasProjections },
     picksMade: [],
     availablePlayers,
     currentPick: 1,

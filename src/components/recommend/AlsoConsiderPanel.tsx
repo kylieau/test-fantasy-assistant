@@ -23,15 +23,20 @@ export function AlsoConsiderPanel({
   state,
   excludePlayerId,
   teams,
+  showActions,
   onDraftToMyTeam,
   onMarkDraftedByTeam,
 }: {
   state: DraftState;
   excludePlayerId: string | undefined;
   teams: TeamOption[];
+  /** Sleeper stays authoritative for the actual pick — hide the draft controls there. */
+  showActions: boolean;
   onDraftToMyTeam: (playerId: string) => void;
   onMarkDraftedByTeam: (playerId: string, teamId: string) => void;
 }) {
+  if (!state.leagueSettings.hasProjections) return null;
+
   const rosterSlots = computeFilledRosterSlots(state.leagueSettings.rosterSlots, state.userRoster);
   const otherStrategies = ALL_STRATEGIES.filter((s) => s !== state.strategy);
 
@@ -77,11 +82,13 @@ export function AlsoConsiderPanel({
                   </span>
                 </span>
               </div>
-              <PlayerActions
-                teams={teams}
-                onDraftToMyTeam={() => onDraftToMyTeam(top.player.id)}
-                onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(top.player.id, teamId)}
-              />
+              {showActions && (
+                <PlayerActions
+                  teams={teams}
+                  onDraftToMyTeam={() => onDraftToMyTeam(top.player.id)}
+                  onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(top.player.id, teamId)}
+                />
+              )}
             </li>
           );
         })}

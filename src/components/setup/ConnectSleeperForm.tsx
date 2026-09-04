@@ -32,9 +32,11 @@ export function ConnectSleeperForm() {
     <form className="league-setup" onSubmit={handleSubmit}>
       <h2>Connect to Sleeper</h2>
       <p className="connect-sleeper__note">
-        Real players and live picks sync automatically from your Sleeper draft. Since Sleeper
-        doesn't provide projections or ADP, recommendations aren't available in this mode yet —
-        this is a live tracker: your team, everyone else's team, and who's still on the board.
+        Real players and live picks sync automatically from your Sleeper draft. Sleeper doesn't
+        provide projections or ADP itself, so recommendations here are powered by real public
+        rankings merged in from ESPN — the Draft Board looks and works the same as Manual mode.
+        You still draft on Sleeper's own site; this app is a side-by-side advisor, not a
+        replacement for it.
       </p>
 
       <label className="field">
@@ -61,9 +63,6 @@ export function ConnectSleeperForm() {
 
       <fieldset className="strategy-picker">
         <legend>Your draft strategy</legend>
-        <p className="connect-sleeper__note">
-          Kept for when recommendations become available in a future update — not used yet.
-        </p>
         {ALL_STRATEGIES.map((s) => (
           <label key={s} className="strategy-option">
             <input

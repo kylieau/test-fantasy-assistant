@@ -9,16 +9,14 @@ export function MyRosterView() {
   if (!state) return null;
 
   const { leagueSettings } = state;
-  const isManual = leagueSettings.platform === 'manual';
 
-  if (!isManual) {
+  if (!leagueSettings.hasProjections) {
     return (
       <div className="my-roster">
         <section className="roster-analysis">
           <h2>Team Analysis</h2>
           <p className="roster-analysis__empty">
-            Team analysis needs player projections, which aren't available for live Sleeper
-            drafts yet — coming in a future update.
+            Team analysis needs player projections, which couldn't be loaded for this draft.
           </p>
         </section>
         <TeamRosterCard title="My Roster" rosterSlots={leagueSettings.rosterSlots} roster={state.userRoster} />

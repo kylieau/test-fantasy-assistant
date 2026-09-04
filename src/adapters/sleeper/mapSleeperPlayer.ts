@@ -3,6 +3,13 @@ import type { SleeperPickMetadata, SleeperPlayer } from './sleeperTypes';
 
 const SUPPORTED_POSITIONS = new Set<string>(['QB', 'RB', 'WR', 'TE', 'K', 'DST']);
 
+/**
+ * Sentinel for adp/rank on a player with no real ranking data (yet). Lower is "better" for
+ * both fields, so the sentinel must be a large number, not 0 — 0 would sort an unranked
+ * player ahead of every real #1 overall pick in an ascending sort.
+ */
+const UNRANKED = 9999;
+
 /** Sleeper uses 'DEF' for team defense/special teams; we use 'DST'. Other positions match. */
 function mapSleeperPosition(rawPosition: string | null | undefined): Position | null {
   if (!rawPosition) return null;
@@ -11,10 +18,10 @@ function mapSleeperPosition(rawPosition: string | null | undefined): Position | 
 }
 
 /**
- * Maps a raw Sleeper player to our Player shape. Sleeper has no projections/ADP, so those
- * fields get an explicit sentinel of 0 — callers must gate recommendation-engine usage
- * behind `leagueSettings.platform === 'manual'` rather than relying on these values.
- * Returns null for positions we don't track (IDP, superflex-only slots, etc.).
+ * Maps a raw Sleeper player to our Player shape. Sleeper has no projections/ADP of its own —
+ * adp/rank start at the UNRANKED sentinel and projected_points at 0 until real values are
+ * merged in from elsewhere (see src/data/espnProjections). Returns null for positions we
+ * don't track (IDP, superflex-only slots, etc.).
  */
 export function mapSleeperPlayer(raw: SleeperPlayer): Player | null {
   const position = mapSleeperPosition(raw.fantasy_positions?.[0] ?? raw.position);
@@ -29,8 +36,8 @@ export function mapSleeperPlayer(raw: SleeperPlayer): Player | null {
     position: [position],
     team: raw.team ?? 'FA',
     sport: 'NFL',
-    adp: 0,
-    rank: 0,
+    adp: UNRANKED,
+    rank: UNRANKED,
     projected_points: 0,
   };
 }
@@ -53,8 +60,8 @@ export function mapSleeperPickMetadata(playerId: string, metadata: SleeperPickMe
     position: [position],
     team: metadata.team ?? 'FA',
     sport: 'NFL',
-    adp: 0,
-    rank: 0,
+    adp: UNRANKED,
+    rank: UNRANKED,
     projected_points: 0,
   };
 }

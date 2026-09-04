@@ -1,7 +1,7 @@
 import { useDraft } from '../../state/DraftContext';
 import { useRecommendations } from '../../state/useRecommendations';
+import { usePositionRanksAndTiers } from '../../state/usePositionRanksAndTiers';
 import { projectFuturePicks, upcomingUserPickNumbers } from '../../engine/projection';
-import { POSITION_RANKS, TIERS } from '../../data/seed/derived';
 import type { Recommendation } from '../../engine/types';
 import { RecommendationPanel } from '../recommend/RecommendationPanel';
 import { AlsoConsiderPanel } from '../recommend/AlsoConsiderPanel';
@@ -12,17 +12,21 @@ const FUTURE_PICKS_TO_SHOW = 3;
 
 export function DraftBoard() {
   const { state, draftPlayer, toggleFavorite } = useDraft();
-  const recommendations = useRecommendations(state); // [] automatically when platform !== 'manual'
+  const recommendations = useRecommendations(state); // [] automatically when !hasProjections
+  const { positionRanks, tiers } = usePositionRanksAndTiers(state);
 
   if (!state) return null;
 
   const { leagueSettings } = state;
-  const isManual = leagueSettings.platform === 'manual';
+  const hasProjections = leagueSettings.hasProjections;
+  // Sleeper stays authoritative for the actual pick regardless of hasProjections — the user
+  // decides here, then executes the pick on the other device/platform.
+  const showActions = leagueSettings.platform === 'manual';
 
   const nextUserPickNumber =
     upcomingUserPickNumbers(leagueSettings, state.currentPick, state.userTeamId, 1)[0] ?? null;
 
-  const futurePicks = isManual
+  const futurePicks = hasProjections
     ? projectFuturePicks(
         state.availablePlayers,
         leagueSettings,
@@ -42,10 +46,11 @@ export function DraftBoard() {
   const draftToMyTeam = (playerId: string) => {
     draftPlayer(playerId, userTeamId);
   };
+  const markDraftedByTeam = (playerId: string, teamId: string) => draftPlayer(playerId, teamId);
 
-  // Read-only rows: available players with no real projections to rank by, so the table
-  // just lists them (Name/Pos/Team/Bye) rather than pretending zeroed values mean anything.
-  const readOnlyRows: Recommendation[] = isManual
+  // Tracker-only rows: no real projections to rank by, so the table just lists players
+  // (Name/Pos/Team/Bye) rather than pretending zeroed values mean anything.
+  const trackerOnlyRows: Recommendation[] = hasProjections
     ? []
     : state.availablePlayers.map((player) => ({
         player,
@@ -60,37 +65,37 @@ export function DraftBoard() {
     <div className="draft-board">
       <RosterNeedsView rosterSlots={leagueSettings.rosterSlots} roster={state.userRoster} compact />
 
-      {isManual && (
-        <>
-          <RecommendationPanel
-            strategy={state.strategy}
-            recommendation={recommendations[0]}
-            futurePicks={futurePicks}
-            teams={otherTeams}
-            onDraft={draftToMyTeam}
-            onMarkDraftedByTeam={(playerId, teamId) => draftPlayer(playerId, teamId)}
-          />
-          <AlsoConsiderPanel
-            state={state}
-            excludePlayerId={recommendations[0]?.player.id}
-            teams={otherTeams}
-            onDraftToMyTeam={draftToMyTeam}
-            onMarkDraftedByTeam={(playerId, teamId) => draftPlayer(playerId, teamId)}
-          />
-        </>
-      )}
+      <RecommendationPanel
+        strategy={state.strategy}
+        recommendation={recommendations[0]}
+        futurePicks={futurePicks}
+        teams={otherTeams}
+        hasProjections={hasProjections}
+        showActions={showActions}
+        onDraft={draftToMyTeam}
+        onMarkDraftedByTeam={markDraftedByTeam}
+      />
+      <AlsoConsiderPanel
+        state={state}
+        excludePlayerId={recommendations[0]?.player.id}
+        teams={otherTeams}
+        showActions={showActions}
+        onDraftToMyTeam={draftToMyTeam}
+        onMarkDraftedByTeam={markDraftedByTeam}
+      />
 
       <PlayerTable
-        recommendations={isManual ? recommendations : readOnlyRows}
-        positionRanks={isManual ? POSITION_RANKS : {}}
-        tiers={isManual ? TIERS : {}}
+        recommendations={hasProjections ? recommendations : trackerOnlyRows}
+        positionRanks={positionRanks}
+        tiers={tiers}
         favoritedPlayerIds={state.favoritedPlayerIds}
         nextUserPickNumber={nextUserPickNumber}
         teams={otherTeams}
         onDraftToMyTeam={draftToMyTeam}
-        onMarkDraftedByTeam={(playerId, teamId) => draftPlayer(playerId, teamId)}
+        onMarkDraftedByTeam={markDraftedByTeam}
         onToggleFavorite={toggleFavorite}
-        readOnly={!isManual}
+        showValueColumns={hasProjections}
+        showActions={showActions}
       />
     </div>
   );

@@ -7,12 +7,12 @@ import type { Recommendation } from '../engine/types';
 
 /**
  * Ranks the full available player pool; callers slice for a "top N" view as needed.
- * Returns [] for non-'manual' platforms (e.g. Sleeper) rather than running the engine on
- * players with sentinel/zeroed projections — there's no real data to rank there yet.
+ * Returns [] when the league has no usable projections (e.g. a live Sleeper draft whose ESPN
+ * projections merge failed) rather than running the engine on sentinel/zeroed values.
  */
 export function useRecommendations(state: DraftState | null): Recommendation[] {
   return useMemo(() => {
-    if (!state || state.leagueSettings.platform !== 'manual') return [];
+    if (!state || !state.leagueSettings.hasProjections) return [];
     const rosterSlots = computeFilledRosterSlots(state.leagueSettings.rosterSlots, state.userRoster);
     const weight = resolveStrategyWeight(state.strategy, rosterSlots);
     return rankRecommendations(

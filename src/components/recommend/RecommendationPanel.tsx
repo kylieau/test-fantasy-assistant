@@ -8,6 +8,8 @@ export function RecommendationPanel({
   recommendation,
   futurePicks,
   teams,
+  hasProjections,
+  showActions,
   onDraft,
   onMarkDraftedByTeam,
 }: {
@@ -15,6 +17,10 @@ export function RecommendationPanel({
   recommendation: Recommendation | undefined;
   futurePicks: FuturePickProjection[];
   teams: TeamOption[];
+  /** False when there's no usable projection data (e.g. ESPN merge failed for a Sleeper draft). */
+  hasProjections: boolean;
+  /** Sleeper stays authoritative for the actual pick — hide the draft controls there. */
+  showActions: boolean;
   onDraft: (playerId: string) => void;
   onMarkDraftedByTeam: (playerId: string, teamId: string) => void;
 }) {
@@ -36,23 +42,29 @@ export function RecommendationPanel({
               <li key={reason}>{reason}</li>
             ))}
           </ul>
-          <div className="recommendation-panel__actions">
-            <button
-              type="button"
-              className="primary-button"
-              onClick={() => onDraft(recommendation.player.id)}
-            >
-              Draft {recommendation.player.name}
-            </button>
-            <OppDraftedControl
-              teams={teams}
-              onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(recommendation.player.id, teamId)}
-              compact
-            />
-          </div>
+          {showActions && (
+            <div className="recommendation-panel__actions">
+              <button
+                type="button"
+                className="primary-button"
+                onClick={() => onDraft(recommendation.player.id)}
+              >
+                Draft {recommendation.player.name}
+              </button>
+              <OppDraftedControl
+                teams={teams}
+                onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(recommendation.player.id, teamId)}
+                compact
+              />
+            </div>
+          )}
         </div>
       ) : (
-        <p>No players left to recommend.</p>
+        <p>
+          {hasProjections
+            ? 'No players left to recommend.'
+            : "Couldn't load player projections for this draft — showing a live tracker only."}
+        </p>
       )}
 
       {futurePicks.length > 0 && (

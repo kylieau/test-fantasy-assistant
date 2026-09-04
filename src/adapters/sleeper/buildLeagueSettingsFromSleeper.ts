@@ -107,6 +107,8 @@ export function buildLeagueSettingsFromSleeper(
     draftType,
     draftOrder,
     teamNames,
+    // Set by connectToSleeperDraft once it knows whether the ESPN projections merge worked.
+    hasProjections: false,
     platform: 'sleeper',
   };
 
