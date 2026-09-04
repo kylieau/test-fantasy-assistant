@@ -2,6 +2,7 @@ import type { Player, Position } from './player';
 
 export type RosterSlotType = Position | 'FLEX' | 'BENCH';
 export type DraftType = 'snake' | 'linear';
+export type DraftPlatform = 'manual' | 'sleeper';
 
 export interface RosterSlot {
   position: RosterSlotType;
@@ -19,6 +20,12 @@ export interface LeagueSettings {
   draftOrder: string[];
   /** Display name per team id. */
   teamNames: Record<string, string>;
+  /**
+   * 'manual' has real projections/ADP (seed data) and drives recommendations. 'sleeper' has
+   * real players and real live picks but no projections — the UI gates recommendation-engine
+   * features off when this is 'sleeper' rather than feeding it meaningless sentinel values.
+   */
+  platform: DraftPlatform;
 }
 
 export const DEFAULT_ROSTER_SLOTS: RosterSlot[] = [
@@ -45,6 +52,7 @@ export function createDefaultLeagueSettings(teamCount = 10): LeagueSettings {
     draftType: 'snake',
     draftOrder,
     teamNames,
+    platform: 'manual',
   };
 }
 

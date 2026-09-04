@@ -8,6 +8,9 @@ import {
   type DraftStrategy,
 } from '../../domain/strategy';
 import { useDraft } from '../../state/DraftContext';
+import { ConnectSleeperForm } from './ConnectSleeperForm';
+
+type SetupPlatform = 'manual' | 'sleeper';
 
 const DEFAULT_TEAM_COUNT = 10;
 
@@ -17,6 +20,7 @@ function defaultTeamNames(teamCount: number, userPosition: number): string[] {
 
 export function LeagueSetupForm() {
   const { startNewDraft } = useDraft();
+  const [platform, setPlatform] = useState<SetupPlatform>('manual');
   const [teamCount, setTeamCount] = useState(DEFAULT_TEAM_COUNT);
   const [draftType, setDraftType] = useState<DraftType>('snake');
   const [userPosition, setUserPosition] = useState(1);
@@ -64,13 +68,43 @@ export function LeagueSetupForm() {
         draftType,
         draftOrder,
         teamNames: teamNamesById,
+        platform: 'manual',
       },
       strategy,
     );
   }
 
+  const platformToggle = (
+    <div className="platform-toggle">
+      <button
+        type="button"
+        className={`app-tab ${platform === 'manual' ? 'app-tab--active' : ''}`}
+        onClick={() => setPlatform('manual')}
+      >
+        Manual Entry
+      </button>
+      <button
+        type="button"
+        className={`app-tab ${platform === 'sleeper' ? 'app-tab--active' : ''}`}
+        onClick={() => setPlatform('sleeper')}
+      >
+        Connect to Sleeper
+      </button>
+    </div>
+  );
+
+  if (platform === 'sleeper') {
+    return (
+      <div className="league-setup">
+        {platformToggle}
+        <ConnectSleeperForm />
+      </div>
+    );
+  }
+
   return (
     <form className="league-setup" onSubmit={handleSubmit}>
+      {platformToggle}
       <h2>League Rules &amp; Personal Strategy</h2>
 
       <label className="field">

@@ -2,15 +2,33 @@ import { useState } from 'react';
 import type { DraftState } from '../../domain/draft';
 import { useDraft } from '../../state/DraftContext';
 
+function formatSecondsAgo(lastSyncedAt: number | null): string {
+  if (lastSyncedAt === null) return 'syncing…';
+  const seconds = Math.max(0, Math.round((Date.now() - lastSyncedAt) / 1000));
+  return `synced ${seconds}s ago`;
+}
+
 export function Header({ state }: { state: DraftState | null }) {
-  const { undo, resetDraft, goToSetup, saveNow } = useDraft();
+  const { undo, resetDraft, goToSetup, saveNow, sleeperSyncStatus, switchToManualEntry } = useDraft();
   const [savedFlash, setSavedFlash] = useState(false);
   const round = state ? Math.ceil(state.currentPick / state.leagueSettings.teamCount) : null;
+  const isSleeper = state?.leagueSettings.platform === 'sleeper';
 
   async function handleSave() {
     await saveNow();
     setSavedFlash(true);
     setTimeout(() => setSavedFlash(false), 1500);
+  }
+
+  let statusLabel = 'Manual entry';
+  if (isSleeper) {
+    if (sleeperSyncStatus?.state === 'error') {
+      statusLabel = 'Sync error';
+    } else if (sleeperSyncStatus?.state === 'connecting') {
+      statusLabel = 'Connecting…';
+    } else {
+      statusLabel = `Live via Sleeper · ${formatSecondsAgo(sleeperSyncStatus?.lastSyncedAt ?? null)}`;
+    }
   }
 
   return (
@@ -22,15 +40,25 @@ export function Header({ state }: { state: DraftState | null }) {
       {state && (
         <div className="app-header__status">
           <span className="app-header__pick">
-            Pick {state.currentPick} (Round {round}) · Manual entry
+            Pick {state.currentPick} (Round {round}) · {statusLabel}
           </span>
           <div className="app-header__actions">
+            {isSleeper && sleeperSyncStatus?.state === 'error' && (
+              <button
+                type="button"
+                className="icon-button"
+                onClick={switchToManualEntry}
+                title="Stop live sync and continue entering picks manually"
+              >
+                Switch to Manual
+              </button>
+            )}
             <button
               type="button"
               className="icon-button"
               onClick={undo}
-              disabled={state.picksMade.length === 0}
-              title="Undo last pick"
+              disabled={state.picksMade.length === 0 || isSleeper}
+              title={isSleeper ? 'Not available in live Sleeper mode' : 'Undo last pick'}
             >
               Undo
             </button>
@@ -41,7 +69,8 @@ export function Header({ state }: { state: DraftState | null }) {
               type="button"
               className="icon-button"
               onClick={resetDraft}
-              title="Reset this draft back to pick 1"
+              disabled={isSleeper}
+              title={isSleeper ? 'Not available in live Sleeper mode' : 'Reset this draft back to pick 1'}
             >
               Reset
             </button>

@@ -20,6 +20,7 @@ export function PlayerTable({
   onDraftToMyTeam,
   onMarkDraftedByTeam,
   onToggleFavorite,
+  readOnly = false,
 }: {
   recommendations: Recommendation[];
   positionRanks: Record<string, number>;
@@ -30,6 +31,8 @@ export function PlayerTable({
   onDraftToMyTeam: (playerId: string) => void;
   onMarkDraftedByTeam: (playerId: string, teamId: string) => void;
   onToggleFavorite: (playerId: string) => void;
+  /** No projections/ADP to show or act on (e.g. a live Sleeper draft) — just name/pos/team/bye. */
+  readOnly?: boolean;
 }) {
   const [sortKey, setSortKey] = useState<SortKey>('rank');
   const [sortAsc, setSortAsc] = useState(true);
@@ -104,14 +107,18 @@ export function PlayerTable({
               <th>Pos</th>
               <th>Team</th>
               <th>Bye</th>
-              <th onClick={() => toggleSort('rank')}>Overall</th>
-              <th onClick={() => toggleSort('positionRank')}>Pos Rank</th>
-              <th onClick={() => toggleSort('tier')}>Tier</th>
-              <th onClick={() => toggleSort('adp')}>ADP</th>
-              <th onClick={() => toggleSort('projected_points')}>Proj Pts</th>
-              <th onClick={() => toggleSort('value')}>Value</th>
-              <th onClick={() => toggleSort('availability')}>Availability</th>
-              <th>Action</th>
+              {!readOnly && (
+                <>
+                  <th onClick={() => toggleSort('rank')}>Overall</th>
+                  <th onClick={() => toggleSort('positionRank')}>Pos Rank</th>
+                  <th onClick={() => toggleSort('tier')}>Tier</th>
+                  <th onClick={() => toggleSort('adp')}>ADP</th>
+                  <th onClick={() => toggleSort('projected_points')}>Proj Pts</th>
+                  <th onClick={() => toggleSort('value')}>Value</th>
+                  <th onClick={() => toggleSort('availability')}>Availability</th>
+                  <th>Action</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -147,30 +154,34 @@ export function PlayerTable({
                   </td>
                   <td>{player.team}</td>
                   <td>{player.bye_week ?? '—'}</td>
-                  <td>{player.rank}</td>
-                  <td>{positionRanks[player.id] ?? '—'}</td>
-                  <td>{tiers[player.id] ?? '—'}</td>
-                  <td className={label !== 'neutral' ? `adp-label--${label}` : undefined}>{player.adp}</td>
-                  <td>{player.projected_points.toFixed(1)}</td>
-                  <td>{rec.value.toFixed(1)}</td>
-                  <td
-                    className={
-                      probability !== null
-                        ? probability >= 0.5
-                          ? 'availability--likely'
-                          : 'availability--risky'
-                        : undefined
-                    }
-                  >
-                    {probability !== null ? `${Math.round(probability * 100)}%` : '—'}
-                  </td>
-                  <td className="player-table__actions">
-                    <PlayerActions
-                      teams={teams}
-                      onDraftToMyTeam={() => onDraftToMyTeam(player.id)}
-                      onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(player.id, teamId)}
-                    />
-                  </td>
+                  {!readOnly && (
+                    <>
+                      <td>{player.rank}</td>
+                      <td>{positionRanks[player.id] ?? '—'}</td>
+                      <td>{tiers[player.id] ?? '—'}</td>
+                      <td className={label !== 'neutral' ? `adp-label--${label}` : undefined}>{player.adp}</td>
+                      <td>{player.projected_points.toFixed(1)}</td>
+                      <td>{rec.value.toFixed(1)}</td>
+                      <td
+                        className={
+                          probability !== null
+                            ? probability >= 0.5
+                              ? 'availability--likely'
+                              : 'availability--risky'
+                            : undefined
+                        }
+                      >
+                        {probability !== null ? `${Math.round(probability * 100)}%` : '—'}
+                      </td>
+                      <td className="player-table__actions">
+                        <PlayerActions
+                          teams={teams}
+                          onDraftToMyTeam={() => onDraftToMyTeam(player.id)}
+                          onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(player.id, teamId)}
+                        />
+                      </td>
+                    </>
+                  )}
                 </tr>
               );
             })}

@@ -1,20 +1,29 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import type { DraftState } from '../domain/draft';
 import { USER_TEAM_ID } from '../domain/draft';
 import type { LeagueSettings } from '../domain/roster';
 import type { DraftStrategy } from '../domain/strategy';
 import { ManualAdapter } from '../adapters/manual/manualAdapter';
+import { SleeperAdapter, connectToSleeperDraft, type SleeperSyncStatus } from '../adapters/sleeper/sleeperAdapter';
+import type { DraftAdapter } from '../adapters/types';
 import { clearDraftState, loadDraftState, saveDraftState } from '../persistence/draftRepository';
 import { SEED_PLAYERS } from '../data/seed/derived';
 
 interface DraftContextValue {
   state: DraftState | null;
   isLoading: boolean;
+  sleeperSyncStatus: SleeperSyncStatus | null;
   draftPlayer: (playerId: string, teamId: string) => void;
   undo: () => void;
   setStrategy: (strategy: DraftStrategy) => void;
   toggleFavorite: (playerId: string) => void;
   startNewDraft: (leagueSettings: LeagueSettings, strategy: DraftStrategy) => void;
+  connectSleeperDraft: (
+    draftId: string,
+    username: string,
+    strategy: DraftStrategy,
+  ) => Promise<{ ok: true } | { ok: false; error: string }>;
+  switchToManualEntry: () => void;
   resetDraft: () => void;
   goToSetup: () => void;
   saveNow: () => Promise<void>;
@@ -23,16 +32,31 @@ interface DraftContextValue {
 const DraftContext = createContext<DraftContextValue | null>(null);
 
 export function DraftProvider({ children }: { children: ReactNode }) {
-  const [adapter, setAdapter] = useState<ManualAdapter | null>(null);
+  const [adapter, setAdapter] = useState<DraftAdapter | null>(null);
   const [state, setState] = useState<DraftState | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [sleeperSyncStatus, setSleeperSyncStatus] = useState<SleeperSyncStatus | null>(null);
+  // Mutable ref alongside the adapter state so stop() can be called on the *previous*
+  // adapter when switching away, without waiting for a render.
+  const adapterRef = useRef<DraftAdapter | null>(null);
+
+  function setActiveAdapter(next: DraftAdapter) {
+    if (adapterRef.current instanceof SleeperAdapter) {
+      adapterRef.current.stop();
+    }
+    adapterRef.current = next;
+    setAdapter(next);
+  }
 
   useEffect(() => {
     let cancelled = false;
     void loadDraftState().then((loaded) => {
       if (cancelled) return;
       if (loaded) {
-        setAdapter(new ManualAdapter(loaded));
+        // A persisted Sleeper draft can't resume live polling after a refresh (we'd need to
+        // re-run the connect flow); it reopens read-only under ManualAdapter's plumbing so
+        // the UI still renders correctly, just without further live updates until reconnected.
+        setActiveAdapter(new ManualAdapter(loaded));
         setState(loaded);
       }
       setIsLoading(false);
@@ -47,6 +71,14 @@ export function DraftProvider({ children }: { children: ReactNode }) {
     return adapter.subscribe(setState);
   }, [adapter]);
 
+  useEffect(() => {
+    return () => {
+      if (adapterRef.current instanceof SleeperAdapter) {
+        adapterRef.current.stop();
+      }
+    };
+  }, []);
+
   function startNewDraft(leagueSettings: LeagueSettings, strategy: DraftStrategy) {
     const initialState: DraftState = {
       leagueSettings,
@@ -59,9 +91,42 @@ export function DraftProvider({ children }: { children: ReactNode }) {
       strategy,
       favoritedPlayerIds: [],
     };
-    setAdapter(new ManualAdapter(initialState));
+    setSleeperSyncStatus(null);
+    setActiveAdapter(new ManualAdapter(initialState));
     setState(initialState);
     void saveDraftState(initialState);
+  }
+
+  async function connectSleeperDraft(draftId: string, username: string, strategy: DraftStrategy) {
+    setSleeperSyncStatus({ state: 'connecting' });
+    try {
+      const { adapter: sleeperAdapter, initialState } = await connectToSleeperDraft(
+        draftId,
+        username,
+        strategy,
+        setSleeperSyncStatus,
+      );
+      setActiveAdapter(sleeperAdapter);
+      setState(initialState);
+      void saveDraftState(initialState);
+      return { ok: true as const };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Could not connect to that Sleeper draft.';
+      setSleeperSyncStatus(null);
+      return { ok: false as const, error: message };
+    }
+  }
+
+  function switchToManualEntry() {
+    if (!state) return;
+    const manualState: DraftState = {
+      ...state,
+      leagueSettings: { ...state.leagueSettings, platform: 'manual' },
+    };
+    setSleeperSyncStatus(null);
+    setActiveAdapter(new ManualAdapter(manualState));
+    setState(manualState);
+    void saveDraftState(manualState);
   }
 
   function resetDraft() {
@@ -82,9 +147,12 @@ export function DraftProvider({ children }: { children: ReactNode }) {
   }
 
   function setStrategy(strategy: DraftStrategy) {
-    if (!adapter) return;
-    adapter.setStrategy(strategy);
-    void saveDraftState(adapter.getState());
+    // Sleeper mode has no UI surface that calls this (recommendations are gated off), so
+    // this only ever needs to handle ManualAdapter in practice.
+    if (adapter instanceof ManualAdapter) {
+      adapter.setStrategy(strategy);
+      void saveDraftState(adapter.getState());
+    }
   }
 
   function toggleFavorite(playerId: string) {
@@ -94,8 +162,13 @@ export function DraftProvider({ children }: { children: ReactNode }) {
   }
 
   function goToSetup() {
+    if (adapterRef.current instanceof SleeperAdapter) {
+      adapterRef.current.stop();
+    }
+    adapterRef.current = null;
     setAdapter(null);
     setState(null);
+    setSleeperSyncStatus(null);
     void clearDraftState();
   }
 
@@ -107,11 +180,14 @@ export function DraftProvider({ children }: { children: ReactNode }) {
   const value: DraftContextValue = {
     state,
     isLoading,
+    sleeperSyncStatus,
     draftPlayer,
     undo,
     setStrategy,
     toggleFavorite,
     startNewDraft,
+    connectSleeperDraft,
+    switchToManualEntry,
     resetDraft,
     goToSetup,
     saveNow,

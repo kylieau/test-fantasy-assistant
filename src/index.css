@@ -158,6 +158,26 @@ input, select {
   gap: 1rem;
 }
 
+.platform-toggle {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.25rem;
+}
+
+.connect-sleeper__note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.connect-sleeper__error {
+  color: var(--danger);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
 .field {
   display: flex;
   justify-content: space-between;
