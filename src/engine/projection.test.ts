@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { availabilityMargin, availabilityProbability, projectFuturePicks, upcomingUserPickNumbers } from './projection';
+import {
+  availabilityMargin,
+  availabilityProbability,
+  playersLikelyAvailableAt,
+  projectFuturePicks,
+  upcomingUserPickNumbers,
+} from './projection';
 import { createDefaultLeagueSettings } from '../domain/roster';
 import { makePlayer } from '../test/fixtures';
 import type { LeagueSettings } from '../domain/roster';
@@ -98,5 +104,25 @@ describe('projectFuturePicks', () => {
   it('returns an empty array when the user has no upcoming picks in range', () => {
     const settings = twoTeamSnakeSettings();
     expect(projectFuturePicks([], settings, [], 'bpa', 1, 'user', 0)).toEqual([]);
+  });
+});
+
+describe('playersLikelyAvailableAt', () => {
+  it('returns the top-N players still in the pool after simulating up to the target pick', () => {
+    const settings = twoTeamSnakeSettings();
+    const players = [300, 290, 280, 270, 260].map((pts, i) =>
+      makePlayer({ id: `RB${i + 1}`, position: ['RB'], adp: i + 1, rank: i + 1, projected_points: pts }),
+    );
+
+    // Picks 1(user)=RB1, 2(opp)=RB2, 3(opp)=RB3 consumed before target pick 4.
+    const survivors = playersLikelyAvailableAt(players, settings, [], 'bpa', 1, 'user', 4, 2);
+
+    expect(survivors.map((p) => p.id)).toEqual(['RB4', 'RB5']);
+  });
+
+  it('returns an empty list when the pool is already exhausted before the target pick', () => {
+    const settings = twoTeamSnakeSettings();
+    const players = [makePlayer({ id: 'RB1', position: ['RB'], adp: 1, rank: 1 })];
+    expect(playersLikelyAvailableAt(players, settings, [], 'bpa', 1, 'user', 4, 2)).toEqual([]);
   });
 });

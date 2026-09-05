@@ -42,6 +42,10 @@ export function Header({ state }: { state: DraftState | null }) {
           <span className="app-header__pick">
             Pick {state.currentPick} (Round {round}) · {statusLabel}
           </span>
+          <span className="app-header__progress">
+            Drafted {state.picksMade.length} · My picks {state.userRoster.length} · Left{' '}
+            {state.availablePlayers.length}
+          </span>
           <div className="app-header__actions">
             {isSleeper && sleeperSyncStatus?.state === 'error' && (
               <button

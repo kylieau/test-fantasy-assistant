@@ -4,6 +4,11 @@ import { computeFilledRosterSlots, pickOrderTeamId } from '../domain/roster';
 import { resolveStrategyWeight, type DraftStrategy } from '../domain/strategy';
 import { rankRecommendations } from './recommend';
 
+/** Total roster slots on a team, used to bound how many future rounds are worth projecting. */
+export function totalRosterSlotCount(leagueSettings: LeagueSettings): number {
+  return leagueSettings.rosterSlots.reduce((sum, slot) => sum + slot.count, 0);
+}
+
 /** The next `count` pick numbers (from currentPick onward) belonging to userTeamId. */
 export function upcomingUserPickNumbers(
   leagueSettings: LeagueSettings,
@@ -105,4 +110,49 @@ export function projectFuturePicks(
   }
 
   return results;
+}
+
+/**
+ * Same simplifying assumption as projectFuturePicks (opponents draft by best-ADP-available,
+ * the user's own simulated picks follow their chosen strategy) but run forward to a single
+ * target pick and reporting every plausible survivor there, rather than one guess per future
+ * user turn. Backs "likely still there at your pick #N" — a shortlist, not a single guess.
+ */
+export function playersLikelyAvailableAt(
+  availablePlayers: Player[],
+  leagueSettings: LeagueSettings,
+  userRoster: Player[],
+  strategy: DraftStrategy,
+  currentPick: number,
+  userTeamId: string,
+  targetPickNumber: number,
+  topN: number,
+): Player[] {
+  const pool = [...availablePlayers];
+  const simulatedUserPicks: Player[] = [];
+
+  for (let pick = currentPick; pick < targetPickNumber && pool.length > 0; pick++) {
+    if (pickOrderTeamId(leagueSettings, pick) === userTeamId) {
+      const rosterSlots = computeFilledRosterSlots(leagueSettings.rosterSlots, [
+        ...userRoster,
+        ...simulatedUserPicks,
+      ]);
+      const weight = resolveStrategyWeight(strategy, rosterSlots);
+      const [top] = rankRecommendations(pool, leagueSettings, rosterSlots, weight, 1);
+      if (!top) break;
+      simulatedUserPicks.push(top.player);
+      pool.splice(
+        pool.findIndex((p) => p.id === top.player.id),
+        1,
+      );
+    } else {
+      let bestAdpIndex = 0;
+      for (let i = 1; i < pool.length; i++) {
+        if (pool[i].adp < pool[bestAdpIndex].adp) bestAdpIndex = i;
+      }
+      pool.splice(bestAdpIndex, 1);
+    }
+  }
+
+  return [...pool].sort((a, b) => a.rank - b.rank).slice(0, topN);
 }

@@ -42,6 +42,8 @@ export function PlayerTable({
   const [sortAsc, setSortAsc] = useState(true);
   const [positionFilter, setPositionFilter] = useState<Position | 'ALL'>('ALL');
   const [search, setSearch] = useState('');
+  const [availableOnly, setAvailableOnly] = useState(false);
+  const [targetsOnly, setTargetsOnly] = useState(false);
 
   const favoritedSet = useMemo(() => new Set(favoritedPlayerIds), [favoritedPlayerIds]);
 
@@ -53,6 +55,12 @@ export function PlayerTable({
     if (search.trim()) {
       const q = search.trim().toLowerCase();
       filtered = filtered.filter((r) => r.player.name.toLowerCase().includes(q));
+    }
+    if (availableOnly) {
+      filtered = filtered.filter((r) => !r.draftedBy);
+    }
+    if (targetsOnly) {
+      filtered = filtered.filter((r) => favoritedSet.has(r.player.id));
     }
 
     function sortValue(r: Recommendation): number {
@@ -71,7 +79,19 @@ export function PlayerTable({
     }
 
     return [...filtered].sort((a, b) => (sortAsc ? sortValue(a) - sortValue(b) : sortValue(b) - sortValue(a)));
-  }, [recommendations, positionFilter, search, sortKey, sortAsc, positionRanks, tiers, nextUserPickNumber]);
+  }, [
+    recommendations,
+    positionFilter,
+    search,
+    availableOnly,
+    targetsOnly,
+    favoritedSet,
+    sortKey,
+    sortAsc,
+    positionRanks,
+    tiers,
+    nextUserPickNumber,
+  ]);
 
   function toggleSort(key: SortKey) {
     if (key === sortKey) {
@@ -100,6 +120,18 @@ export function PlayerTable({
             </option>
           ))}
         </select>
+        <label className="player-table__checkbox">
+          <input
+            type="checkbox"
+            checked={availableOnly}
+            onChange={(e) => setAvailableOnly(e.target.checked)}
+          />
+          Available only
+        </label>
+        <label className="player-table__checkbox">
+          <input type="checkbox" checked={targetsOnly} onChange={(e) => setTargetsOnly(e.target.checked)} />
+          ★ Targets
+        </label>
       </div>
 
       <div className="player-table__scroll">
@@ -122,7 +154,7 @@ export function PlayerTable({
                   <th onClick={() => toggleSort('availability')}>Availability</th>
                 </>
               )}
-              {showActions && <th>Action</th>}
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -134,7 +166,7 @@ export function PlayerTable({
               const isFavorited = favoritedSet.has(player.id);
 
               return (
-                <tr key={player.id}>
+                <tr key={player.id} className={rec.draftedBy ? 'player-table__row--drafted' : undefined}>
                   <td>
                     <button
                       type="button"
@@ -168,26 +200,32 @@ export function PlayerTable({
                       <td>{rec.value.toFixed(1)}</td>
                       <td
                         className={
-                          probability !== null
-                            ? probability >= 0.5
+                          rec.draftedBy || probability === null
+                            ? undefined
+                            : probability >= 0.5
                               ? 'availability--likely'
                               : 'availability--risky'
-                            : undefined
                         }
                       >
-                        {probability !== null ? `${Math.round(probability * 100)}%` : '—'}
+                        {rec.draftedBy || probability === null ? '—' : `${Math.round(probability * 100)}%`}
                       </td>
                     </>
                   )}
-                  {showActions && (
-                    <td className="player-table__actions">
+                  <td className="player-table__actions">
+                    {rec.draftedBy ? (
+                      <span className="drafted-label" title={`Drafted by ${rec.draftedBy}`}>
+                        DRAFTED
+                      </span>
+                    ) : showActions ? (
                       <PlayerActions
                         teams={teams}
                         onDraftToMyTeam={() => onDraftToMyTeam(player.id)}
                         onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(player.id, teamId)}
                       />
-                    </td>
-                  )}
+                    ) : (
+                      '—'
+                    )}
+                  </td>
                 </tr>
               );
             })}

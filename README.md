@@ -33,10 +33,14 @@ See [`docs/concept-doc.md`](docs/concept-doc.md) for the full product concept an
   ADP/rank/projected-points are merged in from ESPN's public API, matched to Sleeper's real
   players by name. The Draft Board looks and works identically whether you're in Manual or
   Sleeper mode.
-- **Draft Board** — My Team (roster fill status), Your Next Pick (top suggestion + reasoning +
-  a few rounds of projected future picks), Also Consider (what other strategies would suggest),
-  and a sortable/filterable Available Players table with position/tier badges and an
-  ADP-based availability estimate.
+- **Draft Board** — My Team (roster fill status), Your Draft (a full round-by-round view of
+  every pick you've made or will make, an auto-generated per-round plan tag like "Upside RB/WR"
+  derived from projected roster need, and a "likely still there at your next pick" shortlist),
+  Pick Next (pure best-player-available) and Strategy (your chosen strategy's roster/round-aware
+  pick) shown side by side, Also Consider (what the other strategies would suggest), and a
+  sortable/filterable Available Players table with position/tier badges, an ADP-based
+  availability estimate, and drafted players kept visible (greyed out, tagged with who took
+  them) rather than disappearing.
 - **My Roster & All Rosters views** — a full roster breakdown per team, plus a Team Analysis
   panel (value over replacement by position, bye-week conflicts, a plain-language strength
   summary) for your own team.
@@ -77,13 +81,23 @@ Sleeper draft). Unchecked items are the planned next slices, roughly in order.
 - [x] Draft Board parity between Manual and Sleeper modes
 - [x] Verified against a real, completed Sleeper draft
 
-### Phase 4 — Hardening & polish (next up)
+### Phase 4 — Draft Board redesign & hardening
+- [x] Full round-by-round pick planner ("Your Draft") spanning every past and future user pick
+- [x] "Likely still there at your pick #N" — a shortlist of survivors at one specific future
+      pick, not just a single best-guess per round
+- [x] Auto-generated per-round plan tag (e.g. "Upside RB / WR"), derived from projected roster need
+- [x] Pick Next (pure best-player-available) split out from Strategy (roster/round-aware pick)
+- [x] Drafted players stay visible in the Available Players table (greyed out, tagged by team),
+      with an "Available only" filter to hide them and a "★ Targets" filter for favorites
+- [x] Header draft-progress counters (Drafted / My picks / Left)
 - [ ] Test live sync against an in-progress (not yet completed) real Sleeper draft
 - [ ] Adaptive polling cadence (slow when idle, fast when on the clock) instead of a fixed interval
 - [ ] Bye-week data for Sleeper-sourced players (currently Manual-mode only)
 - [ ] Auto-deploy pipeline so the public demo updates on push, instead of a manual rebuild
 
 ### Later phases — not yet started
+- [ ] Multi-source rank blending (combine several published ranking sets into one, rather than
+      ESPN alone)
 - [ ] Category/roto scoring engine (Z-scores, SGP) for MLB/NBA leagues
 - [ ] Additional live adapters (Yahoo, ESPN fantasy platform itself)
 - [ ] Auction draft support (max-bid calculator, inflation/deflation tracking)

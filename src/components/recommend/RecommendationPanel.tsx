@@ -1,12 +1,10 @@
 import type { Recommendation } from '../../engine/types';
-import type { FuturePickProjection } from '../../engine/projection';
 import { STRATEGY_LABELS, type DraftStrategy } from '../../domain/strategy';
 import { OppDraftedControl, type TeamOption } from '../OppDraftedControl';
 
 export function RecommendationPanel({
   strategy,
   recommendation,
-  futurePicks,
   teams,
   hasProjections,
   showActions,
@@ -15,7 +13,6 @@ export function RecommendationPanel({
 }: {
   strategy: DraftStrategy;
   recommendation: Recommendation | undefined;
-  futurePicks: FuturePickProjection[];
   teams: TeamOption[];
   /** False when there's no usable projection data (e.g. ESPN merge failed for a Sleeper draft). */
   hasProjections: boolean;
@@ -26,8 +23,10 @@ export function RecommendationPanel({
 }) {
   return (
     <section className="recommendation-panel">
-      <h2>Your Next Pick</h2>
-      <p className="recommendation-panel__strategy">Strategy: {STRATEGY_LABELS[strategy]}</p>
+      <h2>Strategy</h2>
+      <p className="recommendation-panel__strategy">
+        Who to consider for your roster &amp; round — {STRATEGY_LABELS[strategy]}
+      </p>
 
       {recommendation ? (
         <div className="recommendation-panel__top">
@@ -65,23 +64,6 @@ export function RecommendationPanel({
             ? 'No players left to recommend.'
             : "Couldn't load player projections for this draft — showing a live tracker only."}
         </p>
-      )}
-
-      {futurePicks.length > 0 && (
-        <div className="recommendation-panel__future">
-          <h3>Anticipated Next Rounds</h3>
-          <p className="recommendation-panel__future-caveat">
-            Projected assuming other teams draft by ADP — not a guarantee.
-          </p>
-          <ol>
-            {futurePicks.map((fp) => (
-              <li key={fp.pickNumber}>
-                Pick {fp.pickNumber} (Rd {fp.round}): <strong>{fp.player.name}</strong> (
-                {fp.player.position[0]})
-              </li>
-            ))}
-          </ol>
-        </div>
       )}
     </section>
   );
