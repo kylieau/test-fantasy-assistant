@@ -9,6 +9,7 @@ import {
 } from '../../domain/strategy';
 import { useDraft } from '../../state/DraftContext';
 import { ConnectSleeperForm } from './ConnectSleeperForm';
+import { SavedDraftsPanel } from './SavedDraftsPanel';
 
 type SetupPlatform = 'manual' | 'sleeper';
 
@@ -97,6 +98,7 @@ export function LeagueSetupForm() {
   if (platform === 'sleeper') {
     return (
       <div className="league-setup">
+        <SavedDraftsPanel />
         {platformToggle}
         <ConnectSleeperForm />
       </div>
@@ -105,6 +107,7 @@ export function LeagueSetupForm() {
 
   return (
     <form className="league-setup" onSubmit={handleSubmit}>
+      <SavedDraftsPanel />
       {platformToggle}
       <h2>League Rules &amp; Personal Strategy</h2>
 

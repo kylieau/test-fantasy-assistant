@@ -7,6 +7,7 @@ import { ManualAdapter } from '../adapters/manual/manualAdapter';
 import { SleeperAdapter, connectToSleeperDraft, type SleeperSyncStatus } from '../adapters/sleeper/sleeperAdapter';
 import type { DraftAdapter } from '../adapters/types';
 import { clearDraftState, loadDraftState, saveDraftState } from '../persistence/draftRepository';
+import { loadSavedDraft, saveDraftAs } from '../persistence/savedDraftsRepository';
 import { SEED_PLAYERS } from '../data/seed/derived';
 
 interface DraftContextValue {
@@ -27,6 +28,8 @@ interface DraftContextValue {
   resetDraft: () => void;
   goToSetup: () => void;
   saveNow: () => Promise<void>;
+  saveCurrentDraftAs: (label: string) => Promise<void>;
+  loadSavedDraftById: (id: string) => Promise<void>;
 }
 
 const DraftContext = createContext<DraftContextValue | null>(null);
@@ -177,6 +180,22 @@ export function DraftProvider({ children }: { children: ReactNode }) {
     await saveDraftState(adapter.getState());
   }
 
+  async function saveCurrentDraftAs(label: string) {
+    if (!adapter) return;
+    await saveDraftAs(label, adapter.getState());
+  }
+
+  async function loadSavedDraftById(id: string) {
+    const saved = await loadSavedDraft(id);
+    if (!saved) return;
+    // Same "reopens read-only under ManualAdapter's plumbing" treatment as the startup
+    // load path above — a saved Sleeper draft can't resume live polling from a snapshot.
+    setSleeperSyncStatus(null);
+    setActiveAdapter(new ManualAdapter(saved.state));
+    setState(saved.state);
+    void saveDraftState(saved.state);
+  }
+
   const value: DraftContextValue = {
     state,
     isLoading,
@@ -191,6 +210,8 @@ export function DraftProvider({ children }: { children: ReactNode }) {
     resetDraft,
     goToSetup,
     saveNow,
+    saveCurrentDraftAs,
+    loadSavedDraftById,
   };
 
   return <DraftContext.Provider value={value}>{children}</DraftContext.Provider>;

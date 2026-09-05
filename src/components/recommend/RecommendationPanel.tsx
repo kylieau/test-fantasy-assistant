@@ -1,5 +1,6 @@
 import type { Recommendation } from '../../engine/types';
 import { STRATEGY_LABELS, type DraftStrategy } from '../../domain/strategy';
+import { PlayerCard } from '../PlayerCard';
 import { OppDraftedControl, type TeamOption } from '../OppDraftedControl';
 
 export function RecommendationPanel({
@@ -29,35 +30,33 @@ export function RecommendationPanel({
       </p>
 
       {recommendation ? (
-        <div className="recommendation-panel__top">
-          <div className="recommendation-panel__top-player">
-            <strong>{recommendation.player.name}</strong>
-            <span>
-              {recommendation.player.position[0]} · {recommendation.player.team}
-            </span>
-          </div>
-          <ul className="recommendation-panel__reasons">
-            {recommendation.reasonParts.map((reason) => (
-              <li key={reason}>{reason}</li>
-            ))}
-          </ul>
-          {showActions && (
-            <div className="recommendation-panel__actions">
-              <button
-                type="button"
-                className="primary-button"
-                onClick={() => onDraft(recommendation.player.id)}
-              >
-                Draft {recommendation.player.name}
-              </button>
-              <OppDraftedControl
-                teams={teams}
-                onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(recommendation.player.id, teamId)}
-                compact
-              />
-            </div>
-          )}
-        </div>
+        <PlayerCard
+          player={recommendation.player}
+          stats={{
+            points: recommendation.player.projected_points,
+            value: recommendation.value,
+            adp: recommendation.player.adp,
+          }}
+          reasonParts={recommendation.reasonParts}
+          actions={
+            showActions && (
+              <>
+                <button
+                  type="button"
+                  className="primary-button"
+                  onClick={() => onDraft(recommendation.player.id)}
+                >
+                  Draft {recommendation.player.name}
+                </button>
+                <OppDraftedControl
+                  teams={teams}
+                  onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(recommendation.player.id, teamId)}
+                  compact
+                />
+              </>
+            )
+          }
+        />
       ) : (
         <p>
           {hasProjections

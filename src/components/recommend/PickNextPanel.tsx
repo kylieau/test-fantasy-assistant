@@ -1,5 +1,6 @@
 import type { Recommendation } from '../../engine/types';
 import { labelAdpDelta } from '../../engine/value';
+import { PlayerCard } from '../PlayerCard';
 import { OppDraftedControl, type TeamOption } from '../OppDraftedControl';
 
 /**
@@ -32,42 +33,40 @@ export function PickNextPanel({
         <span className="pick-next-panel__subtitle">best player left, by ranking</span>
       </div>
 
-      <div className="pick-next-panel__top">
-        <div className="pick-next-panel__player">
-          <strong>{top.player.name}</strong>
-          <span className="pick-next-panel__meta">
-            {top.player.position[0]} · {top.player.team}
-          </span>
-          {isBestValue && (
-            <span className="badge badge--value">
-              Best value · going {Math.round(top.adpDelta)} picks past his rank
-            </span>
-          )}
-        </div>
-        {showActions && (
-          <div className="recommendation-panel__actions">
-            <button type="button" className="primary-button" onClick={() => onDraft(top.player.id)}>
-              + My Team
-            </button>
-            <OppDraftedControl
-              teams={teams}
-              onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(top.player.id, teamId)}
-              compact
-            />
-          </div>
-        )}
-      </div>
+      <PlayerCard
+        player={top.player}
+        stats={{ points: top.player.projected_points, value: top.value, adp: top.player.adp }}
+        reasonParts={top.reasonParts}
+        badge={isBestValue ? `Best value · going ${Math.round(top.adpDelta)} picks past his rank` : undefined}
+        actions={
+          showActions && (
+            <>
+              <button type="button" className="primary-button" onClick={() => onDraft(top.player.id)}>
+                + My Team
+              </button>
+              <OppDraftedControl
+                teams={teams}
+                onMarkDraftedByTeam={(teamId) => onMarkDraftedByTeam(top.player.id, teamId)}
+                compact
+              />
+            </>
+          )
+        }
+      />
 
       {then.length > 0 && (
         <div className="pick-next-panel__then">
           <span className="pick-next-panel__then-label">then</span>
-          <ul>
+          <div className="pick-next-panel__then-cards">
             {then.map((rec) => (
-              <li key={rec.player.id}>
-                {rec.player.name} <span className="pick-next-panel__then-pos">{rec.player.position[0]}</span>
-              </li>
+              <PlayerCard
+                key={rec.player.id}
+                compact
+                player={rec.player}
+                stats={{ points: rec.player.projected_points, value: rec.value, adp: rec.player.adp }}
+              />
             ))}
-          </ul>
+          </div>
         </div>
       )}
     </section>

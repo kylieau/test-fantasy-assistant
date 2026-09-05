@@ -9,13 +9,26 @@ function formatSecondsAgo(lastSyncedAt: number | null): string {
 }
 
 export function Header({ state }: { state: DraftState | null }) {
-  const { undo, resetDraft, goToSetup, saveNow, sleeperSyncStatus, switchToManualEntry } = useDraft();
+  const { undo, resetDraft, goToSetup, saveNow, saveCurrentDraftAs, sleeperSyncStatus, switchToManualEntry } =
+    useDraft();
   const [savedFlash, setSavedFlash] = useState(false);
+  const [savingAs, setSavingAs] = useState(false);
+  const [saveAsLabel, setSaveAsLabel] = useState('');
   const round = state ? Math.ceil(state.currentPick / state.leagueSettings.teamCount) : null;
   const isSleeper = state?.leagueSettings.platform === 'sleeper';
 
   async function handleSave() {
     await saveNow();
+    setSavedFlash(true);
+    setTimeout(() => setSavedFlash(false), 1500);
+  }
+
+  async function handleConfirmSaveAs() {
+    const label = saveAsLabel.trim();
+    if (!label) return;
+    await saveCurrentDraftAs(label);
+    setSaveAsLabel('');
+    setSavingAs(false);
     setSavedFlash(true);
     setTimeout(() => setSavedFlash(false), 1500);
   }
@@ -69,6 +82,45 @@ export function Header({ state }: { state: DraftState | null }) {
             <button type="button" className="icon-button" onClick={handleSave} title="Save draft now">
               {savedFlash ? 'Saved ✓' : 'Save'}
             </button>
+            {savingAs ? (
+              <form
+                className="save-as-form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  void handleConfirmSaveAs();
+                }}
+              >
+                <input
+                  type="text"
+                  autoFocus
+                  placeholder="Label this draft…"
+                  value={saveAsLabel}
+                  onChange={(e) => setSaveAsLabel(e.target.value)}
+                />
+                <button type="submit" className="icon-button">
+                  Confirm
+                </button>
+                <button
+                  type="button"
+                  className="icon-button"
+                  onClick={() => {
+                    setSavingAs(false);
+                    setSaveAsLabel('');
+                  }}
+                >
+                  Cancel
+                </button>
+              </form>
+            ) : (
+              <button
+                type="button"
+                className="icon-button"
+                onClick={() => setSavingAs(true)}
+                title="Save this draft under a label, so you can resume it later from League Setup"
+              >
+                Save As…
+              </button>
+            )}
             <button
               type="button"
               className="icon-button"
