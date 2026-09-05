@@ -89,6 +89,7 @@ export function DraftBoard() {
       {hasProjections && (
         <PickNextPanel
           recommendations={pickNextRecommendations}
+          positionRanks={positionRanks}
           teams={otherTeams}
           showActions={showActions}
           onDraft={draftToMyTeam}
@@ -100,6 +101,7 @@ export function DraftBoard() {
         state={state}
         strategy={state.strategy}
         recommendation={recommendations[0]}
+        positionRanks={positionRanks}
         teams={otherTeams}
         hasProjections={hasProjections}
         showActions={showActions}

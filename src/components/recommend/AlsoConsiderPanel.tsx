@@ -23,6 +23,7 @@ const CANDIDATES_PER_STRATEGY = 5;
 export function AlsoConsiderPanel({
   state,
   excludePlayerId,
+  positionRanks,
   teams,
   showActions,
   onDraftToMyTeam,
@@ -30,6 +31,7 @@ export function AlsoConsiderPanel({
 }: {
   state: DraftState;
   excludePlayerId: string | undefined;
+  positionRanks: Record<string, number>;
   teams: TeamOption[];
   /** Sleeper stays authoritative for the actual pick — hide the draft controls there. */
   showActions: boolean;
@@ -71,6 +73,7 @@ export function AlsoConsiderPanel({
             key={strategy}
             compact
             player={top.player}
+            positionRank={positionRanks[top.player.id]}
             stats={{ points: top.player.projected_points, value: top.value, adp: top.player.adp }}
             reasonParts={[`Best under "${STRATEGY_LABELS[strategy]}"`]}
             actions={

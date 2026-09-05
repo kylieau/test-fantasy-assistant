@@ -9,6 +9,7 @@ export function RecommendationPanel({
   state,
   strategy,
   recommendation,
+  positionRanks,
   teams,
   hasProjections,
   showActions,
@@ -18,6 +19,7 @@ export function RecommendationPanel({
   state: DraftState;
   strategy: DraftStrategy;
   recommendation: Recommendation | undefined;
+  positionRanks: Record<string, number>;
   teams: TeamOption[];
   /** False when there's no usable projection data (e.g. ESPN merge failed for a Sleeper draft). */
   hasProjections: boolean;
@@ -36,6 +38,7 @@ export function RecommendationPanel({
       {recommendation ? (
         <PlayerCard
           player={recommendation.player}
+          positionRank={positionRanks[recommendation.player.id]}
           stats={{
             points: recommendation.player.projected_points,
             value: recommendation.value,
@@ -72,6 +75,7 @@ export function RecommendationPanel({
       <AlsoConsiderPanel
         state={state}
         excludePlayerId={recommendation?.player.id}
+        positionRanks={positionRanks}
         teams={teams}
         showActions={showActions}
         onDraftToMyTeam={onDraft}

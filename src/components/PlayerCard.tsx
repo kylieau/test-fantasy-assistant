@@ -15,6 +15,7 @@ export interface PlayerCardStats {
  */
 export function PlayerCard({
   player,
+  positionRank,
   stats,
   reasonParts,
   badge,
@@ -22,6 +23,7 @@ export function PlayerCard({
   compact = false,
 }: {
   player: Player;
+  positionRank?: number;
   stats?: PlayerCardStats;
   reasonParts?: string[];
   badge?: string;
@@ -33,6 +35,7 @@ export function PlayerCard({
       <div className="player-card__header">
         <span className="position-badge" style={{ backgroundColor: POSITION_COLORS[player.position[0]] }}>
           {player.position[0]}
+          {positionRank ?? ''}
         </span>
         <div className="player-card__identity">
           <strong>{player.name}</strong>

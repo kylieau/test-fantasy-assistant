@@ -40,7 +40,7 @@ export function PlayerTable({
 }) {
   const [sortKey, setSortKey] = useState<SortKey>('rank');
   const [sortAsc, setSortAsc] = useState(true);
-  const [positionFilter, setPositionFilter] = useState<Position | 'ALL'>('ALL');
+  const [selectedPositions, setSelectedPositions] = useState<Set<Position>>(() => new Set());
   const [search, setSearch] = useState('');
   const [availableOnly, setAvailableOnly] = useState(false);
   const [targetsOnly, setTargetsOnly] = useState(false);
@@ -49,8 +49,8 @@ export function PlayerTable({
 
   const rows = useMemo(() => {
     let filtered = recommendations;
-    if (positionFilter !== 'ALL') {
-      filtered = filtered.filter((r) => r.player.position.includes(positionFilter));
+    if (selectedPositions.size > 0) {
+      filtered = filtered.filter((r) => r.player.position.some((pos) => selectedPositions.has(pos)));
     }
     if (search.trim()) {
       const q = search.trim().toLowerCase();
@@ -81,7 +81,7 @@ export function PlayerTable({
     return [...filtered].sort((a, b) => (sortAsc ? sortValue(a) - sortValue(b) : sortValue(b) - sortValue(a)));
   }, [
     recommendations,
-    positionFilter,
+    selectedPositions,
     search,
     availableOnly,
     targetsOnly,
@@ -102,36 +102,66 @@ export function PlayerTable({
     }
   }
 
+  function togglePosition(pos: Position) {
+    setSelectedPositions((prev) => {
+      const next = new Set(prev);
+      if (next.has(pos)) {
+        next.delete(pos);
+      } else {
+        next.add(pos);
+      }
+      return next;
+    });
+  }
+
   return (
     <section className="player-table">
       <h2>Available Players</h2>
       <div className="player-table__controls">
-        <input
-          type="search"
-          placeholder="Search players…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <select value={positionFilter} onChange={(e) => setPositionFilter(e.target.value as Position | 'ALL')}>
-          <option value="ALL">All positions</option>
-          {ALL_POSITIONS.map((pos) => (
-            <option key={pos} value={pos}>
-              {pos}
-            </option>
-          ))}
-        </select>
-        <label className="player-table__checkbox">
+        <div className="player-table__filters-row">
           <input
-            type="checkbox"
-            checked={availableOnly}
-            onChange={(e) => setAvailableOnly(e.target.checked)}
+            type="search"
+            placeholder="Search players…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-          Available only
-        </label>
-        <label className="player-table__checkbox">
-          <input type="checkbox" checked={targetsOnly} onChange={(e) => setTargetsOnly(e.target.checked)} />
-          ★ Targets
-        </label>
+          <label className="player-table__checkbox">
+            <input
+              type="checkbox"
+              checked={availableOnly}
+              onChange={(e) => setAvailableOnly(e.target.checked)}
+            />
+            Available only
+          </label>
+          <label className="player-table__checkbox">
+            <input type="checkbox" checked={targetsOnly} onChange={(e) => setTargetsOnly(e.target.checked)} />
+            ★ Targets
+          </label>
+        </div>
+
+        <div className="player-table__position-filter">
+          <button
+            type="button"
+            className={`position-toggle ${selectedPositions.size === 0 ? 'position-toggle--active' : ''}`}
+            onClick={() => setSelectedPositions(new Set())}
+          >
+            All
+          </button>
+          {ALL_POSITIONS.map((pos) => {
+            const isActive = selectedPositions.has(pos);
+            return (
+              <button
+                key={pos}
+                type="button"
+                className={`position-toggle ${isActive ? 'position-toggle--active' : ''}`}
+                style={isActive ? { backgroundColor: POSITION_COLORS[pos], borderColor: POSITION_COLORS[pos] } : undefined}
+                onClick={() => togglePosition(pos)}
+              >
+                {pos}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <div className="player-table__scroll">

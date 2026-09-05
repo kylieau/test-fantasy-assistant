@@ -10,12 +10,14 @@ import { OppDraftedControl, type TeamOption } from '../OppDraftedControl';
  */
 export function PickNextPanel({
   recommendations,
+  positionRanks,
   teams,
   showActions,
   onDraft,
   onMarkDraftedByTeam,
 }: {
   recommendations: Recommendation[];
+  positionRanks: Record<string, number>;
   teams: TeamOption[];
   showActions: boolean;
   onDraft: (playerId: string) => void;
@@ -35,6 +37,7 @@ export function PickNextPanel({
 
       <PlayerCard
         player={top.player}
+        positionRank={positionRanks[top.player.id]}
         stats={{ points: top.player.projected_points, value: top.value, adp: top.player.adp }}
         reasonParts={top.reasonParts}
         badge={isBestValue ? `Best value · going ${Math.round(top.adpDelta)} picks past his rank` : undefined}
@@ -63,6 +66,7 @@ export function PickNextPanel({
                 key={rec.player.id}
                 compact
                 player={rec.player}
+                positionRank={positionRanks[rec.player.id]}
                 stats={{ points: rec.player.projected_points, value: rec.value, adp: rec.player.adp }}
               />
             ))}
