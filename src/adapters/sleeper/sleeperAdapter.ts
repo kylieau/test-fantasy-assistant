@@ -7,7 +7,7 @@ import { buildEspnProjectionIndex } from '../../data/espnProjections/mapEspnProj
 import { mergeEspnProjections } from '../../data/espnProjections/mergeEspnProjections';
 import type { DraftAdapter } from '../types';
 import type { SleeperPick, SleeperPlayer } from './sleeperTypes';
-import { mapSleeperPickMetadata, mapSleeperPlayer } from './mapSleeperPlayer';
+import { dropUnrosteredIdpPlayers, mapSleeperPickMetadata, mapSleeperPlayer } from './mapSleeperPlayer';
 import { buildLeagueSettingsFromSleeper } from './buildLeagueSettingsFromSleeper';
 import * as sleeperClient from './sleeperClient';
 
@@ -170,9 +170,12 @@ export async function connectToSleeperDraft(
     user.user_id,
   );
 
-  let availablePlayers = Object.values(playersById)
-    .map(mapSleeperPlayer)
-    .filter((p): p is Player => p !== null && p.team !== 'FA');
+  let availablePlayers = dropUnrosteredIdpPlayers(
+    Object.values(playersById)
+      .map(mapSleeperPlayer)
+      .filter((p): p is Player => p !== null && p.team !== 'FA'),
+    leagueSettings,
+  );
 
   // Sleeper has no projections/ADP of its own — merge in real ones from ESPN's public API so
   // "Your Next Pick"/"Also Consider" can work the same way they do in Manual mode. Failure

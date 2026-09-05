@@ -1,6 +1,10 @@
 import type { Player, Position } from './player';
 
-export type RosterSlotType = Position | 'FLEX' | 'BENCH';
+/**
+ * SUPERFLEX: a flex slot that also accepts QB (unlike the plain FLEX below). IDP_FLEX: a flex
+ * slot among the individual-defensive-player positions (DL/LB/DB).
+ */
+export type RosterSlotType = Position | 'FLEX' | 'SUPERFLEX' | 'IDP_FLEX' | 'BENCH';
 export type DraftType = 'snake' | 'linear';
 export type DraftPlatform = 'manual' | 'sleeper';
 
@@ -63,6 +67,16 @@ export function createDefaultLeagueSettings(teamCount = 10): LeagueSettings {
 }
 
 export const FLEX_ELIGIBLE_POSITIONS: Position[] = ['RB', 'WR', 'TE'];
+/** Superflex additionally accepts QB, on top of everything the plain FLEX already accepts. */
+export const SUPERFLEX_ELIGIBLE_POSITIONS: Position[] = ['QB', ...FLEX_ELIGIBLE_POSITIONS];
+export const IDP_ELIGIBLE_POSITIONS: Position[] = ['DL', 'LB', 'DB'];
+
+/** Flex-style slots tried in order, after an exact-position slot isn't available. */
+const FLEX_SLOTS: { slotType: RosterSlotType; eligiblePositions: Position[] }[] = [
+  { slotType: 'FLEX', eligiblePositions: FLEX_ELIGIBLE_POSITIONS },
+  { slotType: 'SUPERFLEX', eligiblePositions: SUPERFLEX_ELIGIBLE_POSITIONS },
+  { slotType: 'IDP_FLEX', eligiblePositions: IDP_ELIGIBLE_POSITIONS },
+];
 
 export interface SlotAssignment extends RosterSlot {
   players: Player[];
@@ -80,13 +94,16 @@ function assignPlayersToSlots(templateSlots: RosterSlot[], roster: Player[]): Sl
       continue;
     }
 
-    if (FLEX_ELIGIBLE_POSITIONS.includes(primaryPosition)) {
-      const flexSlot = slots.find((s) => s.position === 'FLEX' && s.filled < s.count);
-      if (flexSlot) {
-        flexSlot.filled += 1;
-        flexSlot.players.push(player);
-        continue;
-      }
+    const flexMatch = FLEX_SLOTS.find(
+      ({ slotType, eligiblePositions }) =>
+        eligiblePositions.includes(primaryPosition) &&
+        slots.some((s) => s.position === slotType && s.filled < s.count),
+    );
+    if (flexMatch) {
+      const flexSlot = slots.find((s) => s.position === flexMatch.slotType && s.filled < s.count)!;
+      flexSlot.filled += 1;
+      flexSlot.players.push(player);
+      continue;
     }
 
     const benchSlot = slots.find((s) => s.position === 'BENCH' && s.filled < s.count);

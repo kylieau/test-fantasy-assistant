@@ -36,4 +36,22 @@ describe('computeNeedScore', () => {
     ];
     expect(computeNeedScore(player, slots)).toBe(0.0);
   });
+
+  it('returns 0.5 for a QB when only a SUPERFLEX slot remains', () => {
+    const player = makePlayer({ id: 'QB1', position: ['QB'] });
+    const slots: RosterSlot[] = [
+      { position: 'QB', count: 1, filled: 1 },
+      { position: 'SUPERFLEX', count: 1, filled: 0 },
+    ];
+    expect(computeNeedScore(player, slots)).toBe(0.5);
+  });
+
+  it('returns 0.5 for an IDP position (DB) when only IDP_FLEX remains', () => {
+    const player = makePlayer({ id: 'DB1', position: ['DB'] });
+    const slots: RosterSlot[] = [
+      { position: 'DB', count: 1, filled: 1 },
+      { position: 'IDP_FLEX', count: 1, filled: 0 },
+    ];
+    expect(computeNeedScore(player, slots)).toBe(0.5);
+  });
 });

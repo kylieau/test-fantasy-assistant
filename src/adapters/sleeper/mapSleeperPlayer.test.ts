@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { mapSleeperPickMetadata, mapSleeperPlayer } from './mapSleeperPlayer';
+import { dropUnrosteredIdpPlayers, mapSleeperPickMetadata, mapSleeperPlayer } from './mapSleeperPlayer';
+import { createDefaultLeagueSettings } from '../../domain/roster';
 import type { SleeperPlayer } from './sleeperTypes';
+import { makePlayer } from '../../test/fixtures';
 
 describe('mapSleeperPlayer', () => {
   it('maps a standard skill-position player with sentinel projections', () => {
@@ -53,15 +55,26 @@ describe('mapSleeperPlayer', () => {
     expect(mapSleeperPlayer(teamOnly)?.name).toBe('NE');
   });
 
-  it('returns null for unsupported positions (IDP etc.)', () => {
-    const idp: SleeperPlayer = {
+  it('maps IDP positions (DL/LB/DB) like any other position', () => {
+    const linebacker: SleeperPlayer = {
       player_id: '999',
       full_name: 'Some Linebacker',
       position: 'LB',
       fantasy_positions: ['LB'],
       team: 'SF',
     };
-    expect(mapSleeperPlayer(idp)).toBeNull();
+    expect(mapSleeperPlayer(linebacker)?.position).toEqual(['LB']);
+  });
+
+  it('returns null for positions this app has no use for (e.g. offensive line)', () => {
+    const lineman: SleeperPlayer = {
+      player_id: '999',
+      full_name: 'Some Lineman',
+      position: 'OL',
+      fantasy_positions: ['OL'],
+      team: 'SF',
+    };
+    expect(mapSleeperPlayer(lineman)).toBeNull();
   });
 
   it('defaults team to FA when missing', () => {
@@ -102,6 +115,30 @@ describe('mapSleeperPickMetadata', () => {
   });
 
   it('returns null for an unsupported position in metadata', () => {
-    expect(mapSleeperPickMetadata('1', { position: 'DL', first_name: 'A', last_name: 'B' })).toBeNull();
+    expect(mapSleeperPickMetadata('1', { position: 'OL', first_name: 'A', last_name: 'B' })).toBeNull();
+  });
+});
+
+describe('dropUnrosteredIdpPlayers', () => {
+  const players = [
+    makePlayer({ id: 'rb1', position: ['RB'] }),
+    makePlayer({ id: 'lb1', position: ['LB'] }),
+    makePlayer({ id: 'db1', position: ['DB'] }),
+  ];
+
+  it('drops DL/LB/DB players when the league has no IDP slots', () => {
+    const leagueSettings = createDefaultLeagueSettings(10); // no IDP slots
+    const result = dropUnrosteredIdpPlayers(players, leagueSettings);
+    expect(result.map((p) => p.id)).toEqual(['rb1']);
+  });
+
+  it('keeps DL/LB/DB players when the league rosters IDP positions', () => {
+    const base = createDefaultLeagueSettings(10);
+    const leagueSettings = {
+      ...base,
+      rosterSlots: [...base.rosterSlots, { position: 'LB' as const, count: 2, filled: 0 }],
+    };
+    const result = dropUnrosteredIdpPlayers(players, leagueSettings);
+    expect(result.map((p) => p.id)).toEqual(['rb1', 'lb1', 'db1']);
   });
 });

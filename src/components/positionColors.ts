@@ -8,4 +8,7 @@ export const POSITION_COLORS: Record<Position, string> = {
   TE: '#c0392b',
   K: '#b8860b',
   DST: '#546e7a',
+  DL: '#8d6e63',
+  LB: '#00695c',
+  DB: '#455a64',
 };

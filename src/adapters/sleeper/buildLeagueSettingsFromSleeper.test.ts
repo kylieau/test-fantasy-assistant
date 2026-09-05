@@ -63,6 +63,38 @@ describe('buildLeagueSettingsFromSleeper', () => {
     ]);
   });
 
+  it('maps Superflex and IDP roster slots instead of dropping them', () => {
+    const { leagueSettings } = buildLeagueSettingsFromSleeper(
+      sampleDraft({
+        settings: {
+          teams: 3,
+          rounds: 15,
+          slots_qb: 1,
+          slots_flex: 1,
+          slots_super_flex: 1,
+          slots_dl: 2,
+          slots_lb: 2,
+          slots_db: 2,
+          slots_idp_flex: 1,
+          slots_bn: 5,
+        },
+      }),
+      leagueUsers,
+      leagueRosters,
+      'user_a',
+    );
+
+    expect(leagueSettings.rosterSlots).toEqual(
+      expect.arrayContaining([
+        { position: 'SUPERFLEX', count: 1, filled: 0 },
+        { position: 'DL', count: 2, filled: 0 },
+        { position: 'LB', count: 2, filled: 0 },
+        { position: 'DB', count: 2, filled: 0 },
+        { position: 'IDP_FLEX', count: 1, filled: 0 },
+      ]),
+    );
+  });
+
   it('builds draftOrder from draft_order + slot_to_roster_id, in slot order', () => {
     const { leagueSettings } = buildLeagueSettingsFromSleeper(sampleDraft(), leagueUsers, leagueRosters, 'user_a');
     // slot 1 -> roster 10 (Alice), slot 2 -> roster 3 (Bob), slot 3 -> roster 5 (Cara).

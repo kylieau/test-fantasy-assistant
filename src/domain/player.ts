@@ -1,4 +1,5 @@
-export type Position = 'QB' | 'RB' | 'WR' | 'TE' | 'K' | 'DST';
+/** DL/LB/DB are the individual-defensive-player (IDP) positions some leagues roster. */
+export type Position = 'QB' | 'RB' | 'WR' | 'TE' | 'K' | 'DST' | 'DL' | 'LB' | 'DB';
 
 export interface Player {
   id: string;

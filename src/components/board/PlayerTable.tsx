@@ -18,7 +18,7 @@ type SortKey =
   | 'tier'
   | 'availability';
 
-const ALL_POSITIONS: Position[] = ['QB', 'RB', 'WR', 'TE', 'K', 'DST'];
+const ALL_POSITIONS: Position[] = ['QB', 'RB', 'WR', 'TE', 'K', 'DST', 'DL', 'LB', 'DB'];
 
 export function PlayerTable({
   recommendations,

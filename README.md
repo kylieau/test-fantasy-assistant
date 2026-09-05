@@ -73,6 +73,11 @@ Sleeper draft). Unchecked items are the planned next slices, roughly in order.
 - [x] Live pick polling, replayed through the existing reducer
 - [x] Graceful sync-failure handling (3 failed polls → manual "switch to manual entry" recovery)
 - [x] Verified against a real Sleeper league end-to-end
+- [x] Superflex and IDP (DL/LB/DB) roster slots imported instead of silently dropped — flows
+      through roster-need scoring and replacement-level math, not just League Setup display.
+      IDP players are only pulled into the pool for leagues that actually roster them, since
+      ESPN's projections don't cover IDP and including them for everyone would dilute the
+      projections match rate league-wide
 
 ### Phase 3 — Real recommendations for live drafts
 - [x] ESPN public-API integration for real ADP/rank/projected points

@@ -21,13 +21,15 @@ const SLOT_POSITION_MAP: { settingsKey: string; position: RosterSlot['position']
   { settingsKey: 'slots_wr', position: 'WR' },
   { settingsKey: 'slots_te', position: 'TE' },
   { settingsKey: 'slots_flex', position: 'FLEX' },
+  { settingsKey: 'slots_super_flex', position: 'SUPERFLEX' },
   { settingsKey: 'slots_k', position: 'K' },
   { settingsKey: 'slots_def', position: 'DST' },
+  { settingsKey: 'slots_dl', position: 'DL' },
+  { settingsKey: 'slots_lb', position: 'LB' },
+  { settingsKey: 'slots_db', position: 'DB' },
+  { settingsKey: 'slots_idp_flex', position: 'IDP_FLEX' },
   { settingsKey: 'slots_bn', position: 'BENCH' },
 ];
-
-/** Slot types Sleeper supports that we don't track yet — dropped with a warning, not a crash. */
-const KNOWN_UNSUPPORTED_SLOT_KEYS = ['slots_super_flex', 'slots_idp_flex', 'slots_dl', 'slots_lb', 'slots_db'];
 
 function teamIdForRosterId(rosterId: number | string): string {
   return `sleeper-roster-${rosterId}`;
@@ -60,12 +62,6 @@ export function buildLeagueSettingsFromSleeper(
     count: settings[settingsKey] ?? 0,
     filled: 0,
   })).filter((slot) => slot.count > 0);
-
-  for (const key of KNOWN_UNSUPPORTED_SLOT_KEYS) {
-    if ((settings[key] ?? 0) > 0) {
-      console.warn(`Sleeper draft uses "${key}" slots, which this app doesn't track yet — they'll be ignored.`);
-    }
-  }
 
   const slotToRosterId = draft.slot_to_roster_id ?? {};
   const teamCount = settings.teams;

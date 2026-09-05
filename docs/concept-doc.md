@@ -117,7 +117,7 @@ Deferred: Advanced Mode (full custom rules/scripting, e.g., "if a QB run happens
 
 Phase 1 ships this as a single "League Rules & Personal Strategy" page:
 
-- League Rules Input: Number of teams and roster slot counts (QB/RB/WR/TE/FLEX/K/DST/BENCH). Scoring is points-based only in Phase 1 — category/roto toggles, bench-size-as-a-separate-setting, keeper rules, and scoring multipliers (Superflex, TE Premium, PPR, etc.) remain future work.
+- League Rules Input: Number of teams and roster slot counts (QB/RB/WR/TE/FLEX/K/DST/BENCH), plus Superflex and IDP (DL/LB/DB, IDP_FLEX) slots when imported from a connected platform — see Phase 4 in the README roadmap. Scoring is points-based only in Phase 1 — category/roto toggles, bench-size-as-a-separate-setting, keeper rules, and scoring multipliers (TE Premium, PPR, etc.) remain future work.
 - Category Config (MLB/NBA): Deferred until category/roto scoring and non-NFL sports are built.
 - Draft Settings: **Type of draft — Snake or Linear** (Auction is out of scope by decision, not a "not yet" — see Scope Constraints). Draft order is captured directly as an ordered list of team names, plus which position in that order is the user's own — this doubles as "pick order" and "the user's order in the draft."
 - Platform Selection: Manual entry only in Phase 1 (`ManualAdapter`) — the "option to input names of the other teams/managers" is what a live Sleeper/Yahoo/ESPN adapter would eventually populate automatically instead of by hand.
@@ -172,7 +172,7 @@ of what was considered and explicitly not pursued:
 ### Implemented (Phase 1)
 
 ```typescript
-type Position = 'QB' | 'RB' | 'WR' | 'TE' | 'K' | 'DST'; // NFL only so far
+type Position = 'QB' | 'RB' | 'WR' | 'TE' | 'K' | 'DST' | 'DL' | 'LB' | 'DB'; // NFL only so far; DL/LB/DB are IDP
 
 interface Player {
   id: string;
@@ -192,7 +192,7 @@ interface Player {
 type DraftType = 'snake' | 'linear'; // auction out of scope by decision, not planned
 
 interface RosterSlot {
-  position: Position | 'FLEX' | 'BENCH';
+  position: Position | 'FLEX' | 'SUPERFLEX' | 'IDP_FLEX' | 'BENCH';
   count: number;
   filled: number;
 }

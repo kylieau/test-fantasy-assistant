@@ -28,4 +28,25 @@ describe('replacementLevel', () => {
     // With the top two QBs drafted off the board, the 5th-best remaining QB is now 170 (was 180).
     expect(levels.QB).toBe(170);
   });
+
+  it('credits a SUPERFLEX slot entirely to QB starter demand', () => {
+    const base = sampleLeagueSettings();
+    const withSuperflex = {
+      ...base,
+      rosterSlots: [...base.rosterSlots, { position: 'SUPERFLEX' as const, count: 1, filled: 0 }],
+    };
+    // Baseline (no superflex) is 5 (see the first test above); one superflex slot per team
+    // doubles QB starter demand from 1 to 2 per team, so rank climbs from 5 to 9.
+    expect(replacementRank(withSuperflex, 'QB')).toBe(9);
+  });
+
+  it('splits an IDP_FLEX slot evenly across DL/LB/DB starter demand', () => {
+    const base = sampleLeagueSettings();
+    const withIdpFlex = {
+      ...base,
+      rosterSlots: [...base.rosterSlots, { position: 'IDP_FLEX' as const, count: 3, filled: 0 }],
+    };
+    // 4 teams * (3 IDP_FLEX slots / 3 IDP positions) = 4 starters, plus the 0.3x bench buffer.
+    expect(replacementRank(withIdpFlex, 'DL')).toBe(5);
+  });
 });

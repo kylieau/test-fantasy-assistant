@@ -48,4 +48,34 @@ describe('computeFilledRosterSlots', () => {
     expect(slots.find((s) => s.position === 'FLEX')?.filled).toBe(0);
     expect(slots.find((s) => s.position === 'BENCH')?.filled).toBe(1);
   });
+
+  it('overflows a QB into SUPERFLEX once the exact QB slot is full', () => {
+    const template = [
+      { position: 'QB' as const, count: 1, filled: 0 },
+      { position: 'SUPERFLEX' as const, count: 1, filled: 0 },
+      { position: 'BENCH' as const, count: 2, filled: 0 },
+    ];
+    const roster = [
+      makePlayer({ id: 'QB1', position: ['QB'] }),
+      makePlayer({ id: 'QB2', position: ['QB'] }),
+    ];
+    const slots = computeFilledRosterSlots(template, roster);
+    expect(slots.find((s) => s.position === 'QB')?.filled).toBe(1);
+    expect(slots.find((s) => s.position === 'SUPERFLEX')?.filled).toBe(1);
+  });
+
+  it('overflows an IDP position (DL) into IDP_FLEX once its exact slot is full', () => {
+    const template = [
+      { position: 'DL' as const, count: 1, filled: 0 },
+      { position: 'IDP_FLEX' as const, count: 1, filled: 0 },
+      { position: 'BENCH' as const, count: 2, filled: 0 },
+    ];
+    const roster = [
+      makePlayer({ id: 'DL1', position: ['DL'] }),
+      makePlayer({ id: 'DL2', position: ['DL'] }),
+    ];
+    const slots = computeFilledRosterSlots(template, roster);
+    expect(slots.find((s) => s.position === 'DL')?.filled).toBe(1);
+    expect(slots.find((s) => s.position === 'IDP_FLEX')?.filled).toBe(1);
+  });
 });
