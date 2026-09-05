@@ -119,7 +119,7 @@ Phase 1 ships this as a single "League Rules & Personal Strategy" page:
 
 - League Rules Input: Number of teams and roster slot counts (QB/RB/WR/TE/FLEX/K/DST/BENCH). Scoring is points-based only in Phase 1 — category/roto toggles, bench-size-as-a-separate-setting, keeper rules, and scoring multipliers (Superflex, TE Premium, PPR, etc.) remain future work.
 - Category Config (MLB/NBA): Deferred until category/roto scoring and non-NFL sports are built.
-- Draft Settings: **Type of draft — Snake or Linear** (Auction is deferred; see Scope Constraints). Draft order is captured directly as an ordered list of team names, plus which position in that order is the user's own — this doubles as "pick order" and "the user's order in the draft."
+- Draft Settings: **Type of draft — Snake or Linear** (Auction is out of scope by decision, not a "not yet" — see Scope Constraints). Draft order is captured directly as an ordered list of team names, plus which position in that order is the user's own — this doubles as "pick order" and "the user's order in the draft."
 - Platform Selection: Manual entry only in Phase 1 (`ManualAdapter`) — the "option to input names of the other teams/managers" is what a live Sleeper/Yahoo/ESPN adapter would eventually populate automatically instead of by hand.
 - Strategy Setup: Select one of the four named strategies from the Customization Model above as the league's default. Risk-tolerance framing ("Maximize Expected Value" vs. "Minimize Regret") and per-pick time limits remain future work.
 
@@ -158,9 +158,11 @@ Each Draft Board section (My Team, Your Draft, Next Pick, Strategy, Available Pl
 
 Not yet built: multi-source rank blending (combining several published ranking sets into one score, rather than ESPN alone — deferred out of the Phase 4 redesign; see the note in the README roadmap), "The One Thing" banner, Clock Intelligence Adaptation, Panic Mode Toggle, Draft Story Narrative, Snag/Steal Risk Radar, and Run & Tier Alerts — these remain part of the fuller vision described earlier in this section.
 
-**Auction-Specific Controls (If Auction Format)**
+**Auction-Specific Controls — out of scope**
 
-Deferred — Auction is not yet a selectable draft type in Phase 1 (see League Setup / Onboarding).
+Decided against, not deferred: this app supports snake and linear drafts only (see League Setup /
+Onboarding and Scope Constraints). The auction-specific ideas below are kept here only as a record
+of what was considered and explicitly not pursued:
 
 - Max Bid Calculator: Real-time formula display (`Remaining Budget - Open Slots + 1`) ensuring hard cap awareness.
 - Inflation/Deflation Tracker: Displays whether top tiers are selling above or below baseline projections.
@@ -187,7 +189,7 @@ interface Player {
 // once from the full player pool (computePositionRanks / computeTiers) and looked up by id,
 // the same way adp/rank are treated as static, preseason-style values.
 
-type DraftType = 'snake' | 'linear'; // auction deferred
+type DraftType = 'snake' | 'linear'; // auction out of scope by decision, not planned
 
 interface RosterSlot {
   position: Position | 'FLEX' | 'BENCH';

@@ -106,7 +106,7 @@ Sleeper draft). Unchecked items are the planned next slices, roughly in order.
       ESPN alone)
 - [ ] Category/roto scoring engine (Z-scores, SGP) for MLB/NBA leagues
 - [ ] Additional live adapters (Yahoo, ESPN fantasy platform itself)
-- [ ] Auction draft support (max-bid calculator, inflation/deflation tracking)
+- Auction draft support — decided against; snake/linear only, by choice, not by "not yet"
 - [ ] "The One Thing" banner, Panic Mode, and clock-aware recommendation detail
 - [ ] Opponent intelligence (Manager DNA, Draft Capital Efficiency, Opponent Blocking)
 - [ ] Decision-support modules (Trap Value Detection, Counterfactual Drafting, Regret-Aware Recommendations)
