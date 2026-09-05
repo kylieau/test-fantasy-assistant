@@ -99,7 +99,7 @@ Sleeper draft). Unchecked items are the planned next slices, roughly in order.
 - [ ] Test live sync against an in-progress (not yet completed) real Sleeper draft
 - [ ] Adaptive polling cadence (slow when idle, fast when on the clock) instead of a fixed interval
 - [ ] Bye-week data for Sleeper-sourced players (currently Manual-mode only)
-- [ ] Auto-deploy pipeline so the public demo updates on push, instead of a manual rebuild
+- [x] Auto-deploy pipeline so the public demo updates on push, instead of a manual rebuild
 
 ### Later phases — not yet started
 - [ ] Multi-source rank blending (combine several published ranking sets into one, rather than
