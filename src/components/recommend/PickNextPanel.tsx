@@ -29,7 +29,7 @@ export function PickNextPanel({
   return (
     <section className="pick-next-panel">
       <div className="pick-next-panel__heading">
-        <h2>Pick Next</h2>
+        <h2>Next Pick</h2>
         <span className="pick-next-panel__subtitle">best player left, by ranking</span>
       </div>
 
@@ -55,9 +55,9 @@ export function PickNextPanel({
       />
 
       {then.length > 0 && (
-        <div className="pick-next-panel__then">
-          <span className="pick-next-panel__then-label">then</span>
-          <div className="pick-next-panel__then-cards">
+        <div className="panel-subsection">
+          <span className="panel-subsection__label">then</span>
+          <div className="panel-subsection__cards">
             {then.map((rec) => (
               <PlayerCard
                 key={rec.player.id}

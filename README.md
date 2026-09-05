@@ -36,9 +36,9 @@ See [`docs/concept-doc.md`](docs/concept-doc.md) for the full product concept an
 - **Draft Board** — My Team (roster fill status), Your Draft (a full round-by-round view of
   every pick you've made or will make, an auto-generated per-round plan tag like "Upside RB/WR"
   derived from projected roster need, and a "likely still there at your next pick" shortlist),
-  Pick Next (pure best-player-available) and Strategy (your chosen strategy's roster/round-aware
-  pick) shown side by side, Also Consider (what the other strategies would suggest), and a
-  sortable/filterable Available Players table with position/tier badges, an ADP-based
+  Next Pick (pure best-player-available) and Strategy (your chosen strategy's roster/round-aware
+  pick, with Also Consider — what the other strategies would suggest — nested underneath it),
+  and a sortable/filterable Available Players table with position/tier badges, an ADP-based
   availability estimate, and drafted players kept visible (greyed out, tagged with who took
   them) rather than disappearing.
 - **My Roster & All Rosters views** — a full roster breakdown per team, plus a Team Analysis
@@ -86,7 +86,13 @@ Sleeper draft). Unchecked items are the planned next slices, roughly in order.
 - [x] "Likely still there at your pick #N" — a shortlist of survivors at one specific future
       pick, not just a single best-guess per round
 - [x] Auto-generated per-round plan tag (e.g. "Upside RB / WR"), derived from projected roster need
-- [x] Pick Next (pure best-player-available) split out from Strategy (roster/round-aware pick)
+- [x] Next Pick (pure best-player-available) split out from Strategy (roster/round-aware pick),
+      with Also Consider nested under Strategy as a compact card row
+- [x] Suggested players shown as their own cards with key stats (points, value, ADP), and Next
+      Pick's already-computed reasoning surfaced instead of just a bare name
+- [x] Light per-section tint colors on the Draft Board so each panel reads as its own zone
+- [x] Save a draft under a label and resume it later from League Setup (separate from the
+      existing autosave)
 - [x] Drafted players stay visible in the Available Players table (greyed out, tagged by team),
       with an "Available only" filter to hide them and a "★ Targets" filter for favorites
 - [x] Header draft-progress counters (Drafted / My picks / Left)

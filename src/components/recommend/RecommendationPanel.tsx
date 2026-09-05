@@ -1,9 +1,12 @@
+import type { DraftState } from '../../domain/draft';
 import type { Recommendation } from '../../engine/types';
 import { STRATEGY_LABELS, type DraftStrategy } from '../../domain/strategy';
 import { PlayerCard } from '../PlayerCard';
 import { OppDraftedControl, type TeamOption } from '../OppDraftedControl';
+import { AlsoConsiderPanel } from './AlsoConsiderPanel';
 
 export function RecommendationPanel({
+  state,
   strategy,
   recommendation,
   teams,
@@ -12,6 +15,7 @@ export function RecommendationPanel({
   onDraft,
   onMarkDraftedByTeam,
 }: {
+  state: DraftState;
   strategy: DraftStrategy;
   recommendation: Recommendation | undefined;
   teams: TeamOption[];
@@ -64,6 +68,15 @@ export function RecommendationPanel({
             : "Couldn't load player projections for this draft — showing a live tracker only."}
         </p>
       )}
+
+      <AlsoConsiderPanel
+        state={state}
+        excludePlayerId={recommendation?.player.id}
+        teams={teams}
+        showActions={showActions}
+        onDraftToMyTeam={onDraft}
+        onMarkDraftedByTeam={onMarkDraftedByTeam}
+      />
     </section>
   );
 }

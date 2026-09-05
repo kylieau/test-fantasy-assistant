@@ -10,7 +10,6 @@ import type { Recommendation } from '../../engine/types';
 import { RoundPlanner } from './RoundPlanner';
 import { PickNextPanel } from '../recommend/PickNextPanel';
 import { RecommendationPanel } from '../recommend/RecommendationPanel';
-import { AlsoConsiderPanel } from '../recommend/AlsoConsiderPanel';
 import { RosterNeedsView } from '../roster/RosterNeedsView';
 import { PlayerTable } from './PlayerTable';
 
@@ -98,20 +97,13 @@ export function DraftBoard() {
       )}
 
       <RecommendationPanel
+        state={state}
         strategy={state.strategy}
         recommendation={recommendations[0]}
         teams={otherTeams}
         hasProjections={hasProjections}
         showActions={showActions}
         onDraft={draftToMyTeam}
-        onMarkDraftedByTeam={markDraftedByTeam}
-      />
-      <AlsoConsiderPanel
-        state={state}
-        excludePlayerId={recommendations[0]?.player.id}
-        teams={otherTeams}
-        showActions={showActions}
-        onDraftToMyTeam={draftToMyTeam}
         onMarkDraftedByTeam={markDraftedByTeam}
       />
 
