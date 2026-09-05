@@ -6,7 +6,17 @@ import { availabilityMargin, availabilityProbability } from '../../engine/projec
 import { POSITION_COLORS } from '../positionColors';
 import { PlayerActions, type TeamOption } from '../PlayerActions';
 
-type SortKey = 'rank' | 'adp' | 'projected_points' | 'value' | 'positionRank' | 'tier' | 'availability';
+type SortKey =
+  | 'name'
+  | 'team'
+  | 'bye_week'
+  | 'rank'
+  | 'adp'
+  | 'projected_points'
+  | 'value'
+  | 'positionRank'
+  | 'tier'
+  | 'availability';
 
 const ALL_POSITIONS: Position[] = ['QB', 'RB', 'WR', 'TE', 'K', 'DST'];
 
@@ -63,7 +73,7 @@ export function PlayerTable({
       filtered = filtered.filter((r) => favoritedSet.has(r.player.id));
     }
 
-    function sortValue(r: Recommendation): number {
+    function sortValue(r: Recommendation): string | number {
       switch (sortKey) {
         case 'value':
           return r.value;
@@ -73,12 +83,21 @@ export function PlayerTable({
           return tiers[r.player.id] ?? Number.MAX_SAFE_INTEGER;
         case 'availability':
           return nextUserPickNumber !== null ? availabilityMargin(r.player, nextUserPickNumber) : 0;
+        case 'bye_week':
+          return r.player.bye_week ?? Number.MAX_SAFE_INTEGER;
         default:
           return r.player[sortKey];
       }
     }
 
-    return [...filtered].sort((a, b) => (sortAsc ? sortValue(a) - sortValue(b) : sortValue(b) - sortValue(a)));
+    function compare(a: Recommendation, b: Recommendation): number {
+      const av = sortValue(a);
+      const bv = sortValue(b);
+      const result = typeof av === 'string' && typeof bv === 'string' ? av.localeCompare(bv) : (av as number) - (bv as number);
+      return sortAsc ? result : -result;
+    }
+
+    return [...filtered].sort(compare);
   }, [
     recommendations,
     selectedPositions,
@@ -100,6 +119,19 @@ export function PlayerTable({
       setSortKey(key);
       setSortAsc(true);
     }
+  }
+
+  function sortableHeader(key: SortKey, label: string) {
+    const isActive = sortKey === key;
+    return (
+      <th
+        className={`sortable-header ${isActive ? 'sortable-header--active' : ''}`}
+        onClick={() => toggleSort(key)}
+      >
+        {label}
+        {isActive ? (sortAsc ? ' ▲' : ' ▼') : ''}
+      </th>
+    );
   }
 
   function togglePosition(pos: Position) {
@@ -169,19 +201,19 @@ export function PlayerTable({
           <thead>
             <tr>
               <th>★</th>
-              <th>Name</th>
+              {sortableHeader('name', 'Name')}
               <th>Pos</th>
-              <th>Team</th>
-              <th>Bye</th>
+              {sortableHeader('team', 'Team')}
+              {sortableHeader('bye_week', 'Bye')}
               {showValueColumns && (
                 <>
-                  <th onClick={() => toggleSort('rank')}>Overall</th>
-                  <th onClick={() => toggleSort('positionRank')}>Pos Rank</th>
-                  <th onClick={() => toggleSort('tier')}>Tier</th>
-                  <th onClick={() => toggleSort('adp')}>ADP</th>
-                  <th onClick={() => toggleSort('projected_points')}>Proj Pts</th>
-                  <th onClick={() => toggleSort('value')}>Value</th>
-                  <th onClick={() => toggleSort('availability')}>Availability</th>
+                  {sortableHeader('rank', 'Overall')}
+                  {sortableHeader('positionRank', 'Pos Rank')}
+                  {sortableHeader('tier', 'Tier')}
+                  {sortableHeader('adp', 'ADP')}
+                  {sortableHeader('projected_points', 'Proj Pts')}
+                  {sortableHeader('value', 'Value')}
+                  {sortableHeader('availability', 'Availability')}
                 </>
               )}
               <th>Action</th>

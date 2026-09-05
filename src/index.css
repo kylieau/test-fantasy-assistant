@@ -648,9 +648,20 @@ input, select {
 }
 
 .player-table th {
-  cursor: pointer;
   color: var(--text-muted);
   font-weight: 600;
+}
+
+.sortable-header {
+  cursor: pointer;
+}
+
+.sortable-header:hover {
+  color: var(--text);
+}
+
+.sortable-header--active {
+  color: var(--accent);
 }
 
 .adp-label--steal {
